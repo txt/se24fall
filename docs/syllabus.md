@@ -1,11 +1,12 @@
 aasdas
 
+
 # ideas for next time
 
 1. three points when people submit a proj3.
 2. google forms
-   - auto assignment of proj3 
-   - regrade requests.
+   - auto assignment of proj3 , judged by time
+   - regrade requests: what is the reason for the regrade
 3. regrade requests: after positing, 2 days to request regrade. whatever the new grade, that is the final grade
 4. final exam: can replace lower of the grades.
 5. proj2,proj3 half the marks come for the extensions
