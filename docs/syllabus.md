@@ -18,7 +18,10 @@ some poject, pull request , pull requests merged
 7. two midterms.
 8. test cases
     - > 20 tests per team mmeber, (ideally 50)
-      > nominal **and** off nonimal cases  
+      > nominal **and** off nonimal cases
+
+## for essay
+9. ensure it is usinng software
 
 ## rubric for projects
 - new stuff shiuld be in seperate branch to old
