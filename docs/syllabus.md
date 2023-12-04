@@ -24,6 +24,7 @@ some poject, pull request , pull requests merged
 9. ensure it is usinng software
 
 ## rubric for projects
+- no keys or passwords in files
 - new stuff shiuld be in seperate branch to old
 - file names in rubric (so we can find things)
 - list of thigns u cant find, 24 hours to change. 
