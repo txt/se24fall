@@ -21,7 +21,8 @@ some poject, pull request , pull requests merged
       > nominal **and** off nonimal cases
 
 ## for essay
-9. ensure it is usinng software
+- ensure it is usinng software
+- standard structure (abstract, intro...)
 
 ## rubric for projects
 - no keys or passwords in files
