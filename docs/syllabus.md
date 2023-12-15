@@ -1,3 +1,5 @@
+late marks for everything (not just project dliverables)
+
 blng has to be real: loos makrs in bling ints to last eyars probkects, or just an icon. bling ahs to link tor eal things
 
 some poject, pull request , pull requests merged
