@@ -1,3 +1,5 @@
+grab cool stuff from https://missing.csail.mit.edu/2020/shell-tools/ and https://missing.csail.mit.edu/2020
+
 closures
 - your own test engine
 
