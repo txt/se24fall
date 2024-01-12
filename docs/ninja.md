@@ -1,5 +1,11 @@
 grab cool stuff from https://missing.csail.mit.edu/2020/shell-tools/ and https://missing.csail.mit.edu/2020
 
+decorators:
+https://medium.com/@ayush-thakur02/python-decorators-that-can-reduce-your-code-by-half-b19f673bc7d8
+
+pipelnes:
+https://medium.com/@ayush-thakur02/wait-what-are-pipelines-in-python-628f4b5021fd
+
 closures
 - your own test engine
 
