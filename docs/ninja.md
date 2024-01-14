@@ -13,6 +13,9 @@ unix
 - pipes
 - test return code
 
+tmux:
+- https://www.youtube.com/watch?v=nTqu6w2wc68
+- https://www.youtube.com/watch?v=H70lULWJeig
 
 makefile
 - your own pre-commit hooks
