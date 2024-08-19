@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Intro to SE</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="timetable.html">timetable</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="groups.html">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+
+<header id="title-block-header">
+<h1 class="title">Intro to SE</h1>
+</header>
+<p><br clear=all></p>
+<p>An introduction to software life cycle models; size estimation; cost
+and schedule estimation; project management; risk management; formal
+technical reviews; analysis, design, coding and testing methods;
+configuration management and change control; and software reliability
+estimation. Emphasis on large development projects. An individual
+project required following good software engineering practices
+throughout the semester.</p>
+<p>Four considerations influence the design of this subject:</p>
+<ul>
+<li><p>Computer technology is changing at a rapid rate. Hence it is
+important to teach <strong>deep fundamentals</strong> rather than merely
+the minor details of some current language.</p></li>
+<li><p>On the other hand, increasingly, computer education takes an easy
+package-based approach. To counter that, this subject will run tutorials
+to make students <strong>command-line gurus</strong>.</p></li>
+<li><p>Post-covid, many new students may not have worked extensively in
+teams. Hence, this subject is <strong>team-intensive</strong>.</p></li>
+<li><p>There is much <a href="https://layoffs.fyi/">hiring
+volatility</a> in the current SE market place (especially in the United
+States). Hence, newcomers to the market need some i<strong>landmark
+product</strong> to show off their skills.</p></li>
+<li><p>In the current software industrial climate (at, lease in the
+United States),</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#x274c;</th>
+<th style="text-align: left;">What</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">Aug22</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Aug27</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Aug29</td>
+<td style="text-align: left;">tut1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Sep3</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Sep5</td>
+<td style="text-align: left;">tut2</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Sep10</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Sep12</td>
+<td style="text-align: left;">tut3</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Sep17</td>
+<td style="text-align: left;">wellness day</td>
+<td>no class</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Sep19</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Sep24</td>
+<td style="text-align: left;">tut4</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Sep26</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Oct1</td>
+<td style="text-align: left;">Lit review due</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Oct3</td>
+<td style="text-align: left;">tut5</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Oct8</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Oct15</td>
+<td style="text-align: left;">fall break</td>
+<td>no class</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Oct17</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Oct22</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Oct24</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Oct29</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Oct31</td>
+<td style="text-align: left;">Paper due</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Nov5</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Nov7</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Nov12</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Nov14</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Nov19</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Nov22</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Nov26</td>
+<td style="text-align: left;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Nov27</td>
+<td style="text-align: left;">Paper2 due</td>
+<td>no class</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Nov28</td>
+<td style="text-align: left;">Thanksgiving</td>
+<td>no class</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">Dec3</td>
+<td style="text-align: left;">Last day for anything</td>
+<td>no class</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">Dec5</td>
+<td style="text-align: left;">Final exam</td>
+<td>no class</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</div>
+</body>
+</html>

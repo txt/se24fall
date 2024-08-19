@@ -1,17 +1,52 @@
-SHELL     := bash 
-MAKEFLAGS += --warn-undefined-variables
-.SILENT: 
+define Cat
+  
+   _._     _,-'""`-._
+  (,-.`._,'(       |\`-/|
+      `-.-' \ )-`( , o o)
+            `-    \`_`"'-
+  endef
+export Cat 
 
-help:  ## show help
-	awk 'BEGIN {FS = ":.*?## "; print "\nmake [WHAT]" } \
-			/^[a-zA-Z_0-9-]+:.*?## / {printf "   \033[36m%-10s\033[0m : %s\n", $$1, $$2} \
-			' $(MAKEFILE_LIST)
+Pandoc =      \
+	-s           \
+	-f markdown   \
+	--mathjax      \
+	--css style.css \
+	--highlight-style kate        \
+	-H $(Etc)/favicon.html         \
+	--include-before=$(Etc)/head.md \
+	--include-after=$(Etc)/foot.md   \
+  --indented-code-classes=python,numberLines  
 
-install: ## install lua on {debian, ubuntu, codespaces}
-	sudo apt update
-	sudo apt install lua5.3
+Cyan=\033[36m
+Yellow=\033[93m
+White=\033[0m
 
-saved: ## save and push  to main branch 
-	read -p "commit msg> " x; git commit -am "$$x"; git push;git status
+#------------------------------------------------------
+Top=$(shell git rev-parse --show-toplevel)
+Etc=$(Top)/etc
 
+SHELL = bash
+.SILENT:
 
+help: ## show help
+	printf '\nmake [$(Yellow)what$(White)]\n'
+	grep -hE '^[^ \t#].*## .*$$' $(MAKEFILE_LIST) \
+	| grep -vE '(grep|awk)' \
+	| sort \
+	| gawk 'BEGIN {FS=":.*?## "};{printf "$(Cyan)%10s$(White) : %s\n",$$1,$$2}'
+	printf "$(Cyan) $$Cat $(White)\n"
+
+pull: ## get updates from cloud
+	git pull --quiet
+
+push: ## save local changes to cloud
+	- read -ep "Why this push? " x; git commit -am "$$x" --quiet
+	git push --quiet -u --no-progress
+	git status --short   
+
+style.css: $(Etc)/style.css; cp $^ $@
+
+%.html: %.md  style.css ## md -> html
+	echo "$@ ... "
+	pandoc $< -o $@ $(Pandoc)
