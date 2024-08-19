@@ -17,7 +17,10 @@ Five considerations influence the design  of this subject:
 - Much of recommended SE best practices never make sense till you've had to work with someone else's code. So this subject is **maintenance-based** (i.e. we have to maintain and extend other people's code)
 - Computer technology is changing at a rapid rate. Hence it is important to teach **deep fundamentals** rather than merely the minor details of some current language.
 -  On the other hand, increasingly, computer education  takes an easy package-based approach. To counter that, this subject will run tutorials to make students **command-line gurus**. 
-- There is much [hiring volatility](https://layoffs.fyi/) in the current SE market place (especially in the United States). Hence, newcomers to the market
+- There is much [hiring volatility](https://layoffs.fyi/) in the current SE market place (especially in the United States, 
+      perhaps due to [changes in interest rates](https://www.visualcapitalist.com/wp-content/uploads/2022/10/Citizens-Bank-Seizing-Capital-Opportunities-Impact-Graphic-May-5.jpeg)
+      and uncertainties in the tax code [1](https://thehill.com/opinion/finance/4616385-the-bipartisan-tax-bill-contains-a-critical-fix-to-spur-american-innovation/)
+      [2](https://www.claconnect.com/en/resources/blogs/manufacturing/senate-blocks-section-174-fix-leaving-taxpayers-dismayed-yet-again)). Hence, newcomers to the market
       need some i**landmark product** to show off their skills.
 
 #x274c;|What|When|No class|

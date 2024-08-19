@@ -1,3 +1,9 @@
+% Syllabus
+
+appiintments
+https://calendar.app.google/NwfqMMibHwU62W9d8
+
+
 late marks for everything (not just project dliverables)
 
 blng has to be real: loos makrs in bling ints to last eyars probkects, or just an icon. bling ahs to link tor eal things
