@@ -25,35 +25,19 @@ Five considerations influence the design  of this subject:
 
 #x274c;|What|When|No class|
 |----:|:----|------ |
-|Aug22|    |         |
-|Aug27|    |         |
-|Aug29| tut1   |         |
-|Sep3|    |         |
-|Sep5| |         |
-|Sep10|    |         |
-|Sep12| tut2   |         |
-|Sep17| wellness day   | no class |
-|Sep19|    |         |
-|Sep24| tut4   |         |
-|Sep26|     |         |
-|Oct1|  Lit review due  |         |
-|Oct3|  tut5   |         |
-|Oct8|    |         |
-|Oct15| fall break    |  no class |
-|Oct17|    |         |
-|Oct22|    |         |
-|Oct24|    |         |
-|Oct29|    |         |
-|Oct31| Paper due   |         |
-|Nov5|    |         |
-|Nov7|    |         |
-|Nov12|    |         |
-|Nov14|    |         |
-|Nov19|    |         |
-|Nov22|    |         |
-|Nov26|    |         |
-|Nov27| Paper2 due    |  no class       |
-|Nov28| Thanksgiving    |  no class       |
-|Dec3| Last day for anything |  no class       |
-|Dec5|  Final exam  | no class |
+|Aug29|  tut2          |         |
+|Sep12| tut2           |         |
+|Sep17| wellness day   |no class |
+|Sep26|  tut3          |         |
+|Oct1|   proj1         |         |
+|Oct3|  tut3           |         |
+|Oct10| tut4           |         |
+|Oct15| fall break     |no class |
+|Oct17| mid-term exam  |         |
+|Oct24| tut5           |         |
+|Oct31| project2       |         |
+|Nov27| project3       |no class |
+|Nov28| thanksgiving   |no class |
+|Dec3| essay due       |no class |
+|Dec5|  final exam     |no class |
 
