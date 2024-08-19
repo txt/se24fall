@@ -23,9 +23,9 @@ Five considerations influence the design  of this subject:
       [2](https://www.claconnect.com/en/resources/blogs/manufacturing/senate-blocks-section-174-fix-leaving-taxpayers-dismayed-yet-again)). Hence, newcomers to the market
       need some i**landmark product** to show off their skills.
 
-#x274c;|What|When|No class|
+|What|When|notes|
 |----:|:----|------ |
-|Aug29|  tut2          |         |
+|Aug29|  tut1          |         |
 |Sep12| tut2           |         |
 |Sep17| wellness day   |no class |
 |Sep26|  tut3          |         |
