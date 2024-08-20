@@ -957,36 +957,35 @@ def div(self:SYM) -> number: return self.ent()
 
 ## Try it for yourself
 
+### Fork a repo
+
+- Go to https://github.com/timm/ezr/
+- Hit the  "fork" button (near top, rhs)
+- On the next screen, find the checkbox hat says "only fork main brancch". Unselect that option
+- Go to the new repo, Find the green "code" button. Create a codespace on main.
+
+
 ### Get Python3.13
 
 Make sure you are running Python3.13. On Linux and Github code spaces, that command is
 
 ```sh
-sudo apt update
-sudo  apt upgrade
-sudo apt install software-properties-common -y
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install python3.13
-python3.13 -B --verion
+sudo apt update -y; sudo  apt upgrade -y; sudo apt install software-properties-common -y; sudo add-apt-repository ppa:deadsnakes/ppa -y ; sudo apt update -y ; sudo apt install python3.13 -y
+
+```
+Now check you have python3.13
+
+```
+python3.13 -B --version
 ```
 
 ### Try one run
 
 ```sh
-git clone https://github.com/timm/moot
-git clone https://github.com/timm/ezr
-cd ezr
-python3.13 -B erz.py -t ../moot/optimize/misc/auto93.csv -e _mqs
+cd /workspaces/ezr
+python3.13 -B ezr.py -t data/misc/auto93.csv -e _mqs
 ```
 
-### Try a longer run
-
-Do a large run (takes a few minutes: output will appear in ~/tmp/mqs.out; assumes a BASH shell):
-
-```sh
-python3.13 -B ezr.py -e _MQS ../moot/optimize/[chmp]*/*.csv | tee ~/tmp/mqs.out
-```
 
 ### Write your own extensions
 

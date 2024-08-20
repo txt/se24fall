@@ -25,16 +25,16 @@ Five considerations influence the design  of this subject:
 
 |What|When|notes|
 |----:|:----|------ |
-|Aug29|  tut1          |         |
-|Sep12| tut2           |         |
+|Aug29|  [hw1](hw1.html)          |         |
+|Sep12| hw2           |         |
 |Sep17| wellness day   |no class |
-|Sep26|  tut3          |         |
+|Sep26|  hw3          |         |
 |Oct1|   proj1         |         |
-|Oct3|  tut3           |         |
-|Oct10| tut4           |         |
+|Oct3|  hw3           |         |
+|Oct10| hw4           |         |
 |Oct15| fall break     |no class |
 |Oct17| mid-term exam  |         |
-|Oct24| tut5           |         |
+|Oct24| hw5           |         |
 |Oct31| project2       |         |
 |Nov27| project3       |no class |
 |Nov28| thanksgiving   |no class |
