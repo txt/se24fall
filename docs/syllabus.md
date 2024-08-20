@@ -74,7 +74,7 @@ Grades come from
   mid-semester. Feel free to submit early.
 - Exams and essays are done individually. Everything else is done in groups of 4.
 
-Projects comprise large maintainance tasks where you have to extend someone else'e code 
+Projects comprise large maintenance tasks where you have to extend someone else'e code 
 (groups of 4 people, working in public Github repos-- not NCSU GH): 
 
 - This will demonstrate the important of documentation, design purity, regression tests, etc.
@@ -98,6 +98,9 @@ select one, then boast of its accomplishments.
 |mid-term exam (solo)	| 20| |
 |project (group)|	      10+15+20	|project1,2,3|
 
+Students are marked 0,1,2,3 for homeworks. If you get anything less than 3, you can resubmit (within 1 week)
+and the new submission's mark will cancel out the first version).
+
 Also, there is an optional final exam which students can attend if they want to replace 
 their mid-term mark. Please note that if you get a lower mark on this final then your 
 lowest mid-term mark will then decrease. Caveat Emptor.
@@ -112,11 +115,11 @@ With the final grades, the following grade scale will be used:
 
 ### Late Marks
 
+For the report, students will lose 2 marks per day for late submissions (weekend = 2 day).
+
+For the homeworks, students will lose 1 marks per day for late submissions (weekend = 1 day).
+
 Groups must post the homeworks each  week, even if it is incomplete, OR THEY WILL LOSE ONE MARK.  Those lost marks are never returned.
-
-Otherwise, students are marked -1 for "not on time" or "try again". If you get a "-1" mark and resubmit, they are replaced with a "0".
-
-For the rport, students will lose 2 marks per day for late submissions (weekend = 2 day).
 
 
 ## Policies
