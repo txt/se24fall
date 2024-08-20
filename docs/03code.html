@@ -92,7 +92,6 @@
   
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
   type="text/javascript"></script>
@@ -404,37 +403,37 @@ class="math inline">\(b\)</span>:</li>
 <col style="width: 43%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: right;">n</th>
 <th style="text-align: center;">Task</th>
 <th style="text-align: left;">Notes</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: right;">1</td>
 <td style="text-align: center;">Sample a little</td>
 <td style="text-align: left;">Get a get a few <span
 class="math inline">\(Y\)</span> values (picked at random?)</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: right;">2</td>
 <td style="text-align: center;">Learn a little</td>
 <td style="text-align: left;">Build a tiny model from that sample</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: right;">3</td>
 <td style="text-align: center;">Reflect</td>
 <td style="text-align: left;">Compute <span
 class="math inline">\(b,r\)</span></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: right;">4</td>
 <td style="text-align: center;">Acquire</td>
 <td style="text-align: left;">Label an example that (e.g.) maximizes
 <span class="math inline">\(b/r\)</span> then it to the sample.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: right;">5</td>
 <td style="text-align: center;">Repeat</td>
 <td style="text-align: left;">Goto 2</td>
@@ -1144,165 +1143,165 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a h
 <col style="width: 76%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Magic Method</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>__init__</code></td>
 <td>Initializes a new instance of a class.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__del__</code></td>
 <td>Called before an object is destroyed.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__repr__</code></td>
 <td>Returns an official string representation of an object.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__str__</code></td>
 <td>Returns a string representation of an object.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__len__</code></td>
 <td>Returns the length of an object.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__getitem__</code></td>
 <td>Gets an item from an object using indexing.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__setitem__</code></td>
 <td>Sets an item in an object using indexing.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__delitem__</code></td>
 <td>Deletes an item from an object using indexing.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__iter__</code></td>
 <td>Returns an iterator object.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__next__</code></td>
 <td>Returns the next item from an iterator.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__contains__</code></td>
 <td>Checks if an object contains a value.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__call__</code></td>
 <td>Allows an object to be called like a function.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__eq__</code></td>
 <td>Checks if two objects are equal.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__ne__</code></td>
 <td>Checks if two objects are not equal.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__lt__</code></td>
 <td>Checks if one object is less than another.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__le__</code></td>
 <td>Checks if one object is less than or equal to another.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__gt__</code></td>
 <td>Checks if one object is greater than another.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__ge__</code></td>
 <td>Checks if one object is greater than or equal to another.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__add__</code></td>
 <td>Adds two objects.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__sub__</code></td>
 <td>Subtracts one object from another.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__mul__</code></td>
 <td>Multiplies two objects.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__truediv__</code></td>
 <td>Divides one object by another.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__floordiv__</code></td>
 <td>Performs floor division on two objects.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__mod__</code></td>
 <td>Returns the remainder of division.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__pow__</code></td>
 <td>Raises one object to the power of another.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__and__</code></td>
 <td>Performs bitwise AND on two objects.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__or__</code></td>
 <td>Performs bitwise OR on two objects.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__xor__</code></td>
 <td>Performs bitwise XOR on two objects.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__lshift__</code></td>
 <td>Performs left bitwise shift on an object.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__rshift__</code></td>
 <td>Performs right bitwise shift on an object.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__neg__</code></td>
 <td>Returns the negation of an object.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__pos__</code></td>
 <td>Returns the positive value of an object.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__abs__</code></td>
 <td>Returns the absolute value of an object.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__invert__</code></td>
 <td>Returns the bitwise inversion of an object.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__round__</code></td>
 <td>Rounds an object to a given number of digits.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__bool__</code></td>
 <td>Returns the boolean value of an object.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__hash__</code></td>
 <td>Returns the hash value of an object.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>__enter__</code></td>
 <td>Called when entering a context (with statement).</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>__exit__</code></td>
 <td>Called when exiting a context (with statement).</td>
 </tr>
