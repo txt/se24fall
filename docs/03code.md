@@ -994,7 +994,7 @@ cd /workspaces/ezr
 Here=$PWD
 cd data/optimize/process
 mkdir -p ~/tmp/mqs
-for i in *.csv ;  do $Here/ezr.py  -D -e _mqs -t data/optimize/misc/auto93.csv | tee  ~/tmp/mqs/$i  ;done
+for i in *.csv ;  do $Here/ezr.py  -D -e _mqs -t $i | tee  ~/tmp/mqs/$i  ; done
 ```
 
 

@@ -106,6 +106,7 @@ Tim Menzies, timm@ieee.org, com sci, nc state
 <hr>
 <a href="index.html">home</a>
 :: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
 :: <a href="groups.html">groups</a> 
 :: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
 :: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
@@ -1573,7 +1574,7 @@ class="sourceCode sh"><code class="sourceCode bash"><span id="cb36-1"><a href="#
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="va">Here</span><span class="op">=</span><span class="va">$PWD</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> data/optimize/process</span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/tmp/mqs</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.csv <span class="kw">;</span>  <span class="cf">do</span> <span class="va">$Here</span><span class="ex">/ezr.py</span>  <span class="at">-D</span> <span class="at">-e</span> _mqs <span class="at">-t</span> data/optimize/misc/auto93.csv <span class="kw">|</span> <span class="fu">tee</span>  ~/tmp/mqs/<span class="va">$i</span>  <span class="kw">;</span><span class="cf">done</span></span></code></pre></div>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.csv <span class="kw">;</span>  <span class="cf">do</span> <span class="va">$Here</span><span class="ex">/ezr.py</span>  <span class="at">-D</span> <span class="at">-e</span> _mqs <span class="at">-t</span> <span class="va">$i</span> <span class="kw">|</span> <span class="fu">tee</span>  ~/tmp/mqs/<span class="va">$i</span>  <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
 <h3 data-number="5.5" id="write-your-own-extensions"><span
 class="header-section-number">5.5</span> Write your own extensions</h3>
 <p>Here’s a file <code>extend.py</code> in the same directory as

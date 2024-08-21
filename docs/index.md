@@ -23,21 +23,23 @@ Five considerations influence the design  of this subject:
       [2](https://www.claconnect.com/en/resources/blogs/manufacturing/senate-blocks-section-174-fix-leaving-taxpayers-dismayed-yet-again)). Hence, newcomers to the market
       need some i**landmark product** to show off their skills.
 
-|What|When|notes|
-|----:|:----|------ |
-|Aug29|  [hw1](hw1.html)          |         |
-|Sep12| hw2           |         |
-|Sep17| wellness day   |no class |
-|Sep26|  hw3          |         |
-|Oct1|   proj1         |         |
-|Oct3|  hw3           |         |
-|Oct10| hw4           |         |
-|Oct15| fall break     |no class |
-|Oct17| mid-term exam  |         |
-|Oct24| hw5           |         |
-|Oct31| project2       |         |
-|Nov27| project3       |no class |
-|Nov28| thanksgiving   |no class |
-|Dec3| essay due       |no class |
-|Dec5|  final exam     |no class |
+|What|Hand ini           |notes  | lecture|
+|----:|:-----------------|------ |-------|
+|Aug21|                  |       | this file and [syllabus](syllabus.html)    |
+|Aug23|                  |       |[fundamentals](03code.html)    |
+|Aug29|  [homework 1](hw1.html) |       |  |
+|Sep12| hw2              |         | | 
+|Sep17| wellness day     |no class | |
+|Sep26|  hw3             |         | |
+|Oct1|   [project 1](project1.html)           |         | |
+|Oct3|  hw3              |         | |
+|Oct10| hw4              |         | |
+|Oct15| fall break       |no class | | 
+|Oct17| mid-term exam    |         | |
+|Oct24| hw5              |         | |
+|Oct31| project2         |         | |
+|Nov27| project3         |no class | |
+|Nov28| thanksgiving     |no class | |
+|Dec3| essay due         |no class | |
+|Dec5|  final exam       |no class | |
 
