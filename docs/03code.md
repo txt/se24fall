@@ -598,7 +598,7 @@ the `xval` function (described below) randomly shuffles the order of the trainin
 handle order effects) then splits the data into bins (where one bin is for testing and the others
 are for training):
 
-<img src="https://en.wikipedia.org/wiki/Overfitting#/media/File:Pyplot_overfitting.png" align=right width=400>
+<img src="img/overfit.png" align=right width=400>
 
 - _Over-fitting_ is when a learner learns too much from the training data.
   - Rather than focus on
