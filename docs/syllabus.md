@@ -72,10 +72,10 @@ Grades come from
 - 1 final exam (for those that want to replace the mark on one of their mid-term and homework).
 - 1 essay (due Dec4) on SE ethics. You will have all the materials for this exam by 
   mid-semester. Feel free to submit early.
-- Exams and essays are done individually. Everything else is done in groups of 4.
+- Exams and essays are done individually. Everything else is done in groups of 3.
 
 Projects comprise large maintenance tasks where you have to extend someone else'e code 
-(groups of 4 people, working in public Github repos-- not NCSU GH): 
+(groups of 3 people, working in public Github repos-- not NCSU GH): 
 
 - This will demonstrate the important of documentation, design purity, regression tests, etc.
 
