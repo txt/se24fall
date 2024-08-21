@@ -169,7 +169,6 @@ Chebyshev function that returns the max difference between the goal values and t
 best possible values. The rows shown above are sorted top to bottom, least to most Chebyshev values
 (so the best rows, with smallest Chebyshev, are shown at top).
 
-
 [^zhang07]: Q. Zhang and H. Li, "MOEA/D: A Multiobjective Evolutionary Algorithm Based on Decomposition," in IEEE Transactions on Evolutionary Computation, vol. 11, no. 6, pp. 712-731, Dec. 2007, doi: 10.1109/TEVC.2007.892759. 
 
 Chebyshev is very simple to code. We assume a lost of goal columns `self.cols.y` each of which  knows:
@@ -179,7 +178,6 @@ Chebyshev is very simple to code. We assume a lost of goal columns `self.cols.y`
 - What is the best value `col.goal`:
   - For goals to minimize, like "Lbs-", `goal=0`.
   - For goals to maximize, like "Mpg+", `goal=1`.
-
 
 ```py
 @of("Compute Chebyshev distance of one row to the best `y` values.")
@@ -287,6 +285,8 @@ def loglike(self:DATA, r:row, nall:int, nh:int) -> float:
   likes = [c.like(r[c.at], prior) for c in self.cols.x if r[c.at] != "?"]
   return sum(log(x) for x in likes + [prior] if x>0)
 ```
+
+For more notes on Bayes, see [this example](https://txt.github.io/se4ai24/04nb.html)
 
 #### Active Learner
 
@@ -971,7 +971,6 @@ Make sure you are running Python3.13. On Linux and Github code spaces, that comm
 
 ```sh
 sudo apt update -y; sudo  apt upgrade -y; sudo apt install software-properties-common -y; sudo add-apt-repository ppa:deadsnakes/ppa -y ; sudo apt update -y ; sudo apt install python3.13 -y
-
 ```
 Now check you have python3.13
 
@@ -983,7 +982,19 @@ python3.13 -B --version
 
 ```sh
 cd /workspaces/ezr
+git checkout 24Aug14
 python3.13 -B ezr.py -t data/misc/auto93.csv -e _mqs
+```
+
+### Try a longer run
+
+This takes a new minutes, writes output t
+```sh
+cd /workspaces/ezr
+Here=$PWD
+cd data/optimize/process
+mkdir -p ~/tmp/mqs
+for i in *.csv ;  do $Here/ezr.py  -D -e _mqs -t data/optimize/misc/auto93.csv | tee  ~/tmp/mqs/$i  ;done
 ```
 
 
@@ -1014,7 +1025,7 @@ show(["------"] * 6)
 On my machine, when I run ...
 
 ```sh
-python3.13 -B extend.py ../moot/optimize/[chmp]*/*.csv > ~/tmp/tmp
+python3.13 -B extend.py data/optimize/[chmp]*/*.csv > ~/tmp/tmp
 sort -r -k 1,2 ~/tmp/tmp
 ```
 ... this prints some stats on the data files: 
