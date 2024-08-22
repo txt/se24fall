@@ -62,3 +62,9 @@ Each poster:
 - Start late, looking at the corpus.
 - Write posters for dull projects
 
+## For samples of posters from prior classes...
+
+Please see [here](https://docs.google.com/spreadsheets/d/1Bq7dsnf30TAz0b9a74aGBA-QYkZE_WAD1WMHkfpDEQs/edit?usp=sharing). 
+
+Those posters scored well, using a prior version of this document 
+(so they would not do so well with this updated rubric).
