@@ -26,7 +26,7 @@ Five considerations influence the design  of this subject:
 |What|Hand ini           |notes  | lecture|
 |----:|:-----------------|------ |-------|
 |Aug21|                  |       | this file and [syllabus](syllabus.html)    |
-|Aug23|                  |       |[fundamentals](03code.html)    |
+|Aug23|                  |       | [beware LLMs](https://discord.com/channels/1274829971772145784/1275150262251683871/1275996582571147344); [fundamentals](03code.html)    |
 |Aug29|  [homework 1](hw1.html) |       |  |
 |Sep12| hw2              |         | | 
 |Sep17| wellness day     |no class | |
