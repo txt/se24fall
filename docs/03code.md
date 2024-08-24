@@ -19,7 +19,7 @@ Terminology (watch for these words):
 - Variables:
   - row, rows, done (which divides into best and rest); todo
 - SE Notes: 
-  - refactoring, DRY, WET
+  - refactoring, five lines, DRY, WET
   - styles, patterns, idioms, function-oriented 
   - decorators, little languages, configuration, pipes, iterators, exception handling,
   - make, regular expressions,
@@ -496,6 +496,14 @@ code may not be the same the order needed by the compiler.
 So he wrote a "tangle" system where code and comments, ordered for explaining, was rejigged at load time into
 what the compiler needs. I found I could do a small part of Knthu's tangle  with a [5 line decorator](#decorators).
 
+#### Pattern: Short functions
+
+- Robert Martin:
+  - Functions should do one thing. They should do it well. They should do it only.
+  - Smaller functions are mostly robust, easy to read and maintain.
+  - So the first rule of functions is that they should be small. 
+    - How small? Some say [five lines](https://www.amazon.com/Five-Lines-Code-when-refactor/dp/161729831X)
+  - The second rule of functions is that they should be smaller than that. 
 
 ####  Pattern: DRY, not WET
 - WET = Write everything twice. 

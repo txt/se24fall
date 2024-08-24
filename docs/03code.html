@@ -181,19 +181,23 @@ class="toc-section-number">4.1.4</span> Pattern: Configuration</a></li>
 id="toc-pattern-function-vs-object-oriented"><span
 class="toc-section-number">4.1.5</span> Pattern: Function vs
 Object-Oriented</a></li>
+<li><a href="#pattern-short-functions"
+id="toc-pattern-short-functions"><span
+class="toc-section-number">4.1.6</span> Pattern: Short
+functions</a></li>
 <li><a href="#pattern-dry-not-wet" id="toc-pattern-dry-not-wet"><span
-class="toc-section-number">4.1.6</span> Pattern: DRY, not WET</a></li>
+class="toc-section-number">4.1.7</span> Pattern: DRY, not WET</a></li>
 <li><a href="#pattern-little-languages"
 id="toc-pattern-little-languages"><span
-class="toc-section-number">4.1.7</span> Pattern: Little Languages</a>
+class="toc-section-number">4.1.8</span> Pattern: Little Languages</a>
 <ul>
 <li><a href="#little-languages-make"
 id="toc-little-languages-make"><span
-class="toc-section-number">4.1.7.1</span> Little Languages:
+class="toc-section-number">4.1.8.1</span> Little Languages:
 Make</a></li>
 <li><a href="#little-languages-regular-expressions"
 id="toc-little-languages-regular-expressions"><span
-class="toc-section-number">4.1.7.2</span> Little Languages: Regular
+class="toc-section-number">4.1.8.2</span> Little Languages: Regular
 Expressions</a></li>
 </ul></li>
 </ul></li>
@@ -269,7 +273,7 @@ methods are grouped by name, not class.</li>
 </ul></li>
 <li>SE Notes:
 <ul>
-<li>refactoring, DRY, WET</li>
+<li>refactoring, five lines, DRY, WET</li>
 <li>styles, patterns, idioms, function-oriented</li>
 <li>decorators, little languages, configuration, pipes, iterators,
 exception handling,</li>
@@ -407,37 +411,37 @@ class="math inline">\(b\)</span>:</li>
 <col style="width: 43%" />
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th style="text-align: right;">n</th>
 <th style="text-align: center;">Task</th>
 <th style="text-align: left;">Notes</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: right;">1</td>
 <td style="text-align: center;">Sample a little</td>
 <td style="text-align: left;">Get a get a few <span
 class="math inline">\(Y\)</span> values (picked at random?)</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: right;">2</td>
 <td style="text-align: center;">Learn a little</td>
 <td style="text-align: left;">Build a tiny model from that sample</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: right;">3</td>
 <td style="text-align: center;">Reflect</td>
 <td style="text-align: left;">Compute <span
 class="math inline">\(b,r\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: right;">4</td>
 <td style="text-align: center;">Acquire</td>
 <td style="text-align: left;">Label an example that (e.g.) maximizes
 <span class="math inline">\(b/r\)</span> then it to the sample.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: right;">5</td>
 <td style="text-align: center;">Repeat</td>
 <td style="text-align: left;">Goto 2</td>
@@ -911,8 +915,26 @@ be the same the order needed by the compiler. So he wrote a “tangle”
 system where code and comments, ordered for explaining, was rejigged at
 load time into what the compiler needs. I found I could do a small part
 of Knthu’s tangle with a <a href="#decorators">5 line decorator</a>.</p>
-<h4 data-number="4.1.6" id="pattern-dry-not-wet"><span
-class="header-section-number">4.1.6</span> Pattern: DRY, not WET</h4>
+<h4 data-number="4.1.6" id="pattern-short-functions"><span
+class="header-section-number">4.1.6</span> Pattern: Short functions</h4>
+<ul>
+<li>Robert Martin:
+<ul>
+<li>Functions should do one thing. They should do it well. They should
+do it only.</li>
+<li>Smaller functions are mostly robust, easy to read and maintain.</li>
+<li>So the first rule of functions is that they should be small.
+<ul>
+<li>How small? Some say <a
+href="https://www.amazon.com/Five-Lines-Code-when-refactor/dp/161729831X">five
+lines</a></li>
+</ul></li>
+<li>The second rule of functions is that they should be smaller than
+that.</li>
+</ul></li>
+</ul>
+<h4 data-number="4.1.7" id="pattern-dry-not-wet"><span
+class="header-section-number">4.1.7</span> Pattern: DRY, not WET</h4>
 <ul>
 <li>WET = Write everything twice.
 <ul>
@@ -935,8 +957,8 @@ settings.<br />
 reused elsewhere</li>
 </ul></li>
 </ul>
-<h4 data-number="4.1.7" id="pattern-little-languages"><span
-class="header-section-number">4.1.7</span> Pattern: Little
+<h4 data-number="4.1.8" id="pattern-little-languages"><span
+class="header-section-number">4.1.8</span> Pattern: Little
 Languages</h4>
 <ul>
 <li>Operate policy from mechanisms; i.e. the spec from the machinery
@@ -957,8 +979,8 @@ href="https://learnxinyminutes.com/docs/make/">Makefiles</a> handles
 dependencies and updates</li>
 </ul></li>
 </ul>
-<h5 data-number="4.1.7.1" id="little-languages-make"><span
-class="header-section-number">4.1.7.1</span> Little Languages: Make</h5>
+<h5 data-number="4.1.8.1" id="little-languages-make"><span
+class="header-section-number">4.1.8.1</span> Little Languages: Make</h5>
 <p>Make files let us store all our little command line tricks in one
 convenient location. Make development was started by Stuart Feldman in
 1977 as a Bell Labs summer intern (go interns!). It worthy of study
@@ -1007,9 +1029,9 @@ to date. This can save a lot of time during build procedures.</p>
 good practice to add an auto document rule (see the
 <code>make help</code> command, above). Note that this is an example of
 the <em>all code needs doco</em> pattern (also described above).</p>
-<h5 data-number="4.1.7.2"
+<h5 data-number="4.1.8.2"
 id="little-languages-regular-expressions"><span
-class="header-section-number">4.1.7.2</span> Little Languages: Regular
+class="header-section-number">4.1.8.2</span> Little Languages: Regular
 Expressions</h5>
 <ul>
 <li>Example of a “little language”</li>
@@ -1151,165 +1173,165 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a h
 <col style="width: 76%" />
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Magic Method</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><code>__init__</code></td>
 <td>Initializes a new instance of a class.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__del__</code></td>
 <td>Called before an object is destroyed.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__repr__</code></td>
 <td>Returns an official string representation of an object.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__str__</code></td>
 <td>Returns a string representation of an object.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__len__</code></td>
 <td>Returns the length of an object.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__getitem__</code></td>
 <td>Gets an item from an object using indexing.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__setitem__</code></td>
 <td>Sets an item in an object using indexing.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__delitem__</code></td>
 <td>Deletes an item from an object using indexing.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__iter__</code></td>
 <td>Returns an iterator object.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__next__</code></td>
 <td>Returns the next item from an iterator.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__contains__</code></td>
 <td>Checks if an object contains a value.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__call__</code></td>
 <td>Allows an object to be called like a function.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__eq__</code></td>
 <td>Checks if two objects are equal.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__ne__</code></td>
 <td>Checks if two objects are not equal.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__lt__</code></td>
 <td>Checks if one object is less than another.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__le__</code></td>
 <td>Checks if one object is less than or equal to another.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__gt__</code></td>
 <td>Checks if one object is greater than another.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__ge__</code></td>
 <td>Checks if one object is greater than or equal to another.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__add__</code></td>
 <td>Adds two objects.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__sub__</code></td>
 <td>Subtracts one object from another.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__mul__</code></td>
 <td>Multiplies two objects.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__truediv__</code></td>
 <td>Divides one object by another.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__floordiv__</code></td>
 <td>Performs floor division on two objects.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__mod__</code></td>
 <td>Returns the remainder of division.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__pow__</code></td>
 <td>Raises one object to the power of another.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__and__</code></td>
 <td>Performs bitwise AND on two objects.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__or__</code></td>
 <td>Performs bitwise OR on two objects.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__xor__</code></td>
 <td>Performs bitwise XOR on two objects.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__lshift__</code></td>
 <td>Performs left bitwise shift on an object.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__rshift__</code></td>
 <td>Performs right bitwise shift on an object.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__neg__</code></td>
 <td>Returns the negation of an object.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__pos__</code></td>
 <td>Returns the positive value of an object.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__abs__</code></td>
 <td>Returns the absolute value of an object.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__invert__</code></td>
 <td>Returns the bitwise inversion of an object.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__round__</code></td>
 <td>Rounds an object to a given number of digits.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__bool__</code></td>
 <td>Returns the boolean value of an object.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__hash__</code></td>
 <td>Returns the hash value of an object.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>__enter__</code></td>
 <td>Called when entering a context (with statement).</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>__exit__</code></td>
 <td>Called when exiting a context (with statement).</td>
 </tr>
