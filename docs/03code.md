@@ -133,15 +133,15 @@ and maximize fuel consumption.
 
      Clndrs   Volume  HpX  Model  origin  Lbs-  Acc+  Mpg+
      -------  ------  ---  -----  ------  ----  ----  ----
-      4       90      48   78     2       1985  21.5   40
+      4       90      48   78     2       1985  21.1   40
       4       98      79   76     1       2255  17.7   30
-      4       98      68   77     3       2045  18.5   30
+      4       98      68   77     3       2045  18.4   30
       4       79      67   74     2       2000  16     30
       ...
       4      151      85   78     1       2855  17.6   20
       6      168      132  80     3       2910  11.4   30
       8      350      165  72     1       4274  12     10
-      8      304      150  73     1       3672  11.5   10
+      8      304      150  73     1       3672  11.1   10
       ------------------------------      ----------------
         independent features (x)          dependent goals (y)
 
@@ -649,6 +649,8 @@ the = o(
             bootstraps=512,
             confidence=0.05))
 ```
+With the above, now our code can say things like `the.stats.cohen`.
+
 If you want, you can even redefine `+`  (`__add__`) or `=` (`__eq__`):
 
 ```python
