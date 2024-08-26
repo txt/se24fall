@@ -32,7 +32,7 @@ Five considerations influence the design  of this subject:
 |Sep17| wellness day     |no class | |
 |Sep26|  hw3             |         | |
 |Oct1|   [project 1](project1.html)           |         | |
-|Oct3|  hw3              |         | |
+|Oct3|                  |         | |
 |Oct10| hw4              |         | |
 |Oct15| fall break       |no class | | 
 |Oct17| mid-term exam    |         | |
