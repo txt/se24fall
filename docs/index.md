@@ -28,15 +28,15 @@ Five considerations influence the design  of this subject:
 |Aug21|                  |       | this file and [syllabus](syllabus.html)    |
 |Aug23|                  |       | [beware LLMs](https://discord.com/channels/1274829971772145784/1275150262251683871/1275996582571147344); [fundamentals](03code.html)    |
 |Aug29|  [homework 1](hw1.html) |       |  |
-|Sep12| hw2              |         | | 
+|Sep12| [hw2](debug.html)              |         | | 
 |Sep17| wellness day     |no class | |
-|Sep26|  hw3             |         | |
+|Sep26|  [hw3](vim.html)             |         | |
 |Oct1|   [project 1](project1.html)           |         | |
 |Oct3|                  |         | |
-|Oct10| hw4              |         | |
+|Oct10| [hw4](git.html)              |         | |
 |Oct15| fall break       |no class | | 
 |Oct17| mid-term exam    |         | |
-|Oct24| hw5              |         | |
+|Oct24| [hw5](data.html)              |         | |
 |Oct31| project2         |         | |
 |Nov27| project3         |no class | |
 |Nov28| thanksgiving     |no class | |

@@ -1,7 +1,7 @@
 % vim
 
 # Introduction to Vim
-![VimLogo](/docs/img/Vimlogo.svg)
+![VimLogo](img/Vimlogo.svg)
 Welcome to this introductory lecture on Vim, a powerful and efficient text editor. In this session, we'll cover Vim's basic modes, commands, and some useful plugins. By the end, you should have a foundational understanding of Vim and be able to start customizing it with plugins.
 
 
@@ -17,7 +17,7 @@ It's a choice. As said before vim has a steep learning curve, but once you maste
 
 ## Basic Navigation and Editing
 
-![basicVim](/docs/img/vimraw.png)
+![basicVim](img/vimraw.png)
 
 When programming, you spend most of your time reading/editing, not writing. For this reason, Vim is a modal editor: it has different modes for inserting text vs manipulating text.
 
@@ -116,7 +116,7 @@ print(s.merge(nums1, m, nums2, n))
 
 Yes, it is. But did i mention it is **highly customizeable**?
 
-![vimCustom](/docs/img/customVim.png)
+![vimCustom](img/customVim.png)
 
 Your vim instalation has a global file called `.vimrc`. This file can also be set locally where Vim is being ran so you can have multiple configurations, think of it as multiple python environments.
 
@@ -168,19 +168,19 @@ call plug#end()
 
 1. NerdTree
 
-![NerdTree](/docs/img/NerdTree.png)
+![NerdTree](img/NerdTree.png)
 
 [NERDTree](https://vimawesome.com/plugin/nerdtree-red) is a popular Vim plugin that provides a file system explorer within Vim. It allows you to navigate your project's directory structure and manage files efficiently from within the editor.
 
 2. FuzzyFinder
 
-![FuzzyFinder](/docs/img/fuzzyFinder.png)
+![FuzzyFinder](img/fuzzyFinder.png)
 
 The [FuzzyFinder(fzf)](https://vimawesome.com/plugin/fzf) plugin for Vim simplifies locating files and other items by allowing you to search with just a few letters of their names. Instead of needing to type exact file names or paths, you enter a partial string, and the plugin displays a list of matches based on fuzzy matching, which means it looks for items that contain the letters you typed, even if they are not in the exact order. This approach speeds up the process of finding and opening files, making navigation in large projects much more efficient.
 
 3. CVcolorscheme
 
-![CVcolorscheme](/docs/img/cvcolorscheme.png)
+![CVcolorscheme](img/cvcolorscheme.png)
 
 The `cvcolorscheme` [plugin](https://vimawesome.com/plugin/vim-colorschemes-sweeter-than-fiction) for Vim is designed to enhance the appearance of the Vim editor by providing a collection of visually appealing color schemes. 
 
