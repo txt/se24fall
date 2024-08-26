@@ -170,19 +170,19 @@ call plug#end()
 
 ![NerdTree](/docs/img/NerdTree.png)
 
-NERDTree is a popular Vim plugin that provides a file system explorer within Vim. It allows you to navigate your project's directory structure and manage files efficiently from within the editor.
+[NERDTree](https://vimawesome.com/plugin/nerdtree-red) is a popular Vim plugin that provides a file system explorer within Vim. It allows you to navigate your project's directory structure and manage files efficiently from within the editor.
 
 2. FuzzyFinder
 
 ![FuzzyFinder](/docs/img/fuzzyFinder.png)
 
-A fuzzy finder plugin for Vim simplifies locating files and other items by allowing you to search with just a few letters of their names. Instead of needing to type exact file names or paths, you enter a partial string, and the plugin displays a list of matches based on fuzzy matching, which means it looks for items that contain the letters you typed, even if they are not in the exact order. This approach speeds up the process of finding and opening files, making navigation in large projects much more efficient.
+The [FuzzyFinder(fzf)](https://vimawesome.com/plugin/fzf) plugin for Vim simplifies locating files and other items by allowing you to search with just a few letters of their names. Instead of needing to type exact file names or paths, you enter a partial string, and the plugin displays a list of matches based on fuzzy matching, which means it looks for items that contain the letters you typed, even if they are not in the exact order. This approach speeds up the process of finding and opening files, making navigation in large projects much more efficient.
 
 3. CVcolorscheme
 
 ![CVcolorscheme](/docs/img/cvcolorscheme.png)
 
-The `cvcolorscheme` plugin for Vim is designed to enhance the appearance of the Vim editor by providing a collection of visually appealing color schemes. 
+The `cvcolorscheme` [plugin](https://vimawesome.com/plugin/vim-colorschemes-sweeter-than-fiction) for Vim is designed to enhance the appearance of the Vim editor by providing a collection of visually appealing color schemes. 
 
 With `cvcolorscheme`, users can switch between multiple color schemes effortlessly, tailoring their Vim environment to their personal preferences and improving their overall coding experience. This plugin helps users find a color scheme that suits their style and reduces eye strain during long coding sessions.
 
