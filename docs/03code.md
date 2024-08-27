@@ -29,6 +29,10 @@ Terminology (watch for these words):
   - Y,  dependent, X,  independent, goals, 
   - labelling, active learning, 
   - multi-objective, aggregation function, chebyshev
+    - explore, exploit, adaptive, acquisition function, cold-start, warm-start,
+      diversity, perversity, 
+    - (population|surrogate|pool|stream)-based
+    - model-query synthesis
   - regression, classification, Bayes classifier, 
   - entropy, standard deviation
   - over-fitting, order effects, learner variability, cross-validation, temporal validation
@@ -196,6 +200,51 @@ def chebyshevs(self:DATA) -> DATA:
   self.rows = sorted(self.rows, key=lambda r: self.chebyshev(r))
   return self
 ```
+
+### Active Learning Buzzwords
+
+e.g.
+
+```
+Before:
+
+      y y y         n n   : Y (dependent, many missing values)
+    1 2 3 4 5 6 7 8 9 10  : X (independent, most fully known)
+    
+So:
+
+             x2 x2        : AQ1: explore  (usual initial tactic)
+       x1                 : AQ2: exploit (once we know where the good stuff is)
+      x3 x3        x3 x3  : AQ3: representativeiness
+    x4     x4    x4   x4  : AQ4: diversity
+    x5     x5 x5 x5       : AQ5: perversity (to boldly go where no one has gone before)
+```
+
+| words | note |
+|-------:|:-----|
+|explore|     looking for places that can change our mind<br>In the above, try x=6 |
+|exploit|   go to where things look best<br>In the above, try x=(2,3,4) (since that is where things look best). A.k.a. greedy search |
+|adaptive | moving from explore to exploit as the reasoning continues |
+|acquisition functions | the thing that tells us to _explore/exploit_/whatever|
+| informativeness |  a.k.a. exploit. Go where its looks good. |
+| representiveness| equal parts in all regions e.g. x=2,3,4 half the time and x=9,10 half the time|
+| diversity |  ignore the Y values and sample randomly and widely|
+| perversity (my term)| go where you ain't gone before. |
+| cold-start | no prior knowledge |
+| warm-start | some prior (steam-based is usually warm-start) |
+| population-based| objective function knowm, we (e.g.) surf its gradients looking for cool pleases to study next|
+| surrogate-based | objective function unknown so we build an approximation from the available data|
+| pool-based | surrogate-based. have knowledge of lots of independent variables |
+| stream-based| surrogate based. have a (small) window of next examples, after which we wills ee another and and anouter. This is usually a warm-start tactic|
+| model-query synthesis| surrogate or population-based.  look at model so far, infer where to try next. Kind an extreme version of _explore_. May include e.g. feature weighting to decide what to ignore|
+
+In most of my current experiments:
+
+- surrogate-based
+- usually cold-start
+  - but work over summer by grad students suggests that diversity sampling (to create a warm start) means that exploit defeats adaptive and/or explore
+- in batch-mode (when we read all the data) we are pool-based
+  - area open for research: stream-based
 
 ### Configuration
 Other people define their command line options separate to the settings.
