@@ -33,7 +33,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -113,20 +113,6 @@ style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10p
 <header id="title-block-header">
 <h1 class="title">Debugging</h1>
 </header>
-<p><br clear=all></p>
-<p>Important Links:<br />
-<a
-href="https://docs.python.org/3/library/pdb.html">https://docs.python.org/3/library/pdb.html</a><br />
-<a
-href="https://missing.csail.mit.edu/2020/debugging-profiling/">https://missing.csail.mit.edu/2020/debugging-profiling/</a><br />
-<a
-href="https://txt.github.io/se24fall/03code.html">https://txt.github.io/se24fall/03code.html</a></p>
-<p>References:<br />
-Brian Marick, “How to Misuse Code Coverage,” <a
-href="http://www.exampler.com/testingcom/writings/coverage.pdf">http://www.exampler.com/testingcom/writings/coverage.pdf</a>
-[1]</p>
-<p>Ayewah, Pugh, Hovemeyer, Morgenthaler, Penix, “Using Static Analysis
-to Find Bugs,” IEEE Software, vol. 25, no. 5, 2008. [2]</p>
 <h2 id="debugging">Debugging</h2>
 <p><strong>Debugging:</strong> The process by which a programmer
 detects, and reproduces a software fault.</p>
@@ -138,29 +124,33 @@ walkthrough.</p>
 <h3 id="debugging-using-print-statements-logging">Debugging using print
 statements, logging</h3>
 <p>debugging.py is supposed to perform selection sort on an array of
-integers, passed into the function as the variable arr.<br />
-<strong>def selectionSort(arr):</strong><br />
-<strong>n = len(arr)</strong><br />
-<strong>for i in range(n):</strong><br />
-<strong>lowestIndex = i</strong><br />
-<strong>for j in range(n):</strong><br />
-<strong>if arr[j] &lt; arr[lowestIndex]:</strong><br />
-<strong>lowestIndex = j</strong></p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>   <span class="op">**</span>arr\[lowestIndex\] \<span class="op">=</span> arr\[i\]<span class="op">**</span>  </span>
-<span id="cb1-2"><a href="#cb1-2"></a>   <span class="op">**</span>arr\[i\] \<span class="op">=</span> arr\[lowestIndex\]<span class="op">**</span>  </span>
-<span id="cb1-3"><a href="#cb1-3"></a>   <span class="op">**</span>n \<span class="op">=</span> n \<span class="op">-</span> <span class="dv">1</span><span class="op">**</span></span></code></pre></div>
-<p><strong>return arr</strong></p>
-<p><strong>arr_in = [5, 3, 2, 1, 8, 10, 11, 9, 23]</strong></p>
-<p><strong>arr_out = selectionSort(arr_in)</strong></p>
-<p><strong>print(arr_out)</strong></p>
+integers, passed into the function as the variable arr.</p>
+<pre><code>def selectionSort(arr):  
+   n = len(arr)  
+   for i in range(n):  
+       lowestIndex = i  
+       for j in range(n):  
+           if arr[j] &lt; arr[lowestIndex]:  
+               lowestIndex \= j
+
+       arr[lowestIndex] = arr[i]  
+       arr[i] = arr[lowestIndex]  
+       n = n - 1
+
+   return arr
+
+arr_in = [5, 3, 2, 1, 8, 10, 11, 9, 23]
+
+arr_out = selectionSort(arr_in)
+
+print(arr_out)</code></pre>
 <p>If you’ve finished Homework 1, you should have python3.13 installed.
 To run debugging.py,<br />
 copy it to a work_dir folder, and run the following command in your
-command line:<br />
-~/work_dir$ chmod u+x debugging.py<br />
-~/work_dir$ python3.13 debugging.py<br />
-[23, 11, 8, 5, 8, 10, 11, 9, 23]</p>
+command line:</p>
+<pre><code>~/work_dir$ chmod u+x debugging.py  
+~/work_dir$ python3.13 debugging.py  
+[23, 11, 8, 5, 8, 10, 11, 9, 23]</code></pre>
 <p>Unfortunately, our selection sort has a bug in it, as the array the
 program output is not in sorted order. How could we go about finding our
 bug?</p>
@@ -170,25 +160,29 @@ state of the array after every operation that affects the array. With
 enough print statements, we’ll be able to pinpoint at what point in the
 algorithm something unexpected occurs. Let’s augment our previous
 version of debugging.py to include print statements.</p>
-<p>def selectionSort(arr):<br />
-n = len(arr)<br />
-for i in range(n):<br />
-lowestIndex = i<br />
-for j in range(n):<br />
-if arr[j] &lt; arr[lowestIndex]:<br />
-lowestIndex = j</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>   <span class="bu">print</span>(<span class="st">&quot;lowest index &quot;</span>, lowestIndex) \<span class="co"># what index contains the lowest value?  </span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>   <span class="bu">print</span>(<span class="st">&quot;i &quot;</span>, i) \<span class="co"># where in the array should the ith smallest value be?  </span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>   <span class="bu">print</span>(<span class="st">&quot;n &quot;</span>, n) \<span class="co"># where are we considering the end of the array?</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>   <span class="bu">print</span>(<span class="st">&quot;before &quot;</span>, arr) \<span class="co"># what is array state before we swap anything?  </span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>   arr\[lowestIndex\] \<span class="op">=</span> arr\[i\]  </span>
-<span id="cb2-7"><a href="#cb2-7"></a>   <span class="bu">print</span>(<span class="st">&quot;first &quot;</span>, arr) \<span class="co"># what is array state after the first write?  </span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>   arr\[i\] \<span class="op">=</span> arr\[lowestIndex\]  </span>
-<span id="cb2-9"><a href="#cb2-9"></a>   <span class="bu">print</span>(<span class="st">&quot;final&quot;</span>, arr) \<span class="co"># what is array state after the second write?  </span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>   n \<span class="op">=</span> n \<span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
-<p>return arr</p>
+<pre><code>def selectionSort(arr):
+   n = len(arr)
+   for i in range(n):
+       lowestIndex = i
+       for j in range(n):
+           if arr[j] &lt; arr[lowestIndex]:
+               lowestIndex = j
+
+
+       print(&quot;lowest index &quot;, lowestIndex) # what index contains the lowest value?
+       print(&quot;i &quot;, i) # where in the array should the ith smallest value be?
+       print(&quot;n &quot;, n) # where are we considering the end of the array?
+
+
+       print(&quot;before &quot;, arr) # what is array state before we swap anything?
+       arr[lowestIndex] = arr[i]
+       print(&quot;first &quot;, arr) # what is array state after the first write?
+       arr[i] = arr[lowestIndex]
+       print(&quot;final&quot;, arr) # what is array state after the second write?
+       n = n - 1
+
+
+   return arr</code></pre>
 <p>Adding print statements to the code serves as a good exercise of
 whether you understand the code you’ve written. My methodology for
 adding print statements is as follows:</p>
@@ -207,11 +201,11 @@ adding print statements is as follows:</p>
 change represents</li>
 </ol>
 <p>In this example, we do not need to print j, as it is captured in
-lowestIndex, and only used to determine lowestIndex.<br />
-Upon executing our new debugging.py, you’ll immediately notice that the
-output was much longer than before, probably causing your shell window
-to scroll downwards. While print debugging can be useful, working with
-the artifacts of it, specifically text on the command line, can be
+lowestIndex, and only used to determine lowestIndex.</p>
+<p>Upon executing our new debugging.py, you’ll immediately notice that
+the output was much longer than before, probably causing your shell
+window to scroll downwards. While print debugging can be useful, working
+with the artifacts of it, specifically text on the command line, can be
 difficult, and is prone to accidental loss. If we wanted to save our
 print statements to a file for ease of use, we can use the python
 logging library.</p>
@@ -224,31 +218,37 @@ database (ex. ElasticSearch), or you can remote directly into the server
 that is hosting your service, and download the log files from the
 server. Let’s examine our debugging.py, but with all of the print
 statements rewritten to use python’s logging library.</p>
-<p>import logging, sys<br />
-logging.basicConfig(filename=‘debugging.log’, encoding=‘utf-8’,
-level=logging.DEBUG, format=‘%(asctime)s %(message)s’)<br />
-logging.debug(“NEW LOG”)</p>
-<p>def selectionSort(arr):<br />
-logger = logging.getLogger(__name__)<br />
-n = len(arr)<br />
-for i in range(n):<br />
-lowestIndex = i<br />
-for j in range(n):<br />
-if arr[j] &lt; arr[lowestIndex]:<br />
-lowestIndex = j</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>   logger.debug(<span class="st">&quot;lowest index: </span><span class="sc">%r</span><span class="st">&quot;</span>, lowestIndex) \<span class="co"># index w/ lowest value  </span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>   logger.debug(<span class="st">&quot;i: </span><span class="sc">%r</span><span class="st">&quot;</span>, i) \<span class="co"># ith smallest index  </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>   logger.debug(<span class="st">&quot;n: </span><span class="sc">%r</span><span class="st">&quot;</span>, n) \<span class="co"># end of array</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a>   logger.debug(<span class="st">&quot;before: </span><span class="sc">%r</span><span class="st">&quot;</span>, arr) \<span class="co"># array state before we swap anything?  </span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>   arr\[lowestIndex\] \<span class="op">=</span> arr\[i\]  </span>
-<span id="cb3-7"><a href="#cb3-7"></a>   logger.debug(<span class="st">&quot;first: </span><span class="sc">%r</span><span class="st">&quot;</span>, arr) \<span class="co"># state after the first change?  </span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>   arr\[i\] \<span class="op">=</span> arr\[lowestIndex\]</span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a>   logger.debug(<span class="st">&quot;final: </span><span class="sc">%r</span><span class="st">&quot;</span>, arr) \<span class="co"># array state after the second change?  </span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>   n \<span class="op">=</span> n \<span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
-<p>return arr</p>
+<pre><code>import logging, sys
+logging.basicConfig(filename=&#39;debugging.log&#39;, encoding=&#39;utf-8&#39;, level=logging.DEBUG, format=&#39;%(asctime)s %(message)s&#39;)
+logging.debug(&quot;NEW LOG&quot;)
+
+
+def selectionSort(arr):
+   logger = logging.getLogger(__name__)
+   n = len(arr)
+   for i in range(n):
+       lowestIndex = i
+       for j in range(n):
+           if arr[j] &lt; arr[lowestIndex]:
+               lowestIndex = j
+
+
+       logger.debug(&quot;lowest index: %r&quot;, lowestIndex) # index w/ lowest value
+       logger.debug(&quot;i: %r&quot;, i) # ith smallest index
+       logger.debug(&quot;n: %r&quot;, n) # end of array
+
+
+       logger.debug(&quot;before: %r&quot;, arr) # array state before we swap anything?
+       arr[lowestIndex] = arr[i]
+       logger.debug(&quot;first: %r&quot;, arr) # state after the first change?
+       arr[i] = arr[lowestIndex]
+
+
+       logger.debug(&quot;final: %r&quot;, arr) # array state after the second change?
+       n = n - 1
+
+
+   return arr</code></pre>
 <p>The update to use loggers was relatively simple; the print statements
 have been replaced with calls to logger.debug, and the basic logging
 configuration needed to be set up. For our logger, I’ve set it to output
@@ -257,63 +257,69 @@ format to prepend the ascii time to all messages. Let’s re-run our code
 and examine the output. Since we are working with log files and not
 command line output, it is easy to leave comments on the file to help
 facilitate your understanding of the log.</p>
-<p>~/work_dir$ python3.13 debugging.py<br />
-~/work_dir$ cat debugging.py</p>
-<p>2024-08-27 11:34:14,335 NEW LOG<br />
-lowest index 3<br />
-i 0<br />
-n 9<br />
-before [5, 3, 2, 1, 8, 10, 11, 9, 23]<br />
-first [5, 3, 2, 5, 8, 10, 11, 9, 23] ### 5 is swapped from index 0 into
-index 3<br />
-final [5, 3, 2, 5, 8, 10, 11, 9, 23] ### 5 is swapped from index 3 into
-index 0<br />
-lowest index 2<br />
-i 1<br />
-n 8 ### why are not considering the last element (23) of the
-array?<br />
-before [5, 3, 2, 5, 8, 10, 11, 9, 23]<br />
-first [5, 3, 3, 5, 8, 10, 11, 9, 23] ### 3 is swapped from index 2 into
-index 1<br />
-final [5, 3, 3, 5, 8, 10, 11, 9, 23] ### 3 is swapped from index 1 into
-index 2</p>
+<pre><code>~/work_dir$ python3.13 debugging.py
+~/work_dir$ cat debugging.py
+
+
+2024-08-27 11:34:14,335 NEW LOG
+lowest index  3
+i  0
+n  9
+before  [5, 3, 2, 1, 8, 10, 11, 9, 23]
+first  [5, 3, 2, 5, 8, 10, 11, 9, 23] ### 5 is swapped from index 0 into index 3
+final [5, 3, 2, 5, 8, 10, 11, 9, 23]  ### 5 is swapped from index 3 into index 0
+lowest index  2
+i  1
+n  8 ### why are not considering the last element (23) of the array?
+before  [5, 3, 2, 5, 8, 10, 11, 9, 23]
+first  [5, 3, 3, 5, 8, 10, 11, 9, 23] ### 3 is swapped from index 2 into index 1
+final [5, 3, 3, 5, 8, 10, 11, 9, 23]  ### 3 is swapped from index 1 into index 2</code></pre>
 <p>As the inline comments call out, the first operation that edits the
 array, arr[lowestIndex] = arr[i], is causing the element in
 arr[lowestIndex] to be overwritten by the element in arr[i]. This can be
 easily fixed by saving arr[lowestIndex] into a temporary variable, and
 then writing that temporary variable into arr[i]. Let’s update the code
 to use a temporary variable, then re-examine our output.</p>
-<p>import logging, sys<br />
-logging.basicConfig(filename=‘partial_debugging.log’, encoding=‘utf-8’,
-level=logging.DEBUG, format=‘%(asctime)s %(message)s’)<br />
-logging.debug(“NEW LOG”)</p>
-<p>def selectionSort(arr):<br />
-logger = logging.getLogger(__name__)<br />
-n = len(arr)<br />
-for i in range(n):<br />
-lowestIndex = i<br />
-for j in range(n):<br />
-if arr[j] &lt; arr[lowestIndex]:<br />
-lowestIndex = j</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>   logger.debug(<span class="st">&quot;lowest index: </span><span class="sc">%r</span><span class="st">&quot;</span>, lowestIndex) \<span class="co"># what index contains the lowest value?  </span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>   logger.debug(<span class="st">&quot;i: </span><span class="sc">%r</span><span class="st">&quot;</span>, i) \<span class="co"># where in the array should the ith smallest value be?  </span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>   logger.debug(<span class="st">&quot;n: </span><span class="sc">%r</span><span class="st">&quot;</span>, n) \<span class="co"># where are we considering the end of the array?</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a>   lowestNum \<span class="op">=</span> arr\[lowestIndex\]</span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a>   logger.debug(<span class="st">&quot;lowestNum: </span><span class="sc">%r</span><span class="st">&quot;</span>,lowestNum) \<span class="co"># lowest number found in unsorted array</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a>   logger.debug(<span class="st">&quot;before: </span><span class="sc">%r</span><span class="st">&quot;</span>, arr) \<span class="co"># array state before we swap anything  </span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>   arr\[lowestIndex\] \<span class="op">=</span> arr\[i\]  </span>
-<span id="cb4-11"><a href="#cb4-11"></a>   logger.debug(<span class="st">&quot;first: </span><span class="sc">%r</span><span class="st">&quot;</span>, arr) \<span class="co"># array state after the first change  </span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>   arr\[i\] \<span class="op">=</span> lowestNum</span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a>   logger.debug(<span class="st">&quot;final: </span><span class="sc">%r</span><span class="st">&quot;</span>, arr) \<span class="co"># array state after the second change  </span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>   n \<span class="op">=</span> n \<span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
-<p>return arr</p>
-<p>~/work_dir$ python3.13 debugging.py<br />
-[23, 10, 5, 8, 1, 2, 3, 9, 11]</p>
+<pre><code>import logging, sys
+logging.basicConfig(filename=&#39;partial_debugging.log&#39;, encoding=&#39;utf-8&#39;, level=logging.DEBUG, format=&#39;%(asctime)s %(message)s&#39;)
+logging.debug(&quot;NEW LOG&quot;)
+
+
+def selectionSort(arr):
+   logger = logging.getLogger(__name__)
+   n = len(arr)
+   for i in range(n):
+       lowestIndex = i
+       for j in range(n):
+           if arr[j] &lt; arr[lowestIndex]:
+               lowestIndex = j
+
+
+       logger.debug(&quot;lowest index: %r&quot;, lowestIndex) # what index contains the lowest value?
+       logger.debug(&quot;i: %r&quot;, i) # where in the array should the ith smallest value be?
+       logger.debug(&quot;n: %r&quot;, n) # where are we considering the end of the array?
+
+
+       lowestNum = arr[lowestIndex]
+
+
+       logger.debug(&quot;lowestNum: %r&quot;,lowestNum) # lowest number found in unsorted array
+
+
+       logger.debug(&quot;before: %r&quot;, arr) # array state before we swap anything
+       arr[lowestIndex] = arr[i]
+       logger.debug(&quot;first: %r&quot;, arr) # array state after the first change
+       arr[i] = lowestNum
+
+
+       logger.debug(&quot;final: %r&quot;, arr) # array state after the second change
+       n = n - 1
+
+
+   return arr
+</code></pre>
+<pre><code>\~/work\_dir$ python3.13 debugging.py  
+\[23, 10, 5, 8, 1, 2, 3, 9, 11\]</code></pre>
 <p>Unfortunately, even though we fixed a bug, our program actually had
 multiple bugs! And while this process of adding logging to our file has
 been useful to record unexpected behavior for later examination, it has
@@ -353,41 +359,22 @@ Included in python.<br />
 To use <strong>PDB</strong> in debugging.py, import pdb, and add a call
 to breakpoint() on the line of code you’d like the debugger to stop
 execution on:</p>
-<p>import pdb<br />
-def selectionSort(arr):<br />
-n = len(arr)<br />
-for i in range(n):<br />
-lowestIndex = i<br />
-for j in range(n):<br />
-if arr[j] &lt; arr[lowestIndex]:<br />
+<p>```import pdb def selectionSort(arr): n = len(arr) for i in range(n):
+lowestIndex = i for j in range(n): if arr[j] &lt; arr[lowestIndex]:
 lowestIndex = j</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>   <span class="bu">breakpoint</span>()  </span>
-<span id="cb5-2"><a href="#cb5-2"></a>   lowestNum \<span class="op">=</span> arr\[lowestIndex\]  </span>
-<span id="cb5-3"><a href="#cb5-3"></a>   arr\[lowestIndex\] \<span class="op">=</span> arr\[i\]  </span>
-<span id="cb5-4"><a href="#cb5-4"></a>   arr\[i\] \<span class="op">=</span> lowestNum</span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a>   n \<span class="op">=</span> n \<span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
-<p>return arr</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>   <span class="bu">breakpoint</span>()</span>
+<span id="cb8-2"><a href="#cb8-2"></a>   lowestNum <span class="op">=</span> arr[lowestIndex]</span>
+<span id="cb8-3"><a href="#cb8-3"></a>   arr[lowestIndex] <span class="op">=</span> arr[i]</span>
+<span id="cb8-4"><a href="#cb8-4"></a>   arr[i] <span class="op">=</span> lowestNum</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>   n <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
+<p>return arr```</p>
 <p>Now when you execute debugging.py, you’ll be prompted with the pdb
 debugger, indicated by the (pdb) on your command line. To display code
 11 lines above and below the breakpoint, enter l (l as in list).<br />
-~/work_dir$ python3.13 debugging.py<br />
-&gt;
-/home/ubuntu/Home/PHD/tacsc510/pdb_partial_debugging.py(11)selectionSort()<br />
--&gt; breakpoint()<br />
-(Pdb) l<br />
-6 lowestIndex = i<br />
-7 for j in range(n):<br />
-8 if arr[j] &lt; arr[lowestIndex]:<br />
-9 lowestIndex = j<br />
-10<br />
-11 -&gt; breakpoint()<br />
-12 lowestNum = arr[lowestIndex]<br />
-13 arr[lowestIndex] = arr[i]<br />
-14 arr[i] = lowestNum<br />
-15<br />
-16 n = n - 1</p>
+<code>~/work_dir$ python3.13 debugging.py &gt; /home/ubuntu/Home/PHD/tacsc510/pdb_partial_debugging.py(11)selectionSort() -&gt; breakpoint() (Pdb) l   6             lowestIndex = i   7             for j in range(n):   8                 if arr[j] &lt; arr[lowestIndex]:   9                     lowestIndex = j  10       11  -&gt;         breakpoint()  12             lowestNum = arr[lowestIndex]  13             arr[lowestIndex] = arr[i]  14             arr[i] = lowestNum  15       16             n = n - 1</code></p>
 <p>Now we have loaded our program into PDB and stopped its execution, we
 have many options in interacting with our stalled program. Here are the
 main commands you should know:</p>
@@ -404,7 +391,9 @@ the current function is reached or it returns<br />
 <li><strong>b</strong>(reak): set a breakpoint<br />
 </li>
 <li><strong>p</strong>(rint): Evaluate the expression in the current
-context and print its value<br />
+context and print its value</li>
+<li><strong>d</strong>(isplay): Same as print, but prints whenever the
+expression evaluates to a new value<br />
 </li>
 <li><strong>r</strong>(eturn): Continue execution until the current
 function returns<br />
@@ -413,7 +402,8 @@ function returns<br />
 </ul>
 <p>Below is an attached video of using pdb to step through debugging.py
 and find the remaining bug:</p>
-<p>&lt;Insert video here&gt;</p>
+<p><a href="https://www.youtube.com/PDB_VIDEO_NOT_HERE_YET">PDB
+Usage</a></p>
 <h2 id="static-analysis">Static Analysis</h2>
 <p><strong>Static Analysis:</strong> the process of evaluating a system
 or component based on its form, structure, content or documentation.
@@ -450,7 +440,12 @@ guide.<br />
 </li>
 <li><a href="https://bandit.readthedocs.io/en/latest/">Bandit</a> -
 Finds common security issues in python code</li>
+<li><a href="https://radon.readthedocs.io/en/latest">Radon</a> -
+Calculates metrics like cyclomatic complexity, maintainability index
+from your source code</li>
 </ul>
+<p>and many more you can find at <a
+href="https://github.com/analysis-tools-dev/static-analysis?tab=readme-ov-file">analysis-tools.dev</a></p>
 <h2 id="software-testing">Software Testing</h2>
 <p><strong>Testing:</strong> The process of finding software faults via
 <strong>dynamic verification</strong> of the behavior of a program, on a
@@ -517,31 +512,46 @@ discovered via code coverage. [1]</p>
 <strong>BEFORE</strong> you write the code that the case will
 test.</p></li>
 </ul>
-<h2 id="exercises">Exercises</h2>
+<h2 id="homework-2-assignment">Homework 2 Assignment</h2>
 <ol type="1">
-<li>Execute at least <strong>three</strong> of the static analysis tools
-on hw2_debugging.py
+<li>Download and unzip hw2.zip</li>
+<li>Execute AutoPep8 and <strong>two</strong> of the static analysis
+tools mentioned earlier on all files in hw2.zip
 <ol type="1">
 <li>Hw2_debugging.py consists of an implementation of mergeSort that
-uses multiple helper methods to sort the array
+uses multiple helper methods in rand.py to sort the array that is
+currently failing
 <ol type="1">
-<li>For each tool you run, save the trace created by the tool in a
-folder called ‘pre_traces’<br />
-</li>
 <li>Make all of the code changes the static analysis tools
 recommend.<br />
 </li>
 <li>Re-run each tool, save the trace created by the tool in a folder
 called ‘post_traces’<br />
 </li>
+<li>Fix the code, and commit your fixed version of hw2_debugging.py to
+your HW1 repository.</li>
 </ol></li>
-<li>Write test cases to verify your merge sort works, that should be
-executable via pytest.
-<ol type="1">
-<li>Provide a README.md that details how to run your test</li>
-</ol></li>
+<li>Write 3 test cases to verify your merge sort works, that are
+executable via pytest.<br />
+</li>
+<li>Configure autopep8, and the two static analysis tools you’ve used to
+run on your HW1 repo every commit. Add badges for each of the static
+analysis tools.</li>
+<li>Configure your new merge_sort test to run on the HW1 repo every
+commit, to ensure no regression can occur without a test failing.</li>
 </ol></li>
 </ol>
+<h2 id="important-links">Important Links:</h2>
+<p><a
+href="https://docs.python.org/3/library/pdb.html">https://docs.python.org/3/library/pdb.html</a><br />
+<a
+href="https://missing.csail.mit.edu/2020/debugging-profiling/">https://missing.csail.mit.edu/2020/debugging-profiling/</a></p>
+<h2 id="references">References:</h2>
+<p>Brian Marick, “How to Misuse Code Coverage,” <a
+href="http://www.exampler.com/testingcom/writings/coverage.pdf">http://www.exampler.com/testingcom/writings/coverage.pdf</a>
+[1]</p>
+<p>Ayewah, Pugh, Hovemeyer, Morgenthaler, Penix, “Using Static Analysis
+to Find Bugs,” IEEE Software, vol. 25, no. 5, 2008. [2]</p>
 
 
 
