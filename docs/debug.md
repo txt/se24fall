@@ -205,7 +205,8 @@ What we really want to find our final bug in debugging.py is the ability to step
 **PDB:** Debugger for the Python programming language. Included in python.  
 To use **PDB** in debugging.py, import pdb, and add a call to breakpoint() on the line of code you’d like the debugger to stop execution on:
 
-```import pdb
+```
+import pdb
 def selectionSort(arr):
    n = len(arr)
    for i in range(n):
@@ -224,10 +225,12 @@ def selectionSort(arr):
        n = n - 1
 
 
-   return arr```
+   return arr
+```
 
 Now when you execute debugging.py, you’ll be prompted with the pdb debugger, indicated by the (pdb) on your command line. To display code 11 lines above and below the breakpoint, enter l (l as in list).  
-```~/work_dir$ python3.13 debugging.py
+```
+~/work_dir$ python3.13 debugging.py
 > /home/ubuntu/Home/PHD/tacsc510/pdb_partial_debugging.py(11)selectionSort()
 -> breakpoint()
 (Pdb) l
@@ -241,7 +244,8 @@ Now when you execute debugging.py, you’ll be prompted with the pdb debugger, i
  13  	        arr[lowestIndex] = arr[i]
  14  	        arr[i] = lowestNum
  15  	
- 16  	        n = n - 1```
+ 16  	        n = n - 1
+```
 
 Now we have loaded our program into PDB and stopped its execution, we have many options in interacting with our stalled program. Here are the main commands you should know:
 
@@ -252,7 +256,7 @@ Now we have loaded our program into PDB and stopped its execution, we have many 
 * **p**(rint): Evaluate the expression in the current context and print its value 
 * **d**(isplay): Same as print, but prints whenever the expression evaluates to a new value  
 * **r**(eturn): Continue execution until the current function returns  
-* **q(**uit) \- Quit the debugger 
+* **q**(uit) \- Quit the debugger 
 
 Below is an attached video of using pdb to step through debugging.py and find the remaining bug:
 
