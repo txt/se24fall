@@ -312,7 +312,7 @@ and many more you can find at [analysis-tools.dev](https://github.com/analysis-t
   **Test-driven Design:** Writing your test cases **BEFORE** you write the code that the case will test. 
 
 ## Homework 2 Assignment
-1. Download and unzip hw2.zip
+1. Download and unzip [hw2.zip](https://moodle-courses2425.wolfware.ncsu.edu/mod/resource/view.php?id=524797)
 1. Execute AutoPep8 and **two** of the static analysis tools mentioned earlier on all files in hw2.zip
    1. Hw2\_debugging.py consists of an implementation of mergeSort that uses multiple helper methods in rand.py to sort the array that is currently failing 
       1. Make all of the code changes the static analysis tools recommend.  
