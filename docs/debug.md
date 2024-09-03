@@ -317,10 +317,11 @@ and many more you can find at [analysis-tools.dev](https://github.com/analysis-t
    1. Hw2\_debugging.py consists of an implementation of mergeSort that uses multiple helper methods in rand.py to sort the array that is currently failing 
       1. Make all of the code changes the static analysis tools recommend.  
       2. Re-run each tool, save the trace created by the tool in a folder called ‘post\_traces’  
-      3. Fix the code, and commit your fixed version of hw2_debugging.py to your HW1 repository. 
-   2. Write 3 test cases to verify your merge sort works, that are executable via pytest.  
-   3. Configure autopep8, and the two static analysis tools you've used to run on your HW1 repo every commit. Add badges for each of the static analysis tools.
-   4. Configure your new merge_sort test to run on the HW1 repo every commit, to ensure no regression can occur without a test failing. 
+      3. Fix the code, and commit your fixed version of hw2_debugging.py to your HW1 repository, or a seperate HW2 repo with the same badges as HW1. 
+   2. Write 3 test cases to verify your merge sort works, that are executable via pytest.
+   3. Configure autopep8, and the two static analysis tools you've used to run on your HW2 repo every commit. Add badges for each of the static analysis tools.
+   4. Configure your new merge_sort test to run on the HW2 repo every commit, to ensure no regression can occur without a test failing. 
+   5. Submit a PDF with the static analysis traces and a link to your HW2 repository to Moodle.
 
 
 
