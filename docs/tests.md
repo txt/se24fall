@@ -1,11 +1,10 @@
 % Testing
 
-# Concepts to know
+## Concepts to know
 
 - V-diagram unit/system testong
 
 ## Quotes
-
 
 - f u cn rd ths, u cn gt a gd jb n sftwr tstng.<br>
   - Anonymous
@@ -22,39 +21,14 @@
   detective and the murderer.
   - Anon
 
-## V-Diagram
+## Why test?
 
-- V-diagram
-  - "Without requirements or design, programming is the art of adding bugs to an empty text file."
-    -- Louis Srygley
-  - Brooks, [Mythical Man Month](https://web.eecs.umich.edu/~weimerw/2018-481/readings/mythical-man-month.pdf).
-    Effort is
-    - 1/3 th planning
-    - 1/6 th coding
-    - 1/4 th unit testing : testing your own code
-    - 1/4 th systems testing : testing your code, combined with others
-      - may include:
-        - Integration testing: verify the interfaces between components against a software design.
-        - Acceptance testing:
-          - User acceptance testing
-          - Contractual and regulatory acceptance testing 
-        - Alpha and beta testing
-          - Alpha testing is simulated or actual operational testing by potential users/customer
-          - Following alpha testing: external testing with a larger audience
-             - Released to a limited audience outside of the programming team
-
-
-**Testing:** The process of finding software faults via **dynamic verification** of the behavior of a program, on a finite set of test cases, suitably selected, against the expected behavior. Involves the execution of the program.
-
-**Fault:** as an incorrect step, process, or data definition in a program.
-
-- different to **failure** (when something actually goes wrongs)
-- a program may have many faults, but never fail
-
-**Why do we test?**
-
+- Check some code
+- Re-check some code (regression testing; has anything new broken  anything old)?
+- Good manners for your team mates
+  - Do not commit things that will hurt them
 - Without testing, you don’t know if your program actually behaves as expected. Before writing dedicated test cases, you may have only passed a tiny amount of inputs through your system, and only seen a tiny amount of outputs. Testing is the process of selecting good representative inputs for all possible interactions in your program and seeing whether they map to the expected output . Good tests provide a lens into how the program is working, and allow you to find software faults when they fail unexpectedly.
--  Because there is so much to test for
+- Because there is so much to test for
   - Conformance to the requirements
     - But whose' requirements?
       - Welcome to the wonder of multi-stakeholder systems
@@ -78,11 +52,40 @@
     Interoperability
   - And the list goes one and on and on
 
-<img src="https://khalilstemmler.com/img/blog/object-oriented/analysis/non-functional-requirements/non-functional-requirements-map.png">
+<img width=700px  src="https://khalilstemmler.com/img/blog/object-oriented/analysis/non-functional-requirements/non-functional-requirements-map.png">
 
-**Test-drive development**
+## V-Diagram
 
-- write tests first (which will instantly fail, since there is no code yet)
+- V-diagram
+  - "Without requirements or design, programming is the art of adding bugs to an empty text file."
+    -- Louis Srygley
+  - Brooks, [Mythical Man Month](https://web.eecs.umich.edu/~weimerw/2018-481/readings/mythical-man-month.pdf).
+    Effort is
+    - 1/3 th planning
+    - 1/6 th coding
+    - 1/4 th unit testing : testing your own code
+    - 1/4 th systems testing : testing your code, combined with others
+      - may include:
+        - Integration testing: verify the interfaces between components against a software design.
+        - Acceptance testing:
+          - User acceptance testing
+          - Contractual and regulatory acceptance testing 
+        - Alpha and beta testing
+          - Alpha testing is simulated or actual operational testing by potential users/customer
+          - Following alpha testing: external testing with a larger audience
+             - Released to a limited audience outside of the programming team
+
+
+
+**Fault:** as an incorrect step, process, or data definition in a program.
+
+- different to **failure** (when something actually goes wrongs)
+- a program may have many faults, but never fail
+
+
+## Test-drive development
+
+- Write tests first (which will instantly fail, since there is no code yet)
 - Then, write code to fix the  failing tests
 - At the end of each day
   - Leave something broken
@@ -93,7 +96,6 @@
   - refactor (sometimes, do a global clean up).
 - Karac + Turhan (2018): TDD can't really be  defined or shown to be effective
   - [What Do We (Really) Know about Test-Driven Development? ](https://www.researchgate.net/profile/Itir_Karac/publication/326239274_What_Do_We_Really_Know_about_Test-Driven_Development/links/5cee7550299bf1f881494cf6/What-Do-We-Really-Know-about-Test-Driven-Development.pdf)
-     - Itir Karac and Burak Turhan
   - TDD has too many cogs,
   - Its effectiveness is highly influenced by the context (for example, the tasks at hand or skills of individuals),
   - Hard to say when you are/are not doing TDD
@@ -106,17 +108,20 @@
   - Maybe TDD's "success" was just  that it happened at the same time that everyone stopped doing "C" and started using more
     interactive incremental development tools (e.g. Pyhton)
 
-**Handling Large Test Suites**: can't retest everything
+## Handling Large Test Suites
 
-- some input clusters relate to new functionality
- the Elbaum heuristic from Elbaum, Sebastian, Gregg Rothermel, and John Penix. "Techniques for improving regression testing in continuous integration development environments." Proceedings of the 22nd ACM SIGSOFT International Symposium on Foundations of Software Engineering. 2014.
- - failed recently, last tested a while ago, or is new.
- - for very large test suites catches 50% of failures, within one hour
- - for a survey of other ordering heuristics, see  Ling, Xiao, Rishabh Agrawal, and Tim Menzies. "How different is test case prioritization for open and closed source projects?." IEEE Transactions on Software Engineering 48.7 (2021): 2526-2540.
-   - warning: good test case orderings are different for open source projects  and in-house projects.
+Can not retest everything. What to do? Test selectively:
+
+- Some input clusters relate to new functionality
+  - The Elbaum heuristic from Elbaum, Rothermel, and Penix. 
+    [Techniques for improving regression testing in continuous integration development environments.](http://cse.unl.edu/~elbaum/pre-prints/fse2014-prePrint.pdf)  Proceedings of the 22nd ACM SIGSOFT International Symposium on Foundations of Software Engineering. 2014.
+  - retest if failed recently, last tested a while ago, or is new.
+  - for very large test suites catches 50% of failures, within one hour
+- For a survey of other ordering heuristics, see  Ling, Xiao, Rishabh Agrawal, and Tim Menzies. [How different is test case prioritization for open and closed source projects?.](https://arxiv.org/pdf/2008.00612)
+    IEEE Transactions on Software Engineering 48.7 (2021): 2526-2540.
+  - strange to say: good test case orderings are different for open source projects  and in-house projects.
 
 
-**Test Case:** Defines an individual test against a software system. Defines an input to the system and the expected output. Can be done at a high level against the entire software system, or at a low level against code units like methods classes. 
 
 ## Black-box testing 
 - Also known as _functional testing_
@@ -128,21 +133,26 @@
   - and statistics on time to last test
 - Assumes no internal knowledge of the code
   - e.g. throw random input the code, looking for a core dump
-- smarter way:
-  - use domain knowledge. Metamorphic testing
+
+### Smart black box testing: Metamorphic Testing
+
+  - use domain knowledge. **Metamorphic testing**
     - How to test with an oracle for the specifics of the domain?
     - Metamorphic relations (MRs) are _necessary properties_ of the intended functionality of the software
       - high-level statements that should be true across all inputs
-    - e.g. in SQL, conjunctions do not lead to more output
-      -    RESULT1= "all males"
-      - RESULT2="bald males"
-      - RESULT2 should not be larger than RESULT1
-   - e.g. When testing a booking website, a web search for RESULT1= accommodation in Sydney, Australia, returns 1,671 results
-    - RESULT2= Filter the price range or star rating and apply the search again;
-    - RESULT2 should be a subset of RESULT1
-   - A wonderful metamorphic testing result:  Z. Q. Zhou, T. H. Tse and M. Witheridge,
-    [Metamorphic Robustness Testing: Exposing Hidden Defects in Citation Statistics and Journal Impact Factors](https://www.cs.hku.hk/data/techreps/document/TR-2019-03.pdf) in IEEE Transactions on Software Engineering, doi: 10.1109/TSE.2019.2915065.
-  - diversity sampling: each new test should be far way from the one before
+      - e.g. in SQL, conjunctions do not lead to more output
+        -    RESULT1= "all males"
+        - RESULT2="bald males"
+        - RESULT2 should not be larger than RESULT1
+      - e.g. When testing a booking website, a web search for RESULT1= accommodation in Sydney, Australia, returns 1,671 results
+        - RESULT2= Filter the price range or star rating and apply the search again;
+        - RESULT2 should be a subset of RESULT1
+      - e.g. A wonderful metamorphic testing result:  Z. Q. Zhou, T. H. Tse and M. Witheridge,
+        [Metamorphic Robustness Testing: Exposing Hidden Defects in Citation Statistics and Journal Impact Factors](https://www.cs.hku.hk/data/techreps/document/TR-2019-03.pdf) in IEEE Transactions on Software Engineering, doi: 10.1109/TSE.2019.2915065.
+
+### Smart black box testing: Diversity Sampling
+
+  - **Diversity sampling:** each new test should be far way from the one before
     - e.g. all-pairs testing. No new test can mention any pair  x=v1 and y=v2 seen in prior tests.
      - so if ever you use _happy=true_ and _restDay=sunday_ then you can never test that pair again
     - so five inputs, 3 binary, one for "days of week" and one for something with ten values
@@ -178,7 +188,9 @@
  (0 0 0 2 1) (0 0 0 1 10) (0 0 0 1 8)
  (0 0 0 1 7) (0 0 0 1 6) (0 0 0 1 5)
  (0 0 0 1 4) (0 0 0 1 3) (0 0 0 1 2))
+```
 
+### Smart black box testing: Fault Localization
 
   - cluster the input space and only sample the "important" parts
     - but what does "importance" mean?
@@ -188,14 +200,18 @@
         - the branch weighting heuristics proposed by Jones et al. have been (exteslively)
          explored by others. For a small sample of that work, see Sarhan, Qusay Idrees, and Árpád Beszédes. "A survey of challenges in spectrum-based software fault localization." IEEE Access 10 (2022): 10618-10639.
         - for a review of other fault localization heuristics, see Zakari, Abubakar, et al. "Multiple fault localization of software programs: A systematic literature review." Information and Software Technology 124 (2020): 106312.
+
+
+### Smart black box testing: Doddling
+
   - doodle a model (at which point your "black-box" becomes kind of a guess at "white-box" reasoning, see below)
     - Read the doc
     - Doodle a model showing expectations
     - Generate tests over that doodle <br> 
-      <img width=500 src="https://github.com/txt/se20/blob/master/etc/img/fsm1doc.png"> <br> 
-      <img src="https://github.com/txt/se20/blob/master/etc/img/fsm1.png">
+      <img width=500 src="https://barrgroup.com/images/articles/IntroHierarchicalStateMachines02UmlStateDiagram.gif">
 
-- Fuzzing:
+### Smart black box testing: Fuzzing
+
   - a structured approach to "throw stuff at random" at the program.
   - Barton Miller, University of Wisconsin in 1988.  Throw random cr\*p at a program till it crashed (brute force mutation)
     - when he was logged to a modem during a storm, there was a lot of line noise generating junk characters and those characters caused programs to crash
@@ -261,18 +277,18 @@ for i in range(10):
 ```
 
   - Smart fuzzing #3: coverage:
-   - Track parts of the grammar seen so far
-   - Fuzz to some new place (fuzzing meets diversity sampling)
+     - Track parts of the grammar seen so far
+     - Fuzz to some new place (fuzzing meets diversity sampling)
 
-  - Smart fuzzing #4: mining examples to weight grammers:
+  - Smart fuzzing #4: mining examples to weight crammers:
     - Take a library of good examples
-    - Weight sub-trees on (e.g.) Probability of not being "good"w
+    - Weight sub-trees on (e.g.) Probability of not being "good"
     - Stochastic recursive descent:
       - Stochastically select sub-trees according to their weights
         - If weight = random then generational fuzzing
         - If select to prefer min weights, then coverage fuzzing
       - Recurs into sub tree.
-    
+
 
 ## White-box testing
 
