@@ -546,14 +546,15 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a hr
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A! quick brown fox&#39;</span></span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A quick brownfox&#39;</span></span></code></pre></div>
 <ul>
-<li><p>Smart fuzzing #3: coverage:</p></li>
-<li><p>Track parts of the grammar seen so far</p></li>
-<li><p>Fuzz to some new place (fuzzing meets diversity
-sampling)</p></li>
-<li><p>Smart fuzzing #4: mining examples to weight grammers:</p>
+<li>Smart fuzzing #3: coverage:
+<ul>
+<li>Track parts of the grammar seen so far</li>
+<li>Fuzz to some new place (fuzzing meets diversity sampling)</li>
+</ul></li>
+<li>Smart fuzzing #4: mining examples to weight crammers:
 <ul>
 <li>Take a library of good examples</li>
-<li>Weight sub-trees on (e.g.) Probability of not being “good”w</li>
+<li>Weight sub-trees on (e.g.) Probability of not being “good”</li>
 <li>Stochastic recursive descent:
 <ul>
 <li>Stochastically select sub-trees according to their weights
@@ -565,62 +566,231 @@ sampling)</p></li>
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="white-box-testing">White-box testing</h2>
-<p>Writing tests with some (maybe even all) understanding of the
-internals of our code. Tests are focused on exercising all code paths;
-logical decisions as both true and false, loops at their boundaries, and
-context-dependent testing of internal data structures.</p>
+<h2 id="whitebox-testing">Whitebox Testing</h2>
+<p>White box: we can open up the code and look inside:</p>
 <ul>
-<li>Coverage criteria (for finite-state machines)
+<li>Coverage criteria (for code)
 <ul>
-<li><em>Test coverage</em>: cover every path: no feasible due to
-infinite number of paths (cycles)</li>
-<li><em>State coverage</em>: every node coverage (minimal testing
-criterion)</li>
-<li><em>Transition coverage</em>: every edge covered
+<li>Functions (all functions called once);
 <ul>
-<li>E.g. here are five tests covering every edge</li>
+<li>A very weak test</li>
+</ul></li>
+<li>Statement coverage
+<ul>
+<li>Supported by many tools</li>
+</ul></li>
+<li>du coverage:
+<ul>
+<li>find all paths between where a variable is <em>defined</em> and
+<em>used</em>.</li>
+</ul></li>
+<li>Branch coverage:
+<ul>
+<li>has every condition in the program be explored;</li>
+</ul></li>
+</ul></li>
+<li>Warning: you can succeed on all the above, and the code still
+crashes.</li>
+</ul>
+<p>Symbolic execution: - Find the abstract syntax tree of the code -
+e.g. python3’s <code>ctree</code> package</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ctree</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(a):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        a[x] <span class="op">+=</span> x</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>tree1 <span class="op">=</span> ctree.get_ast(f)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>ctree.ipython_show_ast(tree1)</span></code></pre></div>
+<p><img src="https://ucb-sejits.github.io/ctree-docs/_images/ipython_example_tree_1.png"></p>
+<p>Applications of symbolic execution:</p>
+<ul>
+<li>Walk the tree to collect the constraints to build the tests.</li>
+<li>Can lead to spectacular reductions to black box testing</li>
+<li>e.g. BigTest: White-Box Testing of Big Data Analytics [ESEC/FSE
+2019]
+<ul>
+<li>Scripts processing gigabytes of data sets</li>
+<li>Is this a hard testing problem?
+<ul>
+<li>Q: Do the tests have to handle all the possible combinations in the
+data?</li>
+<li>A: No: they only need to cover all the branches of the code</li>
 </ul></li>
 </ul></li>
 </ul>
-<p><strong>Unit Testing:</strong> Testing of individual hardware or
-software units or groups of related units. Test cases consist of
-individual methods, interleaved methods, or classes. Done by programmers
-as white-box testing. Automation of unit testing is desired for
-consistency and ease of repeatability.</p>
-<p><strong>System Testing:</strong> Testing conducted on a complete,
-integrated system to evaluate the system compliance with its specified
-requirements. Test cases are generated from analyzing customer
-requirements, and can be written before the system has even begun
-development. As system testing is black box, testing is often done by an
-external test group and not the programmers, as too much knowledge of
-the code can result in a lack of breadth in test cases.</p>
-<p><strong>Verification:</strong> Are we building the product right?
-Done via white-box testing<br />
-<strong>Validation:</strong> Are we building the right product? Done via
-black-box testing</p>
-<p><strong>Code Coverage:</strong> A measure of test case
-completeness.</p>
+<p><img width=600 src="bigtest.png"></p>
+<h2 id="formal-methods">Formal methods</h2>
+<p>Express english requirements as checkable logic, then use logic to
+reason about it</p>
+<p><img src="chat80.png"></p>
+<p>Other examples:</p>
 <ul>
-<li><p><strong>Method Coverage:</strong> Have all methods been
-called?<br />
-</p></li>
-<li><p><strong>Statement Coverage:</strong> Have all the statements in a
-method been executed?<br />
-</p></li>
-<li><p><strong>Decision/Branch Coverage:</strong> Have all decisions
-been executed in both the true and false paths?<br />
-</p></li>
-<li><p><strong>Condition Coverage:</strong> Have all conditionals been
-executed in both the true and false paths?</p>
-<p><strong>Limitation of Code Coverage:</strong> The assumption that you
-are done testing if you have high coverage is incorrect. Coverage only
-tells you if you’ve covered the code that’s been written. There may be
-requirements you have missed while writing your code, which cannot be
-discovered via code coverage. [1]</p>
-<p><strong>Test-driven Design:</strong> Writing your test cases
-<strong>BEFORE</strong> you write the code that the case will
-test.</p></li>
+<li><p>Product lines:</p></li>
+<li><p><a
+href="https://www.cs.miami.edu/home/geoff/Courses/TPTPSYS/Practicum/EnglishToLogic.shtml">Truth-Functional
+Propositional Logic</a></p></li>
+<li><p>Temporal logic (add operators for until (“U”) and always “[]”
+eventually “&lt;&gt;”</p>
+<ul>
+<li>always ∀, there exists at least one ∃</li>
+</ul></li>
+</ul>
+<p><img src="scopes.png"></p>
+<ul>
+<li>e.g. elevator door stays open between X and Y</li>
+</ul>
+<p><img src="ltl.png"></p>
+<p>(From <a
+href="http://www0.cs.ucl.ac.uk/staff/b.cook/oneclick.pdf">One-Click
+Formal Methods</a>:</p>
+<ul>
+<li>FORMAL METHODS: mathematically based approaches for specifying,
+building, and reasoning about software.</li>
+<li>Despite 50 years of research and development, formal methods have
+had only limited impact in industry.</li>
+<li>Some in such domains as microprocessor design and aerospace.</li>
+</ul>
+<p>Why not widely used?</p>
+<ul>
+<li><em>The modeling cost</em>: Analysts must create a systems model
+(what is the system) and a properties model (what is meant to do).
+Properties model usually much smaller than systems model.</li>
+<li><em>The execution cost</em>: Rigorous analysis of formal properties
+needs a full search of systems model.</li>
+<li><em>The personnel cost:</em> Analysts skilled in formal methods must
+be recruited or trained. Such analysts are generally hard to find and
+retain.</li>
+<li><em>The development brake:</em> The above costs can be so high that
+the requirements must be frozen for some time while we perform the
+formal analysis. Hence, one of the costs of formal analysis is that it
+can slow the process of requirements evolution.</li>
+</ul>
+<p>Recent experience at Amazon:</p>
+<ul>
+<li>More and more, web-based systems are configured in sufficient detail
+<ul>
+<li>Such that processes can be bounced around from node to node on the
+cloud (to make best use of spare resources)</li>
+<li>Application program interfaces (APIs) of cloud services are
+computer-readable contracts that establish and govern how the system
+behaves.
+<ul>
+<li>Most importantly, since those models are utilized by a large user
+community,
+<ul>
+<li>now economically feasible to build the tools needed to verify
+them</li>
+</ul></li>
+</ul></li>
+<li>Which means that we have enough information to auto-configure our
+formal methods
+<ul>
+<li>and the size of the potential user community and the business value
+now justifies the cost of formal methods.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="testing-and-product-lines-and-formal-methods">“Testing” and
+Product Lines and Formal Methods</h2>
+<p>A feature model is a “product line”; i.e. a description of a space of
+products.</p>
+<p>Question: what are the <em>different</em> products we can pull from
+the following?</p>
+<p><img src="fm001.png"></p>
+<p>Now that was a small feature model. Suppose we are talking about
+something really big like a formal model of the LINUX kernel with 4000
+variables and 300,000 contrast. Q: How to reason over that space? A: use
+a theorem prover. e.g. <em>Pycosat</em>.</p>
+<p>The following example comes from the excellent documentation at the
+<a
+href="https://github.com/ContinuumIO/pycosat/blob/master/README.rst">Python
+Picostat Github page</a></p>
+<p>Let us consider the following clauses, represented using the DIMACS
+<code>cnf &lt;http://en.wikipedia.org/wiki/Conjunctive_normal_form&gt;</code>_
+format::</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>    p cnf <span class="dv">5</span> <span class="dv">3</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="dv">1</span> <span class="op">-</span><span class="dv">5</span> <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="op">-</span><span class="dv">1</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="op">-</span><span class="dv">3</span> <span class="op">-</span><span class="dv">4</span> <span class="dv">0</span></span></code></pre></div>
+<p>Here, we have 5 variables and 3 clauses, the first clause being</p>
+<p><em>x1 or not x5 or x4</em></p>
+<p>Note that the variable x2` is not used in any of the clauses, which
+means that for each solution with x2 = True, we must also have a
+solution with x2 = False. In Python, each clause is most conveniently
+represented as a list of integers. Naturally, it makes sense to
+represent each solution also as a list of integers, where the sign
+corresponds to the Boolean value (+ for True and - for False) and the
+absolute value corresponds to i-th variable::</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pycosat</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="op">&gt;&gt;&gt;</span> cnf <span class="op">=</span> [[<span class="dv">1</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">4</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]]</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="op">&gt;&gt;&gt;</span> pycosat.solve(cnf)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">5</span>]</span></code></pre></div>
+<p>This solution translates to: x1=x5=True, x2=x3=x4=False</p>
+<p>To find all solutions, use <code>itersolve</code>::</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="cf">for</span> sol <span class="kw">in</span> pycosat.itersolve(cnf):</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    ...     <span class="bu">print</span> sol</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    ...</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>]</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    ...</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="bu">len</span>(<span class="bu">list</span>(pycosat.itersolve(cnf)))</span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="dv">18</span></span></code></pre></div>
+<p>In this example, there are a total of 18 possible solutions, which
+had to be an even number because x2 was left unspecified in the
+clauses.</p>
+<p>The fact that <code>itersolve</code> returns an iterator, makes it
+very elegant and efficient for many types of operations. For example,
+using the <code>itertools</code> module from the standard library, here
+is how one would construct a list of (up to) 3 solutions::</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> itertools</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="bu">list</span>(itertools.islice(pycosat.itersolve(cnf), <span class="dv">3</span>))</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    [[<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">5</span>],</span>
+<span id="cb8-4"><a href="#cb8-4"></a>     [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>],</span>
+<span id="cb8-5"><a href="#cb8-5"></a>     [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]]</span></code></pre></div>
+<h3 id="example">Example</h3>
+<p>Feature Models and Product Lines: <a
+href="http://cseweb.ucsd.edu/~lerner/papers/opium.pdf">Software
+installation as a formal methods problem</a></p>
+<p>Lets represent software dependencies in a logical framework:</p>
+<p><img src="opium.png"></p>
+<p>If we run Picosat over these formulae then:</p>
+<ul>
+<li>Any solution that satisfies all the constraints…</li>
+<li>Is a different way to create a valid install of the program.</li>
+</ul>
+<p>Variants:</p>
+<ul>
+<li>min install:
+<ul>
+<li>add a cost to the install effort of each part</li>
+<li>score everything coming out of <code>itersolve</code> (sum that
+cost)</li>
+<li>pick the easiest thing to install</li>
+</ul></li>
+<li>optimizing:
+<ul>
+<li>generate one solution, ask some human what they think</li>
+<li>if they don’t like, negate it add it to the theorems</li>
+<li>so future solutions will <em>not</em> contain the thing you don;t
+like</li>
+</ul></li>
+</ul>
+<p><strong>Important note:</strong> in practice, except for trivally
+small problems, no one writes DIMACS manually.</p>
+<ul>
+<li>Instead, we write code to generate DIMACS via some code.</li>
+<li>For example: <a
+href="https://github.com/ContinuumIO/pycosat/blob/master/examples/opium.py">running
+code</a>.</li>
 </ul>
 
 

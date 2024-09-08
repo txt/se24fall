@@ -289,34 +289,260 @@ for i in range(10):
         - If select to prefer min weights, then coverage fuzzing
       - Recurs into sub tree.
 
-
-## White-box testing
-
-Writing tests with some (maybe even all) understanding of the internals of our code.
-Tests are focused on exercising all code paths; logical decisions as both true and false, loops at their boundaries, and context-dependent testing of internal data structures.
-
-- Coverage criteria (for finite-state machines)
-  - _Test coverage_: cover every path: no feasible due to infinite number of paths (cycles)
-  - _State coverage_: every node coverage (minimal testing criterion)
-  - _Transition coverage_: every edge covered
-    - E.g. here are five tests covering every edge
-
-**Unit Testing:** Testing of individual hardware or software units or groups of related units. Test cases consist of individual methods, interleaved methods, or classes. Done by programmers as white-box testing. Automation of unit testing is desired for consistency and ease of repeatability. 
-
-**System Testing:** Testing conducted on a complete, integrated system to evaluate the system compliance with its specified requirements. Test cases are generated from analyzing customer requirements, and can be written before the system has even begun development. As system testing is black box, testing is often done by an external test group and not the programmers, as too much knowledge of the code can result in a lack of breadth in test cases. 
-
-**Verification:** Are we building the product right? Done via white-box testing  
-**Validation:** Are we building the right product? Done via black-box testing
-
-**Code Coverage:** A measure of test case completeness.
-
-* **Method Coverage:** Have all methods been called?  
-* **Statement Coverage:** Have all the statements in a method been executed?  
-* **Decision/Branch Coverage:** Have all decisions been executed in both the true and false paths?  
-* **Condition Coverage:** Have all conditionals been executed in both the true and false paths?  
-    
-  **Limitation of Code Coverage:** The assumption that you are done testing if you have high coverage is incorrect. Coverage only tells you if you’ve covered the code that’s been written. There may be requirements you have missed while writing your code, which cannot be discovered via code coverage. \[1\]  
-    
-  **Test-driven Design:** Writing your test cases **BEFORE** you write the code that the case will test. 
+##  Whitebox Testing
 
 
+White box: we can open up the code and look inside:
+
+
+- Coverage criteria (for code)
+  - Functions (all functions called once);
+    - A very weak test
+  - Statement coverage
+    - Supported by many tools
+  - du coverage:
+    - find all paths between where a variable is _defined_ and _used_.
+  - Branch coverage:
+    - has every condition in the program be explored;
+- Warning: you can succeed on all the above, and the code still crashes.
+
+
+Symbolic execution:
+- Find the abstract syntax tree of the code
+  - e.g. python3's `ctree` package
+
+
+```python
+import ctree
+
+
+def f(a):
+    for x in range(10):
+        a[x] += x
+
+
+tree1 = ctree.get_ast(f)
+ctree.ipython_show_ast(tree1)
+```
+
+
+<img src="https://ucb-sejits.github.io/ctree-docs/_images/ipython_example_tree_1.png">
+
+
+Applications of symbolic execution:
+
+
+- Walk the tree to collect the constraints to build the tests.
+- Can lead to spectacular reductions to black box testing
+- e.g. BigTest: White-Box Testing of Big Data Analytics [ESEC/FSE 2019]
+  - Scripts processing gigabytes of  data sets
+  - Is this a hard testing problem?
+    - Q: Do the tests have to handle all the possible combinations in the data?
+    - A: No: they only need to cover all the branches of the code
+
+
+<img width=600 src="bigtest.png">
+
+
+## Formal methods
+
+
+Express english requirements as checkable logic, then use logic to reason about it
+
+
+<img src="chat80.png">
+
+
+Other examples:
+
+
+- Product lines:
+
+
+- [Truth-Functional Propositional Logic](https://www.cs.miami.edu/home/geoff/Courses/TPTPSYS/Practicum/EnglishToLogic.shtml)
+
+
+- Temporal logic (add operators for until ("U") and always "[]" eventually "<>"
+   - always &#8704;, there exists at least one &#8707;
+
+
+<img src="scopes.png">
+
+
+- e.g. elevator door stays open between X and Y
+
+
+<img src="ltl.png">
+
+
+(From [One-Click Formal Methods](http://www0.cs.ucl.ac.uk/staff/b.cook/oneclick.pdf):
+
+
+- FORMAL METHODS: mathematically based approaches for specifying, building,
+  and reasoning about software.
+- Despite 50 years of research and development, formal methods have had
+  only limited impact in industry.
+- Some in such domains as microprocessor design and aerospace.
+
+
+Why not widely used?
+
+
+- _The modeling cost_:
+  Analysts must create a systems model (what is the system)
+  and a properties model (what is meant to do). Properties model
+  usually much smaller than systems model.
+- _The execution cost_: Rigorous analysis of formal properties needs a  full search of  systems model.
+- _The personnel cost:_ Analysts skilled in formal methods must be recruited or trained.
+  Such analysts are generally hard to find and retain.
+- _The development brake:_ The above costs can be so high that the requirements must be
+   frozen for some time while we perform the formal analysis.
+   Hence, one of the costs of formal analysis is that it can slow the process of requirements evolution.
+
+
+Recent experience at Amazon:
+
+
+- More and more, web-based systems are configured in sufficient detail
+  - Such that processes can be bounced around from node to node on the cloud (to make best use of spare resources)
+  - Application program interfaces (APIs) of cloud services are computer-readable contracts that establish and govern how the system behaves.
+    - Most importantly, since those models are utilized by a large user community,
+      - now economically feasible to build the tools needed to verify them
+  - Which means that we have enough information to auto-configure our formal methods
+    - and the size of the potential user community and the business value now justifies the cost of formal methods.
+
+
+
+
+## "Testing" and Product Lines and Formal Methods
+
+
+A feature model is a "product line"; i.e. a description of a space
+of products.
+
+
+Question: what are the _different_ products we can pull from the following?
+
+
+<img src="fm001.png">
+
+
+Now that was a small feature model. Suppose we are talking about something
+really big like a formal model of the LINUX kernel with 4000 variables
+and 300,000 contrast. Q: How to reason over that space? A: use a theorem prover.
+e.g. _Pycosat_.
+
+
+The following example comes from the excellent documentation
+at the
+[Python Picostat Github page](https://github.com/ContinuumIO/pycosat/blob/master/README.rst)
+
+
+Let us consider the following clauses, represented using
+the DIMACS `cnf <http://en.wikipedia.org/wiki/Conjunctive_normal_form>`_
+format::
+
+
+        p cnf 5 3
+        1 -5 4 0
+        -1 5 3 4 0
+        -3 -4 0
+
+
+Here, we have 5 variables and 3 clauses, the first clause being
+
+
+_x1  or not x5 or x4_
+
+
+Note that the variable x2` is not used in any of the clauses,
+which means that for each solution with x2 = True, we must
+also have a solution with x2 = False.  In Python, each clause is
+most conveniently represented as a list of integers.  Naturally, it makes
+sense to represent each solution also as a list of integers, where the sign
+corresponds to the Boolean value (+ for True and - for False) and the
+absolute value corresponds to i-th variable::
+
+
+        >>> import pycosat
+        >>> cnf = [[1, -5, 4], [-1, 5, 3, 4], [-3, -4]]
+        >>> pycosat.solve(cnf)
+        [1, -2, -3, -4, 5]
+
+
+This solution translates to: x1=x5=True,
+x2=x3=x4=False
+
+
+To find all solutions, use `itersolve`::
+
+
+        >>> for sol in pycosat.itersolve(cnf):
+        ...     print sol
+        ...
+        [1, -2, -3, -4, 5]
+        [1, -2, -3, 4, -5]
+        [1, -2, -3, 4, 5]
+        ...
+        >>> len(list(pycosat.itersolve(cnf)))
+        18
+
+
+In this example, there are a total of 18 possible solutions, which had to
+be an even number because x2 was left unspecified in the clauses.
+
+
+The fact that `itersolve` returns an iterator, makes it very elegant
+and efficient for many types of operations.  For example, using
+the `itertools` module from the standard library, here is how one
+would construct a list of (up to) 3 solutions::
+
+
+        >>> import itertools
+        >>> list(itertools.islice(pycosat.itersolve(cnf), 3))
+        [[1, -2, -3, -4, 5],
+         [1, -2, -3, 4, -5],
+         [1, -2, -3, 4, 5]]
+
+
+### Example
+
+
+Feature Models and Product Lines: [Software installation as a formal methods problem](http://cseweb.ucsd.edu/~lerner/papers/opium.pdf)
+
+
+Lets represent software dependencies in a logical framework:
+
+
+<img width=700px  src="opium.png">
+
+
+If we run Picosat over these formulae then:
+
+
+- Any solution that satisfies all the constraints...
+- Is a different way to create a valid install of the program.
+
+
+Variants:
+
+
+- min install:
+   - add a cost to the install effort of each part
+   - score everything coming out of `itersolve` (sum that cost)
+   - pick the easiest thing to install
+- optimizing:
+   - generate one solution, ask some human what they think
+   - if they don't like, negate it add it to the theorems
+   - so future solutions will _not_ contain the thing you don;t like
+
+
+**Important note:** in practice, except for trivally small
+problems, no one writes DIMACS manually.
+
+
+- Instead, we write code to generate DIMACS via some code.
+- For example:
+  [running code](https://github.com/ContinuumIO/pycosat/blob/master/examples/opium.py).
+
+ 
