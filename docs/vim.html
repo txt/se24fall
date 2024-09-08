@@ -33,7 +33,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -92,9 +92,6 @@
   
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <div class=wrapper>
@@ -363,67 +360,67 @@ but there are some upgrades. Notably:</p>
 <col style="width: 38%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Feature</th>
 <th>Vim</th>
 <th>Neovim</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>Codebase</strong></td>
 <td>Legacy codebase, complex to maintain</td>
 <td>Modernized codebase, improved maintainability</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Asynchronous Plugins</strong></td>
 <td>Limited support for asynchronous operations</td>
 <td>Built-in support for asynchronous plugins, improving
 performance</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Built-in Terminal</strong></td>
 <td>No built-in terminal emulator</td>
 <td>Includes a built-in terminal emulator for running shell commands and
 scripts</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Configuration</strong></td>
 <td>Configuration primarily via <code>.vimrc</code></td>
 <td>Configuration can be done via <code>init.vim</code> or
 <code>init.lua</code>, with support for Lua scripting</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Extensibility</strong></td>
 <td>Supports plugins but can be limited in flexibility</td>
 <td>Enhanced plugin architecture with more robust API, allowing for more
 powerful extensions</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>UI Integration</strong></td>
 <td>GUI integration often requires external tools</td>
 <td>Improved support for external UIs and GUI clients, with a focus on
 extensibility</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Community Contributions</strong></td>
 <td>Established, with a large number of plugins</td>
 <td>Active development community, with ongoing improvements and modern
 features</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Performance</strong></td>
 <td>Generally good, but can be limited by synchronous operations</td>
 <td>Optimized for performance with asynchronous processing, reducing lag
 in plugin operations</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Lua Support</strong></td>
 <td>Limited Lua support, primarily uses Vimscript</td>
 <td>Native Lua support for configuration and plugin development,
 offering more flexibility and performance</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Default Behavior</strong></td>
 <td>Traditional Vim behaviors and defaults</td>
 <td>Includes additional default features and settings for a more modern

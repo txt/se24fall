@@ -119,35 +119,29 @@
 **Test Case:** Defines an individual test against a software system. Defines an input to the system and the expected output. Can be done at a high level against the entire software system, or at a low level against code units like methods classes. 
 
 ## Black-box testing 
-- also known as _functional testing_
+- Also known as _functional testing_
 - Writing tests while ignoring the internals of the program. Tests are focused on whether inputs produce expected outputs dictated by customer requirements.
-- assumes no internal knowledge of the code
-- e.g. throw random input the code, looking for a core dump
+  - e.g. you are using some blac box service over the web
+  - e.g. Realistically, exploring most code
+- Black box testing cannot promise anything about the internal structure of code
+  - only coverage of input/output space
+  - and statistics on time to last test
+- Assumes no internal knowledge of the code
+  - e.g. throw random input the code, looking for a core dump
 - smarter way:
   - use domain knowledge. Metamorphic testing
-### Metamorphic testing
-
-
-How to test with an oracle for the specifics of the domain?
-
-
-Metamorphic relations (MRs) are _necessary properties_ of the intended functionality of the software
-- high-level statements that should be true across all inputs
-- e.g. conjunctions do not lead to more output
-   - RESULT1= "all males"
-   - RESULT2="bald males"
-   - RESULT2 should not be larger than RESULT1
-
-
-- e.g. When testing a booking website, a web search for RESULT1= accommodation in Sydney, Australia, returns 1,671 results
+    - How to test with an oracle for the specifics of the domain?
+    - Metamorphic relations (MRs) are _necessary properties_ of the intended functionality of the software
+      - high-level statements that should be true across all inputs
+    - e.g. in SQL, conjunctions do not lead to more output
+      -    RESULT1= "all males"
+      - RESULT2="bald males"
+      - RESULT2 should not be larger than RESULT1
+   - e.g. When testing a booking website, a web search for RESULT1= accommodation in Sydney, Australia, returns 1,671 results
     - RESULT2= Filter the price range or star rating and apply the search again;
     - RESULT2 should be a subset of RESULT1
-
-
-A wonderful metamorphic testing result:  Z. Q. Zhou, T. H. Tse and M. Witheridge,
-[Metamorphic Robustness Testing: Exposing Hidden Defects in Citation Statistics and Journal Impact Factors](https://www.cs.hku.hk/data/techreps/document/TR-2019-03.pdf) in IEEE Transactions on Software Engineering, doi: 10.1109/TSE.2019.2915065.
-
-
+   - A wonderful metamorphic testing result:  Z. Q. Zhou, T. H. Tse and M. Witheridge,
+    [Metamorphic Robustness Testing: Exposing Hidden Defects in Citation Statistics and Journal Impact Factors](https://www.cs.hku.hk/data/techreps/document/TR-2019-03.pdf) in IEEE Transactions on Software Engineering, doi: 10.1109/TSE.2019.2915065.
   - diversity sampling: each new test should be far way from the one before
     - e.g. all-pairs testing. No new test can mention any pair  x=v1 and y=v2 seen in prior tests.
      - so if ever you use _happy=true_ and _restDay=sunday_ then you can never test that pair again
@@ -280,7 +274,10 @@ for i in range(10):
       - Recurs into sub tree.
     
 
-**White-box testing:** Writing tests with full understanding of the code. Tests are focused on exercising all code paths; logical decisions as both true and false, loops at their boundaries, and context-dependent testing of internal data structures.
+## White-box testing
+
+Writing tests with some (maybe even all) understanding of the internals of our code.
+Tests are focused on exercising all code paths; logical decisions as both true and false, loops at their boundaries, and context-dependent testing of internal data structures.
 
 - Coverage criteria (for finite-state machines)
   - _Test coverage_: cover every path: no feasible due to infinite number of paths (cycles)
