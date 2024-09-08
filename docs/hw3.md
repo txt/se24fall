@@ -1,6 +1,5 @@
 % HW3 : Testing an Research Hypotheses
 
-
 (IMPORTANT NOTE: the experimental runs for this one can take a while– especially if you find a find a mistake and have to start again. Do not make this a last minute rush job!!!).
 
 Three students from this class in the spring claim (Jacob, Joshua, and Rohan) claim that:
@@ -42,15 +41,18 @@ Noe that the following is quickly written pseudo code. May have mistakes. You fi
   - return the rows of some, sorted on chebyshev.
 
 ## Experimental Scripts Must be “Commissioned”
+
 The scripts you write for these experiments are always quirky and complex. It is very easy to make mistakes and have to throw out days of compute. So test experimental scripts have to be commissioned.
 
-- If the code is nasty, don’t use it. Make it simpler.
-- If person1 writes it, person2 has to inspect it. Very carefully.
-- Add in tests to check that the expected stuff is actually happening. e.g.
-  - Does chebyshevs().rows[0] return the top item in that sort?
-  - Are smart and dumb lists the right length (i.e. N). if not, why not?
-  - Does you code really run some experimental treatment 20 times for statistical validity?
-  - Does d.shuffle() really jiggle the order of the data?
+-  If the code is nasty, don’t use it. Make it simpler.
+-  If person1 writes it, person2 has to inspect it. Very carefully.
+
+Also: add in tests to check that the expected stuff is actually happening. e.g.
+
+-  Does chebyshevs().rows[0] return the top item in that sort?
+-  Are smart and dumb lists the right length (i.e. N). if not, why not?
+-  Does you code really run some experimental treatment 20 times for statistical validity?
+-  Does d.shuffle() really jiggle the order of the data?
 
 ## How to run a long experiment
 
@@ -63,4 +65,3 @@ Submit a url link to moodle with a repo link that has a /hw3 subdirectory
 - /hs3/README.md should include notes on how to install and run your code, all the rq.sh results, a walk thought the table results summarizing what the tables are all about and what they are saying for this experiment, and a last paragraph that is a conclusion section of the form
   - “Since we observed XXXX, we confirm/ doubt/ refine the JJR1/ JJR2 hypothesis as follows…” (and the “as follows” section is only needed if you want to refine the hypothesis).
 - Include in your code tests cases that checks at least the items mentioned above (and you might want to check more).
-
