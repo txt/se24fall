@@ -115,7 +115,10 @@ style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10p
 </header>
 <h2 id="concepts-to-know">Concepts to know</h2>
 <ul>
-<li>V-diagram unit/system testong</li>
+<li>V-diagram, unit/system testing
+<ul>
+<li>Functional / non-functiona requirements</li>
+</ul></li>
 </ul>
 <h2 id="quotes">Quotes</h2>
 <ul>
@@ -159,25 +162,21 @@ anything old)?</li>
 <ul>
 <li>Do not commit things that will hurt them</li>
 </ul></li>
-<li>Without testing, you don’t know if your program actually behaves as
-expected. Before writing dedicated test cases, you may have only passed
-a tiny amount of inputs through your system, and only seen a tiny amount
-of outputs. Testing is the process of selecting good representative
-inputs for all possible interactions in your program and seeing whether
-they map to the expected output . Good tests provide a lens into how the
-program is working, and allow you to find software faults when they fail
-unexpectedly.</li>
 <li>Because there is so much to test for
 <ul>
+<li>Functional requirements: what the system does</li>
+<li>Non-functional requirements: how the to judge the operation of a
+system (more general that the functional requirements)</li>
+</ul></li>
 <li>Conformance to the requirements
 <ul>
 <li>But whose’ requirements?
 <ul>
 <li>Welcome to the wonder of multi-stakeholder systems</li>
-</ul></li>
 <li>Even if we try to make it complete,complete for who
 <ul>
-<li>Stakeholders, competing goals</li>
+<li>Stakeholders, <a href="https://arxiv.org/pdf/1702.05568">competing
+goals</a></li>
 <li>Toronto CS department. Information system
 <ul>
 <li>“good” if parents can track their children</li>
@@ -185,6 +184,12 @@ unexpectedly.</li>
 </ul></li>
 </ul></li>
 </ul></li>
+</ul></li>
+</ul>
+<p><img width=600px src="tradeoff.jpeg"></p>
+<ul>
+<li>Examples non-functional
+<ul>
 <li>For “maintainability?”
 <ul>
 <li>how to test that, except to watch the code for years to come?</li>
@@ -209,11 +214,12 @@ Integrity, Usability, Interoperability</li>
 <li>And the list goes one and on and on</li>
 </ul></li>
 </ul>
-<p><img width=700px  src="https://khalilstemmler.com/img/blog/object-oriented/analysis/non-functional-requirements/non-functional-requirements-map.png"></p>
+<p><img width=500px  src="https://khalilstemmler.com/img/blog/object-oriented/analysis/non-functional-requirements/non-functional-requirements-map.png"></p>
 <h2 id="v-diagram">V-Diagram</h2>
+<p><img width=400px  src="v.jpg"></p>
 <ul>
-<li>V-diagram
-<ul>
+<li>verification = are we building the system right?</li>
+<li>validation = are we building the right system?</li>
 <li>“Without requirements or design, programming is the art of adding
 bugs to an empty text file.” – Louis Srygley</li>
 <li>Brooks, <a
@@ -241,7 +247,6 @@ potential users/customer</li>
 <li>Following alpha testing: external testing with a larger audience
 <ul>
 <li>Released to a limited audience outside of the programming team</li>
-</ul></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -459,8 +464,11 @@ guess at “white-box” reasoning, see below)
 <ul>
 <li>Read the doc</li>
 <li>Doodle a model showing expectations</li>
-<li>Generate tests over that doodle <br>
-<img width=500 src="https://barrgroup.com/images/articles/IntroHierarchicalStateMachines02UmlStateDiagram.gif"></li>
+<li>Generate tests over that doodle
+<ul>
+<li>Run you finger over the lines and say “what do i expect to see here”
+<br> <img width=500 src="drawn.jpg"></li>
+</ul></li>
 </ul></li>
 </ul>
 <h3 id="smart-black-box-testing-fuzzing">Smart black box testing:
@@ -626,7 +634,7 @@ data?</li>
 <h2 id="formal-methods">Formal methods</h2>
 <p>Express english requirements as checkable logic, then use logic to
 reason about it</p>
-<p><img src="chat80.png"></p>
+<p><img width=800 src="chat80.png"></p>
 <p>Other examples:</p>
 <ul>
 <li><p>Product lines:</p></li>
@@ -761,7 +769,7 @@ class="sourceCode numberSource python numberLines"><code class="sourceCode pytho
 href="http://cseweb.ucsd.edu/~lerner/papers/opium.pdf">Software
 installation as a formal methods problem</a></p>
 <p>Lets represent software dependencies in a logical framework:</p>
-<p><img src="opium.png"></p>
+<p><img width=700px  src="opium.png"></p>
 <p>If we run Picosat over these formulae then:</p>
 <ul>
 <li>Any solution that satisfies all the constraints…</li>

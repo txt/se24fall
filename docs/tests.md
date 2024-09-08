@@ -2,7 +2,8 @@
 
 ## Concepts to know
 
-- V-diagram unit/system testong
+- V-diagram, unit/system testing
+    - Functional / non-functiona requirements
 
 ## Quotes
 
@@ -27,17 +28,21 @@
 - Re-check some code (regression testing; has anything new broken  anything old)?
 - Good manners for your team mates
   - Do not commit things that will hurt them
-- Without testing, you don’t know if your program actually behaves as expected. Before writing dedicated test cases, you may have only passed a tiny amount of inputs through your system, and only seen a tiny amount of outputs. Testing is the process of selecting good representative inputs for all possible interactions in your program and seeing whether they map to the expected output . Good tests provide a lens into how the program is working, and allow you to find software faults when they fail unexpectedly.
 - Because there is so much to test for
-  - Conformance to the requirements
-    - But whose' requirements?
-      - Welcome to the wonder of multi-stakeholder systems
+  - Functional requirements: what the system does
+  - Non-functional requirements: how the to judge the operation of a system (more general that the functional requirements)
+- Conformance to the requirements
+  - But whose' requirements?
+    - Welcome to the wonder of multi-stakeholder systems
     - Even if we try to make it complete,complete for who
-      - Stakeholders, competing goals
+      - Stakeholders, [competing goals](https://arxiv.org/pdf/1702.05568)
       - Toronto CS department. Information system
         - "good" if parents can track their children
         - "good" if students  can maintain their privacy
 
+<img width=600px src="tradeoff.jpeg">
+
+- Examples non-functional
   - For "maintainability?"
     - how to test that, except to watch the code for years to come?
   - Performance:
@@ -52,28 +57,31 @@
     Interoperability
   - And the list goes one and on and on
 
-<img width=700px  src="https://khalilstemmler.com/img/blog/object-oriented/analysis/non-functional-requirements/non-functional-requirements-map.png">
+<img width=500px  src="https://khalilstemmler.com/img/blog/object-oriented/analysis/non-functional-requirements/non-functional-requirements-map.png">
 
 ## V-Diagram
 
-- V-diagram
-  - "Without requirements or design, programming is the art of adding bugs to an empty text file."
-    -- Louis Srygley
-  - Brooks, [Mythical Man Month](https://web.eecs.umich.edu/~weimerw/2018-481/readings/mythical-man-month.pdf).
-    Effort is
-    - 1/3 th planning
-    - 1/6 th coding
-    - 1/4 th unit testing : testing your own code
-    - 1/4 th systems testing : testing your code, combined with others
-      - may include:
-        - Integration testing: verify the interfaces between components against a software design.
-        - Acceptance testing:
-          - User acceptance testing
-          - Contractual and regulatory acceptance testing 
-        - Alpha and beta testing
-          - Alpha testing is simulated or actual operational testing by potential users/customer
-          - Following alpha testing: external testing with a larger audience
-             - Released to a limited audience outside of the programming team
+<img width=400px  src="v.jpg">
+
+- verification = are we building the system right?
+- validation = are we building the right system?
+- "Without requirements or design, programming is the art of adding bugs to an empty text file."
+  -- Louis Srygley
+- Brooks, [Mythical Man Month](https://web.eecs.umich.edu/~weimerw/2018-481/readings/mythical-man-month.pdf).
+  Effort is
+  - 1/3 th planning
+  - 1/6 th coding
+  - 1/4 th unit testing : testing your own code
+  - 1/4 th systems testing : testing your code, combined with others
+    - may include:
+      - Integration testing: verify the interfaces between components against a software design.
+      - Acceptance testing:
+        - User acceptance testing
+        - Contractual and regulatory acceptance testing 
+      - Alpha and beta testing
+        - Alpha testing is simulated or actual operational testing by potential users/customer
+        - Following alpha testing: external testing with a larger audience
+           - Released to a limited audience outside of the programming team
 
 
 
@@ -207,8 +215,9 @@ Can not retest everything. What to do? Test selectively:
   - doodle a model (at which point your "black-box" becomes kind of a guess at "white-box" reasoning, see below)
     - Read the doc
     - Doodle a model showing expectations
-    - Generate tests over that doodle <br> 
-      <img width=500 src="https://barrgroup.com/images/articles/IntroHierarchicalStateMachines02UmlStateDiagram.gif">
+    - Generate tests over that doodle 
+      - Run you finger over the lines and say "what do i expect to see here" <br> 
+      <img width=500 src="drawn.jpg">
 
 ### Smart black box testing: Fuzzing
 
@@ -350,7 +359,7 @@ Applications of symbolic execution:
 Express english requirements as checkable logic, then use logic to reason about it
 
 
-<img src="chat80.png">
+<img width=800 src="chat80.png">
 
 
 Other examples:
