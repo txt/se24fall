@@ -2,8 +2,23 @@
 
 ## Concepts to know
 
-- V-diagram, unit/system testing
-    - Functional / non-functiona requirements
+- V-diagram, unit/system testing, integration, acceptance, alpha/beta testing.
+- Functional vs non-functiona requirements
+  - Trade-offs in non-functional requirements (give an example of how helping one NFR can hurt another)
+- Code has faults. Will it have failures?
+- The TDD mantra.
+- Regression testing. Problems with very large regressions tests. 
+  Test case priorization
+- Black-box, white-box testing. Formal methods. When to do each?
+- Black-box:
+  - Metamorphic testing (give an example)
+  - Diversity sampling. e.g. all-pairs testing
+  - Fuzzing: grammar-based, mutation
+- White-box:
+  - Coverage: functions, statements, du, branch
+  - Symbolic execution: how to use it for test case minimination
+- Formal methods:
+  - Use of theorem proving for product-line testing
 
 ## Quotes
 
@@ -116,9 +131,13 @@
   - Maybe TDD's "success" was just  that it happened at the same time that everyone stopped doing "C" and started using more
     interactive incremental development tools (e.g. Pyhton)
 
-## Handling Large Test Suites
+## Large Test Suites: Test Case Prioriization
 
-Can not retest everything. What to do? Test selectively:
+Regression testing:
+
+- Regression testing is re-running functional and non-functional tests to ensure that previously developed and tested software still performs as expected
+
+But for very large test suites, cannot retest everything. What to do? Test selectively:
 
 - Some input clusters relate to new functionality
   - The Elbaum heuristic from Elbaum, Rothermel, and Penix. 
@@ -200,17 +219,25 @@ Can not retest everything. What to do? Test selectively:
 
 ### Smart black box testing: Fault Localization
 
-  - cluster the input space and only sample the "important" parts
-    - but what does "importance" mean?
-      - domain experts tells us that "A" never happens, but "B and D" happen a lot
-      - some input clusters are more associated with errors that others (so here we are localizing inputs that might lead to failures)
-      - for more on test failure localization, , see Jones JA, Harrold MJ, Stasko J. Visualization of test information to assist fault localization. Proceedings of the 24th International Conference on Software Engineering. ACM, Orlando, Florida, 2002; 467–477.
-        - the branch weighting heuristics proposed by Jones et al. have been (exteslively)
-         explored by others. For a small sample of that work, see Sarhan, Qusay Idrees, and Árpád Beszédes. "A survey of challenges in spectrum-based software fault localization." IEEE Access 10 (2022): 10618-10639.
-        - for a review of other fault localization heuristics, see Zakari, Abubakar, et al. "Multiple fault localization of software programs: A systematic literature review." Information and Software Technology 124 (2020): 106312.
+<img align=right src="yellow.png" width="250px">
 
+- cluster the input space and only sample the "important" parts
+- but what does "importance" mean?
+  - domain experts tells us that "A" never happens, but "B and D" happen a lot
+  - some input clusters are more associated with errors that others (so here we are localizing inputs that might lead to failures)
+    - run tests down the parse tree of a program
+    - on each node, keep counters of passes and fails 
+    - somehow aggregate those counters into a visualization
 
-### Smart black box testing: Doddling
+<img src="tarantula.png" width="600px">
+
+For more on test failure localization, , see Jones JA, Harrold MJ, Stasko J. Visualization of test information to assist fault localization. Proceedings of the 24th International Conference on Software Engineering. ACM, Orlando, Florida, 2002; 467–477.
+
+- the branch weighting heuristics proposed by Jones et al. have been (exteslively)
+  explored by others. For a small sample of that work, see Sarhan, Qusay Idrees, and Árpád Beszédes. "A survey of challenges in spectrum-based software fault localization." IEEE Access 10 (2022): 10618-10639.
+- for a review of other fault localization heuristics, see Zakari, Abubakar, et al. "Multiple fault localization of software programs: A systematic literature review." Information and Software Technology 124 (2020): 106312.
+
+### Smart black box testing: Doodling
 
   - doodle a model (at which point your "black-box" becomes kind of a guess at "white-box" reasoning, see below)
     - Read the doc
@@ -356,7 +383,7 @@ Applications of symbolic execution:
 ## Formal methods
 
 
-Express english requirements as checkable logic, then use logic to reason about it
+Express English requirements as check-able logic, then use logic to reason about it
 
 
 <img width=800 src="chat80.png">

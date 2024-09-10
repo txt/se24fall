@@ -115,9 +115,32 @@ style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10p
 </header>
 <h2 id="concepts-to-know">Concepts to know</h2>
 <ul>
-<li>V-diagram, unit/system testing
+<li>V-diagram, unit/system testing, integration, acceptance, alpha/beta
+testing.</li>
+<li>Functional vs non-functiona requirements
 <ul>
-<li>Functional / non-functiona requirements</li>
+<li>Trade-offs in non-functional requirements (give an example of how
+helping one NFR can hurt another)</li>
+</ul></li>
+<li>Code has faults. Will it have failures?</li>
+<li>The TDD mantra.</li>
+<li>Regression testing. Problems with very large regressions tests. Test
+case priorization</li>
+<li>Black-box, white-box testing. Formal methods. When to do each?</li>
+<li>Black-box:
+<ul>
+<li>Metamorphic testing (give an example)</li>
+<li>Diversity sampling. e.g. all-pairs testing</li>
+<li>Fuzzing: grammar-based, mutation</li>
+</ul></li>
+<li>White-box:
+<ul>
+<li>Coverage: functions, statements, du, branch</li>
+<li>Symbolic execution: how to use it for test case minimination</li>
+</ul></li>
+<li>Formal methods:
+<ul>
+<li>Use of theorem proving for product-line testing</li>
 </ul></li>
 </ul>
 <h2 id="quotes">Quotes</h2>
@@ -303,8 +326,16 @@ that everyone stopped doing “C” and started using more interactive
 incremental development tools (e.g. Pyhton)</li>
 </ul></li>
 </ul>
-<h2 id="handling-large-test-suites">Handling Large Test Suites</h2>
-<p>Can not retest everything. What to do? Test selectively:</p>
+<h2 id="large-test-suites-test-case-prioriization">Large Test Suites:
+Test Case Prioriization</h2>
+<p>Regression testing:</p>
+<ul>
+<li>Regression testing is re-running functional and non-functional tests
+to ensure that previously developed and tested software still performs
+as expected</li>
+</ul>
+<p>But for very large test suites, cannot retest everything. What to do?
+Test selectively:</p>
 <ul>
 <li>Some input clusters relate to new functionality
 <ul>
@@ -429,19 +460,27 @@ class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb1-1"><a 
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">3</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span>))</span></code></pre></div>
 <h3 id="smart-black-box-testing-fault-localization">Smart black box
 testing: Fault Localization</h3>
+<p><img align=right src="yellow.png" width="250px"></p>
 <ul>
-<li>cluster the input space and only sample the “important” parts
-<ul>
+<li>cluster the input space and only sample the “important” parts</li>
 <li>but what does “importance” mean?
 <ul>
 <li>domain experts tells us that “A” never happens, but “B and D” happen
 a lot</li>
 <li>some input clusters are more associated with errors that others (so
-here we are localizing inputs that might lead to failures)</li>
-<li>for more on test failure localization, , see Jones JA, Harrold MJ,
+here we are localizing inputs that might lead to failures)
+<ul>
+<li>run tests down the parse tree of a program</li>
+<li>on each node, keep counters of passes and fails</li>
+<li>somehow aggregate those counters into a visualization</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img src="tarantula.png" width="600px"></p>
+<p>For more on test failure localization, , see Jones JA, Harrold MJ,
 Stasko J. Visualization of test information to assist fault
 localization. Proceedings of the 24th International Conference on
-Software Engineering. ACM, Orlando, Florida, 2002; 467–477.
+Software Engineering. ACM, Orlando, Florida, 2002; 467–477.</p>
 <ul>
 <li>the branch weighting heuristics proposed by Jones et al. have been
 (exteslively) explored by others. For a small sample of that work, see
@@ -452,12 +491,9 @@ spectrum-based software fault localization.” IEEE Access 10 (2022):
 Abubakar, et al. “Multiple fault localization of software programs: A
 systematic literature review.” Information and Software Technology 124
 (2020): 106312.</li>
-</ul></li>
-</ul></li>
-</ul></li>
 </ul>
-<h3 id="smart-black-box-testing-doddling">Smart black box testing:
-Doddling</h3>
+<h3 id="smart-black-box-testing-doodling">Smart black box testing:
+Doodling</h3>
 <ul>
 <li>doodle a model (at which point your “black-box” becomes kind of a
 guess at “white-box” reasoning, see below)
@@ -632,7 +668,7 @@ data?</li>
 </ul>
 <p><img width=600 src="bigtest.png"></p>
 <h2 id="formal-methods">Formal methods</h2>
-<p>Express english requirements as checkable logic, then use logic to
+<p>Express English requirements as check-able logic, then use logic to
 reason about it</p>
 <p><img width=800 src="chat80.png"></p>
 <p>Other examples:</p>
