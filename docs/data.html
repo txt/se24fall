@@ -115,12 +115,30 @@ style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10p
 cleaning, transforming, and organizing raw data into a more usable
 format for analysis or reporting. This process is essential because raw
 data is often messy, incomplete, or unstructured, making it difficult to
-derive meaningful insights without proper preparation. This tutorial
-will teach us command-line tools to facilitate data wrangling.</p>
+derive meaningful insights without proper preparation. Often times, we
+find ourselves handling complex data that needs to be incrementally
+broken down into different shapes and forms at different stages to
+finally come off as meaningful information. Data wrangling enables us to
+break down a complex data processing task into several subtasks, carry
+out those subtasks with off-the-shelf tools, and seamlessly integrate
+the subtasks into a final comprehensive piece of information. This
+tutorial will teach us command-line tools to facilitate data
+wrangling.</p>
+<p>You can follow this tutorial using Linux or MacOS terminals. If you
+are on Windows, you can use WSL (Windows Sub-system for Linux) command
+line.</p>
 <h2 id="pipes">PIPES</h2>
-<p>First, let’s review some handy shell commands. Feel free to open your
-command line or terminal. Type in the following commands and observe the
-output:</p>
+<p>Pipes are a fundamental inter-process communication mechanism on
+operating systems. They enable the output of one process to be
+redirected to another. When you write a command on the terminal, the
+shell is actually creating a process that can execute your command.
+Since pipes are used to glue together different processes, you can also
+use pipes on the terminal to enable communication between different
+commands. The pipe command, represented as a bar symbol
+<strong>|</strong>, lets you transfer the output of one command as the
+input of the next. To understand pipes, first let’s review some handy
+shell commands. Feel free to open your command line or terminal. Type in
+the following commands and observe the output:</p>
 <ol type="1">
 <li><strong>ls:</strong> prints out the list of files and
 sub-directories in the present working directory</li>
@@ -181,14 +199,15 @@ with pipes. This entire pipeline might seem enigmatic at this point.
 But, it will all make sense by the end of the tutorial.</p>
 <p>Let’s now try to unravel this enigma. The command <code>cut</code>
 extracts a specific column from a piece of data containing multiple
-columns separated by some field separator. <code>xargs</code> takes a
-number of rows and runs the command that follows (in this case ls-l) on
-each of the rows one at a time. <code>sort</code> command sorts the list
-of given inputs based on some criteria (in this case, the options for
-sort are <code>n</code> which means numeric sort and <code>r</code>
-which means in reverse order i.e. descending order). Next, we will look
-at the <code>grep</code>, <code>sed</code>, and <code>gawk</code>
-commands in more detail.</p>
+columns separated by some field separator that is specified with the
+<code>d</code> flag. <code>xargs</code> takes a number of rows and runs
+the command that follows (in this case ls-l) on each of the rows one at
+a time. <code>sort</code> command sorts the list of given inputs based
+on some criteria (in this case, the options for sort are <code>k</code>
+which specifies the range of columns used for sorting, <code>n</code>
+which means numeric sort and <code>r</code> which means in reverse order
+i.e. descending order). Next, we will look at the <code>grep</code>,
+<code>sed</code>, and <code>gawk</code> commands in more detail.</p>
 <h2 id="grep">GREP</h2>
 <p>grep is a powerful command-line tool used for searching plain-text
 data sets for lines that match a regular expression. The name stands for
@@ -207,26 +226,30 @@ standard input (like output from another command).</p></li>
 </ul>
 <h4 id="common-options">Common Options</h4>
 <ul>
-<li>-i: Ignore case distinctions in both the pattern and the input
-files.<br />
+<li><code>-i</code>: Ignore case distinctions in both the pattern and
+the input files.<br />
 Example: grep -i “hello” file.txt</li>
-<li>**-r or -R: Recursively search directories.<br />
+<li><code>-r</code> or <code>-R</code>: Recursively search
+directories.<br />
 Example: grep -r “hello” /path/to/directory<br />
 </li>
-<li>-l: Print only the names of files with matching lines.<br />
+<li><code>-l</code>: Print only the names of files with matching
+lines.<br />
 Example: grep -l “hello” *.txt<br />
 </li>
-<li>-n: Prefix each line of output with the line number within its
-file.<br />
+<li><code>-n</code>: Prefix each line of output with the line number
+within its file.<br />
 Example: grep -n “hello” file.txt<br />
 </li>
-<li>-v: Invert the match, showing lines that do not match the
-pattern.<br />
+<li><code>-v</code>: Invert the match, showing lines that do not match
+the pattern.<br />
 Example: grep -v “hello” file.txt<br />
 </li>
-<li>-c: Print only a count of matching lines per file.<br />
+<li><code>-c</code>: Print only a count of matching lines per
+file.<br />
 Example: grep -c “hello” file.txt</li>
-<li>-o: Print only the matched parts of matching lines.<br />
+<li><code>-o</code>: Print only the matched parts of matching
+lines.<br />
 Example: grep -o “hello” file.txt</li>
 </ul>
 <p>grep is extremely powerful when used with regular expressions.
@@ -354,12 +377,14 @@ text.<br />
 </ul>
 <h4 id="character-classes">Character Classes</h4>
 <ul>
-<li> Matches any digit (equivalent to [0-9]).</li>
-<li>: Matches any non-digit.</li>
-<li>: Matches any word character (alphanumeric + underscore).</li>
-<li>: Matches any non-word character.</li>
-<li>: Matches any whitespace character (space, tab, newline).</li>
-<li>: Matches any non-whitespace character.</li>
+<li><code>\d</code>: Matches any digit (equivalent to [0-9]).</li>
+<li><code>\D</code>: Matches any non-digit.</li>
+<li><code>\w</code>: Matches any word character (alphanumeric +
+underscore).</li>
+<li><code>\W</code>: Matches any non-word character.</li>
+<li><code>\s</code>: Matches any whitespace character (space, tab,
+newline).</li>
+<li><code>\S</code>: Matches any non-whitespace character.</li>
 </ul>
 <h4 id="anchors">Anchors</h4>
 <ul>
@@ -485,14 +510,17 @@ sed ‘s/foo/bar/3’ input_file</p></li>
 sed ‘10,20s/foo/bar/’ input_file</p></li>
 </ul>
 <h2 id="gawk">GAWK</h2>
-<p>GAWK is a powerful text-processing language used in Unix and
-Unix-like operating systems. GAWK is designed for pattern scanning and
-processing. It allows you to extract information, perform calculations,
-and generate formatted reports, making it an essential tool for data
-analysis and text manipulation.</p>
+<p>GAWK is GNU Project’s version of AWK. The AWK programming language
+was originally created in the 1970s as a powerful text-processing
+language used in Unix and Unix-like operating systems. GAWK is designed
+for pattern scanning and processing. It allows you to extract
+information, perform calculations, and generate formatted reports,
+making it an essential tool for data analysis and text manipulation.</p>
 <p>This tutorial will cover the basics of GAWK, including how to use it
 for simple tasks like text extraction, as well as more advanced features
-like working with fields, patterns, and GAWK scripts.</p>
+like working with fields, patterns, and GAWK scripts. If you don’t have
+gawk installed, you should be able to easily install it using your
+operating system’s package manager (e.g. apt or brew).</p>
 <p><strong><em>Basic Syntax: gawk ‘pattern { action }’
 input_file</em></strong></p>
 <ul>
@@ -585,10 +613,29 @@ separator to a tab. It then prints the first field and doubles the value
 of the third field for lines where the third field is greater than 100.
 Finally, it prints “Processing Complete” after processing the entire
 file.</p>
+<h2 id="and-finally">And, finally …</h2>
+<p>You’ve probably been wondering: <strong><em>when to use grep, sed,
+and gawk?</em></strong> Typically, try to use <strong>grep</strong> for
+searching, <strong>sed</strong> for substitutions, and
+<strong>gawk</strong> for more complex tasks. The renowned computer
+scientist <a
+href="https://en.wikipedia.org/wiki/Douglas_McIlroy">Douglas Mcilroy</a>
+who coined the concept of pipelines, recommended the following:
+<strong><em>don’t use sed when you can use grep and don’t use (g)awk
+when you can use sed</em></strong>.</p>
+<p>In this tutorial, we learnt about various useful shell commands to
+facilitate data wrangling. We have seen complex example tasks that had
+to be broken down into smaller subtasks thus teaching us an important
+organizational lesson of task decomposition. Decomposing a complex task
+into smaller subtasks makes debugging and team-work much more convenient
+since different team members can work on different parts of the pipeline
+and can eventually integrate their individual parts to form the
+whole.</p>
 <h2 id="homework">Homework</h2>
 <ol type="1">
-<li><p>Download and unzip hw4.zip.</p></li>
-<li><p>Inside the hw.zip, you will find a bash script called
+<li><p>Download and unzip <a
+href="https://moodle-courses2425.wolfware.ncsu.edu/mod/resource/view.php?id=547767">hw4.zip</a>.</p></li>
+<li><p>Inside the hw4.zip, you will find a bash script called
 <code>infinite.sh</code>. Run the script using
 <code>bash infinite.sh</code>. The script will now run infinitely in the
 background. Your task is to write a simple script task1.sh to kill this
@@ -626,6 +673,32 @@ have learnt in this tutorial.</p>
 </ol>
 <p>Build a single pipeline of commands for all the tasks a, b, and c and
 store the pipeline inside a script called task3.sh.</p></li>
+<li><p>Push task1.sh, task2.sh, and task3.sh files to your HW4 GitHub
+repository with the same badges as those from HW1.</p></li>
+<li><p>Submit a PDF report containing the following information:</p>
+<ol type="a">
+<li>Group number</li>
+<li>Names of the group members</li>
+<li>GitHub link of your HW4 repository</li>
+<li>Output of task1.sh, task2.sh, and task3.sh</li>
+</ol></li>
+</ol>
+<h2 id="important-links">Important Links</h2>
+<ol type="1">
+<li><a
+href="https://alvinalexander.com/unix/edu/examples/grep.shtml">GREP
+examples</a></li>
+<li><a href="https://learnxinyminutes.com/docs/sed/">SED
+examples</a></li>
+<li><a href="https://learnxinyminutes.com/docs/awk/">AWK
+examples</a></li>
+<li><a
+href="https://www.geeksforgeeks.org/tee-command-linux-example/">Debugging
+pipes with <strong>tee</strong></a></li>
+<li><a href="https://regex101.com/">Debugging regular
+expressions</a></li>
+<li><a href="https://missing.csail.mit.edu/2020/data-wrangling/">MIT
+missing semester</a></li>
 </ol>
 
 
