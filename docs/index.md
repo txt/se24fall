@@ -35,10 +35,10 @@ Five considerations influence the design  of this subject:
 |Sep26|  [hw3](vim.html)             |         | |
 |Oct1|   [project 1](project1.html)           |         | |
 |Oct3|                  |         | |
-|Oct10| [hw4](git.html)              |         | |
+|Oct10| [hw4](data.html)              |         | |
 |Oct15| fall break       |no class | | 
 |Oct17| mid-term exam    |         | |
-|Oct24| [hw5](data.html)              |         | |
+|Oct24| [hw5](git.html)              |         | |
 |Oct31| project2         |         | |
 |Nov27| project3         |no class | |
 |Nov28| thanksgiving     |no class | |
