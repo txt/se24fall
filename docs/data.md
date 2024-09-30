@@ -1,8 +1,11 @@
 # Data Wrangling
-Data wrangling, also known as data munging, is the process of cleaning, transforming, and organizing raw data into a more usable format for analysis or reporting. This process is essential because raw data is often messy, incomplete, or unstructured, making it difficult to derive meaningful insights without proper preparation. This tutorial will teach us command-line tools to facilitate data wrangling.
+Data wrangling, also known as data munging, is the process of cleaning, transforming, and organizing raw data into a more usable format for analysis or reporting. This process is essential because raw data is often messy, incomplete, or unstructured, making it difficult to derive meaningful insights without proper preparation. Often times, we find ourselves handling complex data that needs to be incrementally broken down into different shapes and forms at different stages to finally come off as meaningful information. Data wrangling enables us to break down a complex data processing task into several subtasks, carry out those subtasks with off-the-shelf tools, and seamlessly integrate the subtasks into a final comprehensive piece of information. This tutorial will teach us command-line tools to facilitate data wrangling.
+
+You can follow this tutorial using Linux or MacOS terminals. If you are on Windows, you can use WSL (Windows Sub-system for Linux) command line.
 
 ## PIPES
-First, let's review some handy shell commands. Feel free to open your command line or terminal. Type in the following commands and observe the output:
+
+Pipes are a fundamental inter-process communication mechanism on operating systems. They enable the output of one process to be redirected to another. When you write a command on the terminal, the shell is actually creating a process that can execute your command. Since pipes are used to glue together different processes, you can also use pipes on the terminal to enable communication between different commands. The pipe command, represented as a bar symbol **|**, lets you transfer the output of one command as the input of the next. To understand pipes, first let's review some handy shell commands. Feel free to open your command line or terminal. Type in the following commands and observe the output:
 
 1. **ls:** prints out the list of files and sub-directories in the present working directory
 2. **ls -l:** prints out the list of files and sub-directories in the present working directory including detailed information related to the permissions, owner, size, dates etc. of each of the files.
@@ -33,7 +36,7 @@ grep -c "CSC510" file*| grep -E ":3$" | cut -d: -f1 | xargs ls -l | sort -k5,5nr
 ```
 In this relatively complex example, we have seen the usage of multiple tools like `grep`, `cut`, `xargs`, `sort`, `sed`, and `gawk`. Let's take a moment to appreciate the immense power bestowed upon us through these tools especially when they are combined with pipes. This entire pipeline might seem enigmatic at this point. But, it will all make sense by the end of the tutorial.
 
-Let's now try to unravel this enigma. The command `cut` extracts a specific column from a piece of data containing multiple columns separated by some field separator. `xargs` takes a number of rows and runs the command that follows (in this case ls-l) on each of the rows one at a time. `sort` command sorts the list of given inputs based on some criteria (in this case, the options for sort are `n` which means numeric sort and `r` which means in reverse order i.e. descending order). Next, we will look at the `grep`, `sed`, and `gawk` commands in more detail.
+Let's now try to unravel this enigma. The command `cut` extracts a specific column from a piece of data containing multiple columns separated by some field separator that is specified with the `d` flag. `xargs` takes a number of rows and runs the command that follows (in this case ls-l) on each of the rows one at a time. `sort` command sorts the list of given inputs based on some criteria (in this case, the options for sort are `k` which specifies the range of columns used for sorting, `n` which means numeric sort and `r` which means in reverse order i.e. descending order). Next, we will look at the `grep`, `sed`, and `gawk` commands in more detail.
 
 ## GREP
 
@@ -47,19 +50,19 @@ grep is a powerful command-line tool used for searching plain-text data sets for
 
 #### Common Options
 
--   -i: Ignore case distinctions in both the pattern and the input files.  
+-   `-i`: Ignore case distinctions in both the pattern and the input files.  
     Example: grep -i "hello" file.txt
--   **-r or -R: Recursively search directories.  
+-   `-r` or `-R`: Recursively search directories.  
     Example: grep -r "hello" /path/to/directory  
--   -l: Print only the names of files with matching lines.  
+-   `-l`: Print only the names of files with matching lines.  
     Example: grep -l "hello" *.txt    
--   -n: Prefix each line of output with the line number within its file.  
+-   `-n`: Prefix each line of output with the line number within its file.  
     Example: grep -n "hello" file.txt    
--   -v: Invert the match, showing lines that do not match the pattern.  
+-   `-v`: Invert the match, showing lines that do not match the pattern.  
     Example: grep -v "hello" file.txt    
--   -c: Print only a count of matching lines per file.  
+-   `-c`: Print only a count of matching lines per file.  
     Example: grep -c "hello" file.txt
--   -o: Print only the matched parts of matching lines.  
+-   `-o`: Print only the matched parts of matching lines.  
     Example: grep -o "hello" file.txt
     
 grep is extremely powerful when used with regular expressions. Regular expressions allow you to search for complex patterns. Let's go over a quick primer of regular expressions below:
@@ -118,12 +121,12 @@ Regular expressions (regex) are sequences of characters that define search patte
 
 #### Character Classes
 
--   \d: Matches any digit (equivalent to [0-9]).
--   \D: Matches any non-digit.
--   \w: Matches any word character (alphanumeric + underscore).
--   \W: Matches any non-word character.
--   \s: Matches any whitespace character (space, tab, newline).
--   \S: Matches any non-whitespace character.
+-   `\d`: Matches any digit (equivalent to [0-9]).
+-   `\D`: Matches any non-digit.
+-   `\w`: Matches any word character (alphanumeric + underscore).
+-   `\W`: Matches any non-word character.
+-   `\s`: Matches any whitespace character (space, tab, newline).
+-   `\S`: Matches any non-whitespace character.
     
 #### Anchors
 
@@ -225,9 +228,9 @@ sed 's/foo/bar/' input_file > output_file
 
 ## GAWK
 
-GAWK is a powerful text-processing language used in Unix and Unix-like operating systems. GAWK is designed for pattern scanning and processing. It allows you to extract information, perform calculations, and generate formatted reports, making it an essential tool for data analysis and text manipulation.
+GAWK is GNU Project's version of AWK. The AWK programming language was originally created in the 1970s as a powerful text-processing language used in Unix and Unix-like operating systems. GAWK is designed for pattern scanning and processing. It allows you to extract information, perform calculations, and generate formatted reports, making it an essential tool for data analysis and text manipulation.
 
-This tutorial will cover the basics of GAWK, including how to use it for simple tasks like text extraction, as well as more advanced features like working with fields, patterns, and GAWK scripts.
+This tutorial will cover the basics of GAWK, including how to use it for simple tasks like text extraction, as well as more advanced features like working with fields, patterns, and GAWK scripts. If you don't have gawk installed, you should be able to easily install it using your operating system's package manager (e.g. apt or brew).
 
 ***Basic Syntax: gawk 'pattern { action }' input_file***
 
@@ -326,12 +329,17 @@ gawk -f script.gawk input_file
 ```
 This script sets the field separator to a comma and the output field separator to a tab. It then prints the first field and doubles the value of the third field for lines where the third field is greater than 100. Finally, it prints "Processing Complete" after processing the entire file.
 
+## And, finally ...
 
+You've probably been wondering: ***when to use grep, sed, and gawk?*** Typically, try to use **grep** for searching, **sed** for substitutions, and **gawk** for more complex tasks. The renowned computer scientist [Douglas Mcilroy](https://en.wikipedia.org/wiki/Douglas_McIlroy) who coined the concept of pipelines, recommended the following: ***don't use sed when you can use grep and don't use (g)awk when you can use sed***.
+
+In this tutorial, we learnt about various useful shell commands to facilitate data wrangling. We have seen complex example tasks that had to be broken down into smaller subtasks thus teaching us an important organizational lesson of task decomposition. Decomposing a complex task into smaller subtasks makes debugging and team-work much more convenient since different team members can work on different parts of the pipeline and can eventually integrate their individual parts to form the whole.
 
 ## Homework
-1. Download and unzip hw4.zip.
 
-2. Inside the hw.zip, you will find a bash script called `infinite.sh`. Run the script using `bash infinite.sh`. The script will now run infinitely in the background. Your task is to write a simple script task1.sh to kill this process.
+1. Download and unzip [hw4.zip](https://moodle-courses2425.wolfware.ncsu.edu/mod/resource/view.php?id=547767).
+
+2. Inside the hw4.zip, you will find a bash script called `infinite.sh`. Run the script using `bash infinite.sh`. The script will now run infinitely in the background. Your task is to write a simple script task1.sh to kill this process.
 
 3. Recall the example where we counted and modified the names of the files containing the word "sample" and exactly 3 lines containing the word "CSC510" in each file of dataset1. Now, we are challenged to do a similar task but with slightly different specifications.
     a. First list the files containing the word "sample" and at least 3 occurrences of the word "CSC510". Note that we are no longer talking about lines containing the word "CSC510" but instead the actual number of times the word "CSC510" occurs. You are **not allowed to use `gawk` for this task** but instead use a combination of `grep` and `uniq` (note: if you are unfamiliar with `uniq`, on a terminal write `man uniq` and you will get the user manual for the command `uniq`).
@@ -346,3 +354,19 @@ This script sets the field separator to a comma and the output field separator t
     c. Finally, calculate the average age of the filtered passengers.
 
     Build a single pipeline of commands for all the tasks a, b, and c and store the pipeline inside a script called task3.sh.
+
+5. Push task1.sh, task2.sh, and task3.sh files to your HW4 GitHub repository with the same badges as those from HW1.
+
+6. Submit a PDF report containing the following information:
+    a. Group number
+    b. Names of the group members
+    c. GitHub link of your HW4 repository
+    d. Output of task1.sh, task2.sh, and task3.sh
+
+## Important Links
+1. [GREP examples](https://alvinalexander.com/unix/edu/examples/grep.shtml)
+2. [SED examples](https://learnxinyminutes.com/docs/sed/)
+3. [AWK examples](https://learnxinyminutes.com/docs/awk/)
+4. [Debugging pipes with **tee**](https://www.geeksforgeeks.org/tee-command-linux-example/)
+5. [Debugging regular expressions](https://regex101.com/)
+6. [MIT missing semester](https://missing.csail.mit.edu/2020/data-wrangling/)
