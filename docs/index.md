@@ -34,7 +34,7 @@ Five considerations influence the design  of this subject:
 |Sep17| wellness day     |no class | |
 |Sep26|  [hw3](vim.html)             |         | |
 |Sep30|               |         | [licenses](license.html);<br>[process](process.html) |
-|Oct1|   [project 1](project1.html)           |         | |
+>Oct1|   [project 1](project1.html)           |         | [ethics](ethics.html) |
 |Oct3|                  |         | |
 |Oct10| [hw4](data.html)              |         | |
 |Oct15| fall break       |no class | | 
@@ -43,6 +43,6 @@ Five considerations influence the design  of this subject:
 |Oct31| project2         |         | |
 |Nov27| project3         |no class | |
 |Nov28| thanksgiving     |no class | |
-|Dec3| essay due         |no class | |
+|Dec3| [essay due](essay.html)         |no class | |
 |Dec5|  final exam       |no class | |
 
