@@ -33,6 +33,7 @@ Five considerations influence the design  of this subject:
 |Sep12| [hw2](debug.html)              |         | | 
 |Sep17| wellness day     |no class | |
 |Sep26|  [hw3](vim.html)             |         | |
+|Sep30|               |         | [licenses](license.html) |
 |Oct1|   [project 1](project1.html)           |         | |
 |Oct3|                  |         | |
 |Oct10| [hw4](data.html)              |         | |
