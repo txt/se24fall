@@ -116,11 +116,16 @@ Licenses matter. They are one of the factors in deciding if you should use a pro
 * Here are principles for making a project more open-source-ish (TCCMR):
 
   - Transparency : everyone can see the decision making process
-  - Collaboration : everyone can effect the decision making process
-  - Community : new comers welcome, no information silos,  celebrate diversity,  "training wheels" defined, mentor program, make newbies aware of transparency and collaboration mechanisms
+  - **Distributed development model**:
+     - Collaboration : everyone can effect the decision making process
+       - **Consensus-Oriented Decision Models**: everyone's voice heard, everyone can see how their opinion is processed
+     - Community : new comers welcome, no information silos,  celebrate diversity,  "training wheels" defined, mentor program, make newbies aware of transparency and collaboration mechanisms
+       - **Zero internal boundaries** (anyone can use any tool; not "Simone does that cause only she has the license")
   - Meritocracy : Meritocracy encourages participation and appreciates great ideas no matter where they come from. In order for meritocracy to work in practice, it is critical to build an inclusive environment. 
-  - Release early and often: do what you can so that, as soon as you can, you get feedback from outside of your group. React to the feedback, in public. Show change and improvements based on that feedback.
+  - **Short release cycles**: Release early and often: do what you can so that, as soon as you can, you get feedback from outside of your group. React to the feedback, in public. Show change and improvements based on that feedback.
+    - **No regressions rule** (new stuff should not break old stuff)
 
+(Aside: items in **bold** are stated "LINUX development best practices").
 
 ### Does open source mean free?
 
