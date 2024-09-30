@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>essay</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<header id="title-block-header">
+<h1 class="title">essay</h1>
+</header>
+<h2 id="for-essay">for essay</h2>
+<ul>
+<li>ensure it is usinng software</li>
+<li>standard structure (abstract, intro…)</li>
+</ul>
+<h2 id="essay-ethics">Essay (ethics)</h2>
+<p>Work solo. <strong>IMPORTANT</strong>: read <a href="ethics.html">the
+lecture on ethics</a> before you start.</p>
+<h2 id="what-to-write">What to write</h2>
+<ul>
+<li>Using these <a href="img/12steps.png">7 steps</a> as an outline</li>
+<li>Address one of the <a
+href="https://onlineethics.org/resources?combine=software&amp;field_keywords_target_id=&amp;field_resource_type_target_id=13236">case
+studies</a></li>
+</ul>
+<p>YOur answer must cover, at the very least: - who is <em>hurt</em> by
+the current design; - how we might <em>fix</em> that? - Important:
+ensure that your text justifies why the new design addresses the
+problems you document. - and how will your fix <em>empower traditionally
+disempowered social groups</em>? - ie. don’t just fix this particular
+problem; rather, address deeper issues that might cause problems in the
+future).</p>
+<h2 id="word-limit">Word limit</h2>
+<ul>
+<li>No less that three pages (in the format shown below, excluding
+references);
+<ul>
+<li>no more than four</li>
+</ul></li>
+<li>HARD LIMITS:
+<ul>
+<li>we will not grade after four pages.</li>
+<li>we will not read if less than three.</li>
+<li>we will not read if it is the wrong format (see below)</li>
+</ul></li>
+</ul>
+<h2 id="how-to-write">How to write</h2>
+<p>Create an overleaf.com account</p>
+<ul>
+<li><p>Go to
+https://www.overleaf.com/gallery/tagged/ieee-official</p></li>
+<li><p>Select :IEEE Bare Demo Template for conferences”</p>
+<ul>
+<li>https://www.overleaf.com/latex/templates/ieee-bare-demo-template-for-conferences/ypypvwjmvtdf</li>
+</ul></li>
+<li><p>Hit “open as template”</p></li>
+<li><p>Add your name and email to list of authors.</p></li>
+<li><p>Add these lines before <code>\begin{document}</code></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>  \usepackage[switch]{lineno}</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  \linenumbers</span></code></pre></div></li>
+<li><p>Write at a three to four page paper.</p></li>
+<li><p>Hit the “recompile” button</p></li>
+<li><p>Look to the right of “recompile: for the download icon</p></li>
+<li><p>Submit to Moodle</p></li>
+</ul>
+<h2 id="grading-rubric">Grading Rubric</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Grade</th>
+<th>What</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-3</td>
+<td>POOR ESSAY STRUCCTURE</td>
+<td>We want coherent paragraphs, not a bullet list. References are used
+in a way that enhances the argument. Paragraphs should be content-full
+(rather that a set of irrelevances). Arguments should be defended and
+not just be opinions of the form “I think that…” (with no supporting
+clauses). Each section should start with some clarification/structuring
+preamble.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PROBLEM DEFINITION</td>
+<td>+1 if it states the problem and +1 more if does it well;
+e.g. situates current problem in broader content</td>
+</tr>
+<tr>
+<td>2</td>
+<td>GATHER RELEVANT FACTS</td>
+<td>+1 if it gather assess relevant facts and +1 more if does it well;
+e.g. extensive literature review</td>
+</tr>
+<tr>
+<td>2</td>
+<td>IDENTIFY STAKEHOLDERS</td>
+<td>+1 if it identifies the stakeholders and +1 more if does it well;
+e.g. shows how skackholder requirements can be contradictory</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LIST OF 5 OPTIONS</td>
+<td>+5 if it develops a list of iat least five options</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SOFTWARE DESIGN</td>
+<td>+2 of some of those options need to includes a redesign for a better
+version of the software where the better software mitigates some of the
+issues discussed by the original software. And +1 more if it does it
+well; e.g. clever design</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TESTING</td>
+<td>2 if it tests options using criteria like harm, publicity,
+defensibility, reversibility, virtue, colleague, professional,
+organizational test ( see guidance on that at
+https://github.com/txt/se20/blob/master/etc/img/12steps.png) And 2 more
+if it does it well; e.g. writes extensively insightful notes on three or
+more of the tests</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CHOICE</td>
+<td>+1 if tentative choice and +1 if final Choice</td>
+</tr>
+<tr>
+<td>-2,+1</td>
+<td>OTHER</td>
+<td>-2 if the essay is mostly “I think X, I think Y” without any
+citations or comment on the amazing things other people have thunk in
+this matter. +1 more if it beyond the specifics of your answer, the real
+test will be ““does the student understand general principles that can
+be applied in other contexts”; i.e. if the essay defined clear steps to
+making ethical decisions (beyond the 12 steps of
+https://github.com/txt/se20/blob/master/etc/img/12steps.png) for future
+applications.</td>
+</tr>
+<tr>
+<td>20</td>
+<td>TOTAL</td>
+<td>plus, maybe, +1 bonus</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</div>
+</body>
+</html>
