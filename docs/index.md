@@ -40,8 +40,8 @@ Five considerations influence the design  of this subject:
 |Oct15| fall break       |no class | | 
 |Oct17| mid-term exam    |         | |
 |Oct24| [hw5](git.html)              |         | |
-|Oct31| project2         |         | |
-|Nov27| project3         |no class | |
+|Oct31| [project2](project23.html)         |         | |
+|Nov27| [project3](project23.html)         |no class | |
 |Nov28| thanksgiving     |no class | |
 |Dec3| [essay due](essay.html)         |no class | |
 |Dec5|  final exam       |no class | |
