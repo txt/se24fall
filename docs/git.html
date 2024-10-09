@@ -135,14 +135,18 @@ or trees (so directories can contain other directories).</p>
 <p>A repository (or repo) is a storage space for files, directories,
 historical records, commits, and heads. It can be local (on your
 computer) or remote (on a server like GitHub). <br /> <br /> Some
-components of the repository:<br /> * .git Directory: contains all the
-configurations, logs, branches, HEAD, and more * Working Tree: the
-directories and files in your repository * Index: is the staging area in
-git. It’s basically a layer that separates your working tree from the
-Git repository. * HEAD and head: HEAD is a pointer that points to the
-current branch. A repository only has 1 <strong>active</strong> HEAD.
-head is a pointer that points to any commit. A repository can have any
-number of heads.</p>
+components of the repository:<br /></p>
+<ul>
+<li>.git Directory: contains all the configurations, logs, branches,
+HEAD, and more</li>
+<li>Working Tree: the directories and files in your repository</li>
+<li>Index: is the staging area in git. It’s basically a layer that
+separates your working tree from the Git repository.</li>
+<li>HEAD and head: HEAD is a pointer that points to the current branch.
+A repository only has 1 <strong>active</strong> HEAD. head is a pointer
+that points to any commit. A repository can have any number of
+heads.</li>
+</ul>
 <h3 id="commit">Commit</h3>
 <p>A commit is a snapshot of a set of changes. For example, if you added
 5 files, and removed 2 others, these changes will be contained in a
@@ -256,58 +260,76 @@ happen, like:</p>
 that need to be resolved.<br /> Open the files with conflicts in your
 text editor or IDE. Conflicts sections shows your current branch, named
 “<strong>HEAD</strong>”, and the branch you try to merge, named
-“branch-name”.<br /> <strong>Step:</strong><br /> * Resolve the
-Conflict: Edit the file to resolve the conflict by choosing the right
-changes to keep. * Stage the Resolved Files: Once you have resolved the
-conflicts, you need to stage the changes. * Commit the Merge: After
-staging the resolved files, commit the merge. * Finish the Merge
-Process: After committing, the merge conflict resolution is complete.
-There are some good visual tools to help with dealing conlicts like
-VSCodes, IntelliJ. To minimize the chance of conflicts, pull changes
-from the upstream branches regularly and resolve smaller conflicts
-incrementally. When working in a team, communicate about major changes
-or rebase regularly to reduce the chances of conflicts. <br /> ###
-Reverse In Git, “reverse” typically refers to undoing changes or
-reverting a commit. There are several ways to reverse changes in Git: *
-<strong>Revert a Commit:</strong> Creates a new commit that undoes the
-changes made by a previous commit without rewriting history. This is
-useful when you want to keep the history intact and record the fact that
-a commit was reverted.<br />
-<code>sh     git revert &lt;commit-hash&gt;</code> But if you have
-merged a branch into your main branch, but later realized that you need
-to undo this merge.
-<code>sh     #find the commit hash of the merge that you want to reverse     git log --oneline     #use "-m" option to specify the parent of the merge you want to keep. The "-m 1" option typically specifies that you want to keep the changes from the first parent (usually the main branch before the merge).     git revert -m 1 &lt;merge-commit-hash&gt;</code>
-* <strong>Reset a Commit:</strong> Moves the <strong>HEAD</strong>
+“branch-name”.<br /></p>
+<p><strong>Step:</strong><br /></p>
+<ul>
+<li>Resolve the Conflict: Edit the file to resolve the conflict by
+choosing the right changes to keep.</li>
+<li>Stage the Resolved Files: Once you have resolved the conflicts, you
+need to stage the changes.</li>
+<li>Commit the Merge: After staging the resolved files, commit the
+merge.</li>
+<li>Finish the Merge Process: After committing, the merge conflict
+resolution is complete. There are some good visual tools to help with
+dealing conlicts like VSCodes, IntelliJ. To minimize the chance of
+conflicts, pull changes from the upstream branches regularly and resolve
+smaller conflicts incrementally. When working in a team, communicate
+about major changes or rebase regularly to reduce the chances of
+conflicts. <br /></li>
+</ul>
+<h3 id="reverse">Reverse</h3>
+<p>In Git, “reverse” typically refers to undoing changes or reverting a
+commit. There are several ways to reverse changes in Git:</p>
+<ul>
+<li><p><strong>Revert a Commit:</strong> Creates a new commit that
+undoes the changes made by a previous commit without rewriting history.
+This is useful when you want to keep the history intact and record the
+fact that a commit was reverted.<br />
+<code>sh     git revert &lt;commit-hash&gt;</code></p>
+<p>But if you have merged a branch into your main branch, but later
+realized that you need to undo this merge.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#find the commit hash of the merge that you want to reverse</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#use &quot;-m&quot; option to specify the parent of the merge you want to keep. The &quot;-m 1&quot; option typically specifies that you want to keep the changes from the first parent (usually the main branch before the merge).</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert <span class="at">-m</span> 1 <span class="op">&lt;</span>merge-commit-hash<span class="op">&gt;</span></span></code></pre></div></li>
+<li><p><strong>Reset a Commit:</strong> Moves the <strong>HEAD</strong>
 pointer and potentially the branch pointer to a previous commit,
 effectively “erasing” commits from the history. This can be destructive
 as it changes the commit history, making it as though certain commits
 never happened.<br /> The git reset command is used to undo commits by
 moving the HEAD and the current branch to a specified commit. There are
-three modes of reset: * <strong>soft</strong>: Moves the
-<strong>HEAD</strong> to a specified commit and leaves changes staged
-for commit. * <strong>mixed</strong> (default): Moves the
-<strong>HEAD</strong> to a specified commit, unstages changes (moves
-them to the working directory), but doesn’t touch the working directory.
-* <strong>hard</strong>: Moves the <strong>HEAD</strong> to a specified
-commit and deletes all changes in the working directory and index.
-<code>sh     git reset [--soft | --mixed | --hard] &lt;commit-hash&gt;</code>
-<strong>Important</strong>: Using –hard will lose all changes after the
-specified commit, and they cannot be recovered easily. * <strong>Undo
-Changes in the Working Directory:</strong> Reverts changes made to files
-in the working directory that haven’t been staged or committed
-yet.<br /> If you want to undo changes to a file that haven’t been
-staged or committed yet, you can use the “git checkout” (in older
-versions) or “git restore” (in newer versions) command.
-<code>sh     git restore &lt;file&gt;     #or for older version     git checkout -- &lt;file&gt;</code>
-* <strong>Unstage Changes:</strong> If you’ve added changes to the
+three modes of reset:</p>
+<ul>
+<li><strong>soft</strong>: Moves the <strong>HEAD</strong> to a
+specified commit and leaves changes staged for commit.</li>
+<li><strong>mixed</strong> (default): Moves the <strong>HEAD</strong> to
+a specified commit, unstages changes (moves them to the working
+directory), but doesn’t touch the working directory.</li>
+<li><strong>hard</strong>: Moves the <strong>HEAD</strong> to a
+specified commit and deletes all changes in the working directory and
+index.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset [--soft <span class="kw">|</span> <span class="ex">--mixed</span> <span class="kw">|</span> <span class="ex">--hard]</span> <span class="op">&lt;</span>commit-hash<span class="op">&gt;</span></span></code></pre></div>
+<p><strong>Important</strong>: Using –hard will lose all changes after
+the specified commit, and they cannot be recovered easily.</p></li>
+<li><p><strong>Undo Changes in the Working Directory:</strong> Reverts
+changes made to files in the working directory that haven’t been staged
+or committed yet.<br /> If you want to undo changes to a file that
+haven’t been staged or committed yet, you can use the “git checkout” (in
+older versions) or “git restore” (in newer versions) command.
+<code>sh     git restore &lt;file&gt;     #or for older version     git checkout -- &lt;file&gt;</code></p></li>
+<li><p><strong>Unstage Changes:</strong> If you’ve added changes to the
 staging area (using “git add”) and want to unstage them without losing
 changes in the working directory:
-<code>sh     git reset HEAD &lt;file&gt;</code> * <strong>Reflog to
-Recover Lost Commits:</strong> If you accidentally use “git reset –hard”
-or otherwise lose commits, you can often recover them using the Git
-reflog, which tracks all movements of <strong>HEAD</strong>.
-<code>sh     git reflog</code> Find the commit hash of the desired
-state, and then reset or checkout to that commit.</p>
+<code>sh     git reset HEAD &lt;file&gt;</code></p></li>
+<li><p><strong>Reflog to Recover Lost Commits:</strong> If you
+accidentally use “git reset –hard” or otherwise lose commits, you can
+often recover them using the Git reflog, which tracks all movements of
+<strong>HEAD</strong>. <code>sh     git reflog</code> Find the commit
+hash of the desired state, and then reset or checkout to that
+commit.</p></li>
+</ul>
 <h2 id="some-materials">Some materials</h2>
 <p>YouTube video: <a
 href="https://www.youtube.com/watch?v=USjZcfj8yxE">Learn git in 15
@@ -338,19 +360,19 @@ team number, all team members’ names, and emails).</li>
 <li>Stage and commit with an appropriate commit message.</li>
 </ul></li>
 </ol>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>HTML<span class="dt">&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;en&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">META</span><span class="ot"> charset</span><span class="op">=</span><span class="st">&quot;UTF-8&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">META</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;viewport&quot;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Sample Web Page<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>Great content!!!!!</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>HTML<span class="dt">&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;en&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">META</span><span class="ot"> charset</span><span class="op">=</span><span class="st">&quot;UTF-8&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">META</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;viewport&quot;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Sample Web Page<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>Great content!!!!!</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
 <ol start="3" type="1">
 <li>Modify the file(.html file) and commit the changes:
 <ul>
