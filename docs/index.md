@@ -36,7 +36,7 @@ Five considerations influence the design  of this subject:
 |Sep30|               |         | [licenses](license.html);<br>[process](process.html) |
 >Oct1|   [project 1](project1.html)           |         | [ethics](ethics.html) |
 |Oct3|                  |         | |
-|Oct10| [hw4](data.html)              |         | |
+|Oct10| [hw4](data.html)              |         | [git](git.html) |
 |Oct15| fall break       |no class | | 
 |Oct17| mid-term exam    |         | |
 |Oct24| [hw5](git.html)              |         | |
