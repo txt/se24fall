@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Testing</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<header id="title-block-header">
+<h1 class="title">Testing</h1>
+</header>
+<h2 id="concepts-to-know">Concepts to know</h2>
+<ul>
+<li>V-diagram, unit/system testing, integration, acceptance, alpha/beta
+testing.</li>
+<li>Functional vs non-functiona requirements
+<ul>
+<li>Trade-offs in non-functional requirements (give an example of how
+helping one NFR can hurt another)</li>
+</ul></li>
+<li>Code has faults. Will it have failures?</li>
+<li>The TDD mantra.</li>
+<li>Regression testing. Problems with very large regressions tests. Test
+case priorization</li>
+<li>Black-box, white-box testing. Formal methods. When to do each?</li>
+<li>Black-box:
+<ul>
+<li>Metamorphic testing (give an example)</li>
+<li>Diversity sampling. e.g. all-pairs testing</li>
+<li>Fuzzing: grammar-based, mutation</li>
+</ul></li>
+<li>White-box:
+<ul>
+<li>Coverage: functions, statements, du, branch</li>
+<li>Symbolic execution: how to use it for test case minimination</li>
+</ul></li>
+<li>Formal methods:
+<ul>
+<li>Use of theorem proving for product-line testing</li>
+</ul></li>
+</ul>
+<h2 id="quotes">Quotes</h2>
+<ul>
+<li>f u cn rd ths, u cn gt a gd jb n sftwr tstng.<br>
+<ul>
+<li>Anonymous</li>
+</ul></li>
+<li>“Program testing can be a very effective way to show the presence of
+bugs, but is hopelessly inadequate for showing their absence.”<br>
+<ul>
+<li>Edsger Dijkstra</li>
+</ul></li>
+<li>If debugging is the process of removing bugs, then programming must
+be the process of putting them in.<br>
+<ul>
+<li>Edsger Dijkstra</li>
+</ul></li>
+<li>Beware of bugs in the above code; I have only proved it correct, not
+tried it.<br>
+<ul>
+<li>Donald Knuth</li>
+</ul></li>
+<li>… it is a fundamental principle of testing that you must know in
+advance the answer each test case is supposed to produce. If you don’t,
+you are not testing; you are experimenting.”<br>
+<ul>
+<li>Kernighan and Plauger</li>
+</ul></li>
+<li>Debugging is like a mystery novel where you are both the detective
+and the murderer.
+<ul>
+<li>Anon</li>
+</ul></li>
+</ul>
+<h2 id="why-test">Why test?</h2>
+<ul>
+<li>Check some code</li>
+<li>Re-check some code (regression testing; has anything new broken
+anything old)?</li>
+<li>Good manners for your team mates
+<ul>
+<li>Do not commit things that will hurt them</li>
+</ul></li>
+<li>Because there is so much to test for
+<ul>
+<li>Functional requirements: what the system does</li>
+<li>Non-functional requirements: how the to judge the operation of a
+system (more general that the functional requirements)</li>
+</ul></li>
+<li>Conformance to the requirements
+<ul>
+<li>But whose’ requirements?
+<ul>
+<li>Welcome to the wonder of multi-stakeholder systems</li>
+<li>Even if we try to make it complete,complete for who
+<ul>
+<li>Stakeholders, <a href="https://arxiv.org/pdf/1702.05568">competing
+goals</a></li>
+<li>Toronto CS department. Information system
+<ul>
+<li>“good” if parents can track their children</li>
+<li>“good” if students can maintain their privacy</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img width=600px src="tradeoff.jpeg"></p>
+<ul>
+<li>Examples non-functional
+<ul>
+<li>For “maintainability?”
+<ul>
+<li>how to test that, except to watch the code for years to come?</li>
+</ul></li>
+<li>Performance:
+<ul>
+<li>Energy usage</li>
+<li>Network request response time?</li>
+<li>Minimize variance in query spike time</li>
+</ul></li>
+<li>Documentation :
+<ul>
+<li>Incomplete, always</li>
+</ul></li>
+<li>For “usability”?
+<ul>
+<li>For other “ilities” (Maintainability, Customizanility, Scalability,
+Capacity, Availability, Reliability, Recoverability, Maintainability,
+Serviceability, Security, Regulatory, Manageability, Environmental, Data
+Integrity, Usability, Interoperability</li>
+</ul></li>
+<li>And the list goes one and on and on</li>
+</ul></li>
+</ul>
+<p><img width=500px  src="https://khalilstemmler.com/img/blog/object-oriented/analysis/non-functional-requirements/non-functional-requirements-map.png"></p>
+<h2 id="v-diagram">V-Diagram</h2>
+<p><img width=400px  src="v.jpg"></p>
+<ul>
+<li>verification = are we building the system right?</li>
+<li>validation = are we building the right system?</li>
+<li>“Without requirements or design, programming is the art of adding
+bugs to an empty text file.” – Louis Srygley</li>
+<li>Brooks, <a
+href="https://web.eecs.umich.edu/~weimerw/2018-481/readings/mythical-man-month.pdf">Mythical
+Man Month</a>. Effort is
+<ul>
+<li>1/3 th planning</li>
+<li>1/6 th coding</li>
+<li>1/4 th unit testing : testing your own code</li>
+<li>1/4 th systems testing : testing your code, combined with others
+<ul>
+<li>may include:
+<ul>
+<li>Integration testing: verify the interfaces between components
+against a software design.</li>
+<li>Acceptance testing:
+<ul>
+<li>User acceptance testing</li>
+<li>Contractual and regulatory acceptance testing</li>
+</ul></li>
+<li>Alpha and beta testing
+<ul>
+<li>Alpha testing is simulated or actual operational testing by
+potential users/customer</li>
+<li>Following alpha testing: external testing with a larger audience
+<ul>
+<li>Released to a limited audience outside of the programming team</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Fault:</strong> as an incorrect step, process, or data
+definition in a program.</p>
+<ul>
+<li>different to <strong>failure</strong> (when something actually goes
+wrongs)</li>
+<li>a program may have many faults, but never fail</li>
+</ul>
+<h2 id="test-drive-development">Test-drive development</h2>
+<ul>
+<li>Write tests first (which will instantly fail, since there is no code
+yet)</li>
+<li>Then, write code to fix the failing tests</li>
+<li>At the end of each day
+<ul>
+<li>Leave something broken</li>
+<li>So you can “switch in” straight away, tomorrow morning</li>
+</ul></li>
+<li>The TDD mantra
+<ul>
+<li>red (write failing tests)</li>
+<li>green (write the code that fixes the tests)</li>
+<li>refactor (sometimes, do a global clean up).</li>
+</ul></li>
+<li>Karac + Turhan (2018): TDD can’t really be defined or shown to be
+effective
+<ul>
+<li><a
+href="https://www.researchgate.net/profile/Itir_Karac/publication/326239274_What_Do_We_Really_Know_about_Test-Driven_Development/links/5cee7550299bf1f881494cf6/What-Do-We-Really-Know-about-Test-Driven-Development.pdf">What
+Do We (Really) Know about Test-Driven Development?</a></li>
+<li>TDD has too many cogs,</li>
+<li>Its effectiveness is highly influenced by the context (for example,
+the tasks at hand or skills of individuals),</li>
+<li>Hard to say when you are/are not doing TDD
+<ul>
+<li>TDD isn’t a dichotomy in which you either religiously write tests
+first every time or always test after the fact.</li>
+<li>Studies of 416 developers over more than 24,000 hours
+<ul>
+<li>only 12 percent of the projects that claimed to use it, actually did
+“write test first”</li>
+<li>Studies of all Java projects in Github: only 0.8 % were TDD. And in
+that set, no evidence for - no evidence for higher commit velocity or
+more issues reported or retired</li>
+</ul></li>
+</ul></li>
+<li>Maybe TDD’s “success” was just that it happened at the same time
+that everyone stopped doing “C” and started using more interactive
+incremental development tools (e.g. Pyhton)</li>
+</ul></li>
+</ul>
+<h2 id="large-test-suites-test-case-prioriization">Large Test Suites:
+Test Case Prioriization</h2>
+<p>Regression testing:</p>
+<ul>
+<li>Regression testing is re-running functional and non-functional tests
+to ensure that previously developed and tested software still performs
+as expected</li>
+</ul>
+<p>But for very large test suites, cannot retest everything. What to do?
+Test selectively:</p>
+<ul>
+<li>Some input clusters relate to new functionality
+<ul>
+<li>The Elbaum heuristic from Elbaum, Rothermel, and Penix. <a
+href="http://cse.unl.edu/~elbaum/pre-prints/fse2014-prePrint.pdf">Techniques
+for improving regression testing in continuous integration development
+environments.</a> Proceedings of the 22nd ACM SIGSOFT International
+Symposium on Foundations of Software Engineering. 2014.</li>
+<li>retest if failed recently, last tested a while ago, or is new.</li>
+<li>for very large test suites catches 50% of failures, within one
+hour</li>
+</ul></li>
+<li>For a survey of other ordering heuristics, see Ling, Xiao, Rishabh
+Agrawal, and Tim Menzies. <a href="https://arxiv.org/pdf/2008.00612">How
+different is test case prioritization for open and closed source
+projects?.</a> IEEE Transactions on Software Engineering 48.7 (2021):
+2526-2540.
+<ul>
+<li>strange to say: good test case orderings are different for open
+source projects and in-house projects.</li>
+</ul></li>
+</ul>
+<h2 id="black-box-testing">Black-box testing</h2>
+<ul>
+<li>Also known as <em>functional testing</em></li>
+<li>Writing tests while ignoring the internals of the program. Tests are
+focused on whether inputs produce expected outputs dictated by customer
+requirements.
+<ul>
+<li>e.g. you are using some blac box service over the web</li>
+<li>e.g. Realistically, exploring most code</li>
+</ul></li>
+<li>Black box testing cannot promise anything about the internal
+structure of code
+<ul>
+<li>only coverage of input/output space</li>
+<li>and statistics on time to last test</li>
+</ul></li>
+<li>Assumes no internal knowledge of the code
+<ul>
+<li>e.g. throw random input the code, looking for a core dump</li>
+</ul></li>
+</ul>
+<h3 id="smart-black-box-testing-metamorphic-testing">Smart black box
+testing: Metamorphic Testing</h3>
+<ul>
+<li>use domain knowledge. <strong>Metamorphic testing</strong>
+<ul>
+<li>How to test with an oracle for the specifics of the domain?</li>
+<li>Metamorphic relations (MRs) are <em>necessary properties</em> of the
+intended functionality of the software
+<ul>
+<li>high-level statements that should be true across all inputs</li>
+<li>e.g. in SQL, conjunctions do not lead to more output
+<ul>
+<li>RESULT1= “all males”</li>
+<li>RESULT2=“bald males”</li>
+<li>RESULT2 should not be larger than RESULT1</li>
+</ul></li>
+<li>e.g. When testing a booking website, a web search for RESULT1=
+accommodation in Sydney, Australia, returns 1,671 results
+<ul>
+<li>RESULT2= Filter the price range or star rating and apply the search
+again;</li>
+<li>RESULT2 should be a subset of RESULT1</li>
+</ul></li>
+<li>e.g. A wonderful metamorphic testing result: Z. Q. Zhou, T. H. Tse
+and M. Witheridge, <a
+href="https://www.cs.hku.hk/data/techreps/document/TR-2019-03.pdf">Metamorphic
+Robustness Testing: Exposing Hidden Defects in Citation Statistics and
+Journal Impact Factors</a> in IEEE Transactions on Software Engineering,
+doi: 10.1109/TSE.2019.2915065.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="smart-black-box-testing-diversity-sampling">Smart black box
+testing: Diversity Sampling</h3>
+<ul>
+<li><strong>Diversity sampling:</strong> each new test should be far way
+from the one before
+<ul>
+<li>e.g. all-pairs testing. No new test can mention any pair x=v1 and
+y=v2 seen in prior tests.</li>
+<li>so if ever you use <em>happy=true</em> and <em>restDay=sunday</em>
+then you can never test that pair again</li>
+<li>so five inputs, 3 binary, one for “days of week” and one for
+something with ten values the all-pairs generation
+ipo.lisp](https://github.com/txt/se21/blob/61576862fed7549cd174fc392dc4441944cda910/docs/ipo.lisp)
+produces the following (“0” means “don’t care”)</li>
+<li>note that is 68 tests, not 2*2*\7*10 = 570 tests (and for larger
+input spaces, all-pairs offers even more <a
+href="https://github.com/jaccz/pairwise/blob/main/efficiency.md">dramatic
+reductions</a>).</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(ipo &#39;(<span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">10</span>)) <span class="co">; ==&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>((<span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span>) <span class="co">; e.g. (true true true and first value of rest)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> (<span class="dv">2</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span>) (<span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span>) (<span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">4</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> (<span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">5</span>) (<span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">6</span> <span class="dv">6</span>) (<span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">7</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> (<span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">8</span>) (<span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">9</span>) (<span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">7</span> <span class="dv">10</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> (<span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">6</span> <span class="dv">5</span>) (<span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">5</span> <span class="dv">6</span>) (<span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">3</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> (<span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span>) (<span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">7</span> <span class="dv">9</span>) (<span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">7</span> <span class="dv">8</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> (<span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">7</span> <span class="dv">7</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">6</span>)  <span class="co">; note &quot;0&quot; means &quot;don&#39;t care&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> (<span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">4</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">3</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">2</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> (<span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">1</span>) (<span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">6</span> <span class="dv">10</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">9</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">8</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">7</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">4</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">3</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">2</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">1</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">10</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">9</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">8</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">5</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">4</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">3</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">2</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span> <span class="dv">1</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">10</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">9</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">7</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">6</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">5</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">3</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">2</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">10</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">9</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">8</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">7</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">6</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">5</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">4</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">2</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">1</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">10</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">9</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">7</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">6</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">5</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">4</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">3</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">1</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">10</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">8</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">7</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">6</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">5</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">4</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">3</span>) (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span>))</span></code></pre></div>
+<h3 id="smart-black-box-testing-fault-localization">Smart black box
+testing: Fault Localization</h3>
+<p><img align=right src="yellow.png" width="250px"></p>
+<ul>
+<li>cluster the input space and only sample the “important” parts</li>
+<li>but what does “importance” mean?
+<ul>
+<li>domain experts tells us that “A” never happens, but “B and D” happen
+a lot</li>
+<li>some input clusters are more associated with errors that others (so
+here we are localizing inputs that might lead to failures)
+<ul>
+<li>run tests down the parse tree of a program</li>
+<li>on each node, keep counters of passes and fails</li>
+<li>somehow aggregate those counters into a visualization</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img src="tarantula.png" width="600px"></p>
+<p>For more on test failure localization, , see Jones JA, Harrold MJ,
+Stasko J. Visualization of test information to assist fault
+localization. Proceedings of the 24th International Conference on
+Software Engineering. ACM, Orlando, Florida, 2002; 467–477.</p>
+<ul>
+<li>the branch weighting heuristics proposed by Jones et al. have been
+(exteslively) explored by others. For a small sample of that work, see
+Sarhan, Qusay Idrees, and Árpád Beszédes. “A survey of challenges in
+spectrum-based software fault localization.” IEEE Access 10 (2022):
+10618-10639.</li>
+<li>for a review of other fault localization heuristics, see Zakari,
+Abubakar, et al. “Multiple fault localization of software programs: A
+systematic literature review.” Information and Software Technology 124
+(2020): 106312.</li>
+</ul>
+<h3 id="smart-black-box-testing-doodling">Smart black box testing:
+Doodling</h3>
+<ul>
+<li>doodle a model (at which point your “black-box” becomes kind of a
+guess at “white-box” reasoning, see below)
+<ul>
+<li>Read the doc</li>
+<li>Doodle a model showing expectations</li>
+<li>Generate tests over that doodle
+<ul>
+<li>Run you finger over the lines and say “what do i expect to see here”
+<br> <img width=500 src="drawn.jpg"></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="smart-black-box-testing-fuzzing">Smart black box testing:
+Fuzzing</h3>
+<ul>
+<li>a structured approach to “throw stuff at random” at the
+program.</li>
+<li>Barton Miller, University of Wisconsin in 1988. Throw random cr*p at
+a program till it crashed (brute force mutation)
+<ul>
+<li>when he was logged to a modem during a storm, there was a lot of
+line noise generating junk characters and those characters caused
+programs to crash</li>
+</ul></li>
+<li>1981: Duran and Ntafos investigated the effectiveness of testing a
+program with random inputs.
+<ul>
+<li>Random proves are a cost-effective alternative to more systematic
+testing</li>
+</ul></li>
+<li>1983: Steve Capps developed “The Monkey”, a tool that would generate
+random inputs for classic Mac OS applications, such as MacPaint.</li>
+<li>2025 (Gerlacha, Joseph, Mathew, Menzies) for low-dimensional
+problems (less than 6 inputs), 50 random inputs works just as well as
+much more complex schemes.</li>
+<li>Smart fuzzing #1: grammar-based fuzzing:
+<ul>
+<li>Express input as a grammar</li>
+<li>Generate from tree
+<ul>
+<li>Generational fuzzing</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>US_PHONE_GRAMMAR <span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;&lt;start&gt;&quot;</span>: [<span class="st">&quot;&lt;phone-number&gt;&quot;</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;&lt;phone-number&gt;&quot;</span>: [<span class="st">&quot;(&lt;area&gt;)&lt;exchange&gt;-&lt;line&gt;&quot;</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;&lt;area&gt;&quot;</span>: [<span class="st">&quot;&lt;lead-digit&gt;&lt;digit&gt;&lt;digit&gt;&quot;</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;&lt;exchange&gt;&quot;</span>: [<span class="st">&quot;&lt;lead-digit&gt;&lt;digit&gt;&lt;digit&gt;&quot;</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;&lt;line&gt;&quot;</span>: [<span class="st">&quot;&lt;digit&gt;&lt;digit&gt;&lt;digit&gt;&lt;digit&gt;&quot;</span>],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;&lt;lead-digit&gt;&quot;</span>: [<span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>],</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;&lt;digit&gt;&quot;</span>: [<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>[simple_grammar_fuzzer(US_PHONE_GRAMMAR) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>[<span class="st">&#39;(692)449-5179&#39;</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;(519)230-7422&#39;</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;(613)761-0853&#39;</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;(979)881-3858&#39;</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;(810)914-5475&#39;</span>]</span></code></pre></div>
+<ul>
+<li>Smart fuzzing #2: mutation:
+<ul>
+<li>Take a known valid input</li>
+<li>Mutate it</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mutate(s):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Return s with a random mutation applied&quot;&quot;&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mutators <span class="op">=</span> [</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        delete_random_character,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        insert_random_character,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        flip_random_character</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    mutator <span class="op">=</span> random.choice(mutators)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(mutator)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mutator(s)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">repr</span>(mutate(<span class="st">&quot;A quick brown fox&quot;</span>)))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A qzuick brown fox&#39;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">&#39; quick brown fox&#39;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A quick Brown fox&#39;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A qMuick brown fox&#39;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A qu_ick brown fox&#39;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A quick bXrown fox&#39;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A quick brown fx&#39;</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A quick!brown fox&#39;</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A! quick brown fox&#39;</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;A quick brownfox&#39;</span></span></code></pre></div>
+<ul>
+<li>Smart fuzzing #3: coverage:
+<ul>
+<li>Track parts of the grammar seen so far</li>
+<li>Fuzz to some new place (fuzzing meets diversity sampling)</li>
+</ul></li>
+<li>Smart fuzzing #4: mining examples to weight crammers:
+<ul>
+<li>Take a library of good examples</li>
+<li>Weight sub-trees on (e.g.) Probability of not being “good”</li>
+<li>Stochastic recursive descent:
+<ul>
+<li>Stochastically select sub-trees according to their weights
+<ul>
+<li>If weight = random then generational fuzzing</li>
+<li>If select to prefer min weights, then coverage fuzzing</li>
+</ul></li>
+<li>Recurs into sub tree.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="whitebox-testing">Whitebox Testing</h2>
+<p>White box: we can open up the code and look inside:</p>
+<ul>
+<li>Coverage criteria (for code)
+<ul>
+<li>Functions (all functions called once);
+<ul>
+<li>A very weak test</li>
+</ul></li>
+<li>Statement coverage
+<ul>
+<li>Supported by many tools</li>
+</ul></li>
+<li>du coverage:
+<ul>
+<li>find all paths between where a variable is <em>defined</em> and
+<em>used</em>.</li>
+</ul></li>
+<li>Branch coverage:
+<ul>
+<li>has every condition in the program be explored;</li>
+</ul></li>
+</ul></li>
+<li>Warning: you can succeed on all the above, and the code still
+crashes.</li>
+</ul>
+<p>Symbolic execution: - Find the abstract syntax tree of the code -
+e.g. python3’s <code>ctree</code> package</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ctree</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(a):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        a[x] <span class="op">+=</span> x</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>tree1 <span class="op">=</span> ctree.get_ast(f)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>ctree.ipython_show_ast(tree1)</span></code></pre></div>
+<p><img src="https://ucb-sejits.github.io/ctree-docs/_images/ipython_example_tree_1.png"></p>
+<p>Applications of symbolic execution:</p>
+<ul>
+<li>Walk the tree to collect the constraints to build the tests.</li>
+<li>Can lead to spectacular reductions to black box testing</li>
+<li>e.g. BigTest: White-Box Testing of Big Data Analytics [ESEC/FSE
+2019]
+<ul>
+<li>Scripts processing gigabytes of data sets</li>
+<li>Is this a hard testing problem?
+<ul>
+<li>Q: Do the tests have to handle all the possible combinations in the
+data?</li>
+<li>A: No: they only need to cover all the branches of the code</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img width=600 src="bigtest.png"></p>
+<h2 id="formal-methods">Formal methods</h2>
+<p>Express English requirements as check-able logic, then use logic to
+reason about it</p>
+<p><img width=800 src="chat80.png"></p>
+<p>Other examples:</p>
+<ul>
+<li><p>Product lines:</p></li>
+<li><p><a
+href="https://www.cs.miami.edu/home/geoff/Courses/TPTPSYS/Practicum/EnglishToLogic.shtml">Truth-Functional
+Propositional Logic</a></p></li>
+<li><p>Temporal logic (add operators for until (“U”) and always “[]”
+eventually “&lt;&gt;”</p>
+<ul>
+<li>always ∀, there exists at least one ∃</li>
+</ul></li>
+</ul>
+<p><img src="scopes.png"></p>
+<ul>
+<li>e.g. elevator door stays open between X and Y</li>
+</ul>
+<p><img src="ltl.png"></p>
+<p>(From <a
+href="http://www0.cs.ucl.ac.uk/staff/b.cook/oneclick.pdf">One-Click
+Formal Methods</a>:</p>
+<ul>
+<li>FORMAL METHODS: mathematically based approaches for specifying,
+building, and reasoning about software.</li>
+<li>Despite 50 years of research and development, formal methods have
+had only limited impact in industry.</li>
+<li>Some in such domains as microprocessor design and aerospace.</li>
+</ul>
+<p>Why not widely used?</p>
+<ul>
+<li><em>The modeling cost</em>: Analysts must create a systems model
+(what is the system) and a properties model (what is meant to do).
+Properties model usually much smaller than systems model.</li>
+<li><em>The execution cost</em>: Rigorous analysis of formal properties
+needs a full search of systems model.</li>
+<li><em>The personnel cost:</em> Analysts skilled in formal methods must
+be recruited or trained. Such analysts are generally hard to find and
+retain.</li>
+<li><em>The development brake:</em> The above costs can be so high that
+the requirements must be frozen for some time while we perform the
+formal analysis. Hence, one of the costs of formal analysis is that it
+can slow the process of requirements evolution.</li>
+</ul>
+<p>Recent experience at Amazon:</p>
+<ul>
+<li>More and more, web-based systems are configured in sufficient detail
+<ul>
+<li>Such that processes can be bounced around from node to node on the
+cloud (to make best use of spare resources)</li>
+<li>Application program interfaces (APIs) of cloud services are
+computer-readable contracts that establish and govern how the system
+behaves.
+<ul>
+<li>Most importantly, since those models are utilized by a large user
+community,
+<ul>
+<li>now economically feasible to build the tools needed to verify
+them</li>
+</ul></li>
+</ul></li>
+<li>Which means that we have enough information to auto-configure our
+formal methods
+<ul>
+<li>and the size of the potential user community and the business value
+now justifies the cost of formal methods.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="testing-and-product-lines-and-formal-methods">“Testing” and
+Product Lines and Formal Methods</h2>
+<p>A feature model is a “product line”; i.e. a description of a space of
+products.</p>
+<p>Question: what are the <em>different</em> products we can pull from
+the following?</p>
+<p><img src="fm001.png"></p>
+<p>Now that was a small feature model. Suppose we are talking about
+something really big like a formal model of the LINUX kernel with 4000
+variables and 300,000 contrast. Q: How to reason over that space? A: use
+a theorem prover. e.g. <em>Pycosat</em>.</p>
+<p>The following example comes from the excellent documentation at the
+<a
+href="https://github.com/ContinuumIO/pycosat/blob/master/README.rst">Python
+Picostat Github page</a></p>
+<p>Let us consider the following clauses, represented using the DIMACS
+<code>cnf &lt;http://en.wikipedia.org/wiki/Conjunctive_normal_form&gt;</code>_
+format::</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>    p cnf <span class="dv">5</span> <span class="dv">3</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="dv">1</span> <span class="op">-</span><span class="dv">5</span> <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="op">-</span><span class="dv">1</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">0</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="op">-</span><span class="dv">3</span> <span class="op">-</span><span class="dv">4</span> <span class="dv">0</span></span></code></pre></div>
+<p>Here, we have 5 variables and 3 clauses, the first clause being</p>
+<p><em>x1 or not x5 or x4</em></p>
+<p>Note that the variable x2` is not used in any of the clauses, which
+means that for each solution with x2 = True, we must also have a
+solution with x2 = False. In Python, each clause is most conveniently
+represented as a list of integers. Naturally, it makes sense to
+represent each solution also as a list of integers, where the sign
+corresponds to the Boolean value (+ for True and - for False) and the
+absolute value corresponds to i-th variable::</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pycosat</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="op">&gt;&gt;&gt;</span> cnf <span class="op">=</span> [[<span class="dv">1</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">4</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]]</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="op">&gt;&gt;&gt;</span> pycosat.solve(cnf)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">5</span>]</span></code></pre></div>
+<p>This solution translates to: x1=x5=True, x2=x3=x4=False</p>
+<p>To find all solutions, use <code>itersolve</code>::</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="cf">for</span> sol <span class="kw">in</span> pycosat.itersolve(cnf):</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    ...     <span class="bu">print</span> sol</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    ...</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>]</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    ...</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="bu">len</span>(<span class="bu">list</span>(pycosat.itersolve(cnf)))</span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="dv">18</span></span></code></pre></div>
+<p>In this example, there are a total of 18 possible solutions, which
+had to be an even number because x2 was left unspecified in the
+clauses.</p>
+<p>The fact that <code>itersolve</code> returns an iterator, makes it
+very elegant and efficient for many types of operations. For example,
+using the <code>itertools</code> module from the standard library, here
+is how one would construct a list of (up to) 3 solutions::</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> itertools</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="op">&gt;&gt;&gt;</span> <span class="bu">list</span>(itertools.islice(pycosat.itersolve(cnf), <span class="dv">3</span>))</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    [[<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">5</span>],</span>
+<span id="cb8-4"><a href="#cb8-4"></a>     [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>],</span>
+<span id="cb8-5"><a href="#cb8-5"></a>     [<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]]</span></code></pre></div>
+<h3 id="example">Example</h3>
+<p>Feature Models and Product Lines: <a
+href="http://cseweb.ucsd.edu/~lerner/papers/opium.pdf">Software
+installation as a formal methods problem</a></p>
+<p>Lets represent software dependencies in a logical framework:</p>
+<p><img width=700px  src="opium.png"></p>
+<p>If we run Picosat over these formulae then:</p>
+<ul>
+<li>Any solution that satisfies all the constraints…</li>
+<li>Is a different way to create a valid install of the program.</li>
+</ul>
+<p>Variants:</p>
+<ul>
+<li>min install:
+<ul>
+<li>add a cost to the install effort of each part</li>
+<li>score everything coming out of <code>itersolve</code> (sum that
+cost)</li>
+<li>pick the easiest thing to install</li>
+</ul></li>
+<li>optimizing:
+<ul>
+<li>generate one solution, ask some human what they think</li>
+<li>if they don’t like, negate it add it to the theorems</li>
+<li>so future solutions will <em>not</em> contain the thing you don;t
+like</li>
+</ul></li>
+</ul>
+<p><strong>Important note:</strong> in practice, except for trivally
+small problems, no one writes DIMACS manually.</p>
+<ul>
+<li>Instead, we write code to generate DIMACS via some code.</li>
+<li>For example: <a
+href="https://github.com/ContinuumIO/pycosat/blob/master/examples/opium.py">running
+code</a>.</li>
+</ul>
+
+
+
+
+</div>
+</body>
+</html>

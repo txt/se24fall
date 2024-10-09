@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Process</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<header id="title-block-header">
+<h1 class="title">Process</h1>
+</header>
+<h2 id="people-the-most-powerful-technology">People (the most powerful
+Technology)</h2>
+<h3 id="people-tools-1-inspections">People Tools 1: Inspections</h3>
+<p>People, read stuff.</p>
+<p>Different people are told to read for different things - reduces load
+of each one person - prevents double up</p>
+<p>Can be applied to any artifact, any technology - Don’t have to wait
+for (e.g.) updates to latest version of the parser - Needs no tools, no
+licenses</p>
+<p>You can inspect anything - designs: collect “users stories” then run
+the stories. - see where the design falls off the edge - tests: manually
+run some “what-ifs” throogh the code For more, <a
+href="https://faculty.washington.edu/ajko/books/design-methods/#/analytical">see
+here</a>.</p>
+<h3 id="people-tools-2-planning-poker">People Tools 2:: Planning
+Poker</h3>
+<p>Ego-less way to do effort estimation</p>
+<p><a
+href="https://en.wikipedia.org/wiki/Planning_poker">Wikipedia</a></p>
+<p><img  width=600 src="https://user-images.githubusercontent.com/29195/131859590-853f2abf-5e36-4c8d-ac7a-0b87c8c47db8.png"></p>
+<h2 id="process-notes">Process Notes</h2>
+<p>Let us consider two extremes of software process: waterfall vs
+scrumm</p>
+<p><img width=700 src="https://github.com/txt/se23/assets/29195/52c259a7-f480-422e-8f0a-b0acb33cfc8f"></p>
+<p>Both are management tools for controlling software development.</p>
+<h3 id="aside-what-is-agile">(aside: what is “Agile”)</h3>
+<ul>
+<li>Scrum is a type of agile</li>
+<li>Scrum is broken down into shorter sprints and smaller
+deliverables</li>
+<li>In Agile, that is optional. In fact everything might be delivered at
+the end of the project</li>
+</ul>
+<p><img width=700 src="https://github.com/txt/se23/assets/29195/78ceea76-1e54-44fa-9cbd-b333870545b2"></p>
+<h3 id="waterfall">Waterfall</h3>
+<ul>
+<li>Making a good plan and sticking to it</li>
+<li>Very efficient for well-defined projects</li>
+</ul>
+<p>Large strategic control. Linear order of tasks: - Requirements -
+Analysis - Design - Code - Test - Deploy</p>
+<p>Experience gained from step i+1 only allowed to feed back to step
+i</p>
+<p>Used for:</p>
+<ul>
+<li><p>For less complex projects with well defined requirements,
+processes and roles for team members.</p></li>
+<li><p>For large military or government contracts, often need to get
+approval for resources before moving ahead.</p>
+<ul>
+<li>In that context, the thing you are building is defined once at the
+start during a complex negotiation process known as the “requirements
+stage”</li>
+</ul></li>
+<li><p>For very long projects, software companies can’t afford to wait
+to the end to get paid.</p>
+<ul>
+<li>Waterfall offers landmarks along the way where non-programmers
+(read, accountants) can check off that some task is completed (so they
+can pay for that stage).</li>
+</ul></li>
+<li><p>Hware/Sware co-design (see notes at end).</p></li>
+</ul>
+<p>Less than useful when:</p>
+<ul>
+<li>Too much rigidity built into the project.</li>
+<li>Mid-project pivots require extensive re-engineering of the solution
+so far.</li>
+<li>When experience downstream in the process leads to massive changes
+to all ideas upstream (e.g. consider a single test shows that the whole
+system is too slow and needs massive redesign).</li>
+<li>Analysis paralysis: too much paper-driven activity, very little
+working code.</li>
+</ul>
+<h3 id="scrum">Scrum</h3>
+<ul>
+<li><p>Adapt, Improvise, Overcome</p></li>
+<li><p>High flexibility</p></li>
+<li><p>Smaller scale tactical meetings.</p></li>
+<li><p>A cycle that repeats in short cycles (weekly or monthly)</p></li>
+</ul>
+<p>Sprints: 1. Review a backlog of “things to do” 2. select the things
+that deliver the most value at least cost. 3. Sprint to complete those
+tasks before the next review (next week, next month) 4. Go to step1</p>
+<p>Daily meetings: - Daily: run a meeting where everyone is standing up.
+Ask everyone 3 questions: - What have you accomplished since we last
+met? - What do you plan to accomplish before the next meeting? - What
+issues or problems are you currently facing?</p>
+<p>Very useful when:</p>
+<ul>
+<li>When a project is based on incremental progress, complex
+deliverables or consists of multiple, not always sequential
+timelines.</li>
+<li>When dealing with small groups whose skills you trust, and no one is
+negotiating for specific dollar amounts before going ahead with the
+work.</li>
+<li>When running agile.</li>
+<li>When early feedback from running code can radically change your
+goals and designs.</li>
+</ul>
+<p>Less than useful when:</p>
+<ul>
+<li>When small incremental change gets harder and harder since the
+overall architecture is now a mess.</li>
+<li>The project lost direction or is falling behind schedule.</li>
+<li>Constant iteration and re-alignment of the project is stretching
+budgets and timelines</li>
+</ul>
+<h3 id="notes-from-recent-meetings-with-industry">Notes from recent
+meetings with industry</h3>
+<p>AgileFall: - we <strong>say</strong> we are agile but , actually, we
+<strong>do</strong> waterfall.</p>
+<p>From an industry person: “have to get agile out of our copamany” -
+for hardware / software co-design, h/ware developers need a solid target
+for their work - e.g. 4-6 month cycle a. Why,What,Who: motivations,
+users, user stories, high level decisions b. How : lower-level design
+c. Code : d. Test : including h/ware integration - Note: same people,
+cloud platform,s happy to see abcd cycles as short as 1 week.</p>
+<h2 id="repo-branching-stragties">Repo Branching Stragties</h2>
+<p>Distributed (e.g.GH) versus centrailized (e.g. SVN)</p>
+<ul>
+<li>Distributed (e.g. GIT)
+<ul>
+<li><p>Operates locally so you can work on offline, without a
+network</p></li>
+<li><p>No Aa single point of failure. Any “main” repository can be
+restored from a local copies.</p></li>
+<li><p>Very good at merging.</p></li>
+<li><p>All users can acccess all parts of repo (great for coding, bad
+for security)</p></li>
+<li><p>Problems with large binaries</p></li>
+<li><p>Higher learning curve. Commit? then push? Say what?</p></li>
+</ul></li>
+</ul>
+<pre><code>You can squelch this message by running one of the following
+commands sometime before your next pull:
+
+
+  git config pull.rebase false  # merge (the default strategy)
+  git config pull.rebase true   # rebase
+  git config pull.ff only       # fast-forward only</code></pre>
+<ul>
+<li>Centralized (e.g. SVN)
+<ul>
+<li>centralized “boss”, and many “workers”</li>
+<li>easier mental model (for newcomers)</li>
+<li>contributor’s access can be limited to particular directories and
+files (good for secutiry)</li>
+<li>Efficiently stores large binary files.</li>
+<li>Limited off-line supports (everything operates on a centralized
+repository using a client-server approach)</li>
+<li>Centralized repository server can be a single point of failure.</li>
+</ul></li>
+</ul>
+<h2 id="branching-strategies">Branching Strategies</h2>
+<h3 id="branching-method-1-dont-do-it">Branching method 1: Don’t do
+it</h3>
+<p>How to branch (approach-1: don’t bother, for small projects)</p>
+<ul>
+<li>No branches. Everyone checks out and commits to main</li>
+<li>Consider not branching for small teams:
+<ul>
+<li>Divide things up into lots of small files</li>
+<li>Everyone commit and pull at high frequency (many times per day)</li>
+</ul></li>
+<li>Why that’s a good idea
+<ul>
+<li>Your current code base is initially too small to be hard
+structured</li>
+<li>Also, this fails often enough to show you why version control is so
+important</li>
+</ul></li>
+</ul>
+<h3 id="branching-method2-git-flow">Branching method2: git flow</h3>
+<p>Each branch is an experiment with a new feature.</p>
+<p><img width=700 src="https://user-images.githubusercontent.com/29195/130551955-f25cab13-55f1-48c2-a3f8-a6c3c759e82a.png"></p>
+<ul>
+<li>When a team branches, they are promising to return with some new
+cool feature.</li>
+<li>When the team comes back to main, people expect to see that promise
+delivered.</li>
+<li>Code is thoroughly vetted before being merged</li>
+<li>Good for large scale, not-so-fast, distributed development</li>
+<li>E.g.
+<ul>
+<li>https://github.com/marcotcr/lime</li>
+<li>https://github.com/elacx/lime</li>
+</ul></li>
+</ul>
+<p>Beware gitflow hell</p>
+<p><img width=700 src="https://user-images.githubusercontent.com/29195/130552057-1891deda-3328-43c7-8fab-c139cff3d1ff.png"></p>
+<p>Git flow tips</p>
+<ul>
+<li>Good when
+<ul>
+<li>When you run an large, slow open-source project.
+<ul>
+<li>Everyone can contribute</li>
+<li>You’ll need to be able to check every single line of code,
+<ul>
+<li>because well you can’t trust people contributing.</li>
+</ul></li>
+</ul></li>
+<li>When you have a lot of junior developers.
+<ul>
+<li>you want to have a way to check their work closely</li>
+</ul></li>
+<li>When you have an established product.
+<ul>
+<li>So branches are small changes, bounded by something much larger</li>
+</ul></li>
+</ul></li>
+<li>Not so good when
+<ul>
+<li>When you are just starting up.
+<ul>
+<li>Chances are you want to create a minimal viable product
+quickly.</li>
+<li>Doing pull requests creates a huge bottleneck that slows the whole
+team down dramatically</li>
+</ul></li>
+<li>When you need to iterate quickly.</li>
+<li>When you work mostly with senior developers
+<ul>
+<li>Who mostly don’t mess things up</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="branching-method3-trunk-based-development">Branching method3:
+Trunk-based Development</h3>
+<p>(used at Google,Facebook, Amazon:
+https://trunkbaseddevelopment.com)</p>
+<p>Developers collaborate on code in a single branch called “trunk” (*),
+resist any pressure to create other long-lived development branches.
+Avoids merge hell, do not break the build, and live happily ever
+after.</p>
+<p>(*) master, in Git nomenclature</p>
+<p>Very short lived feature branches: one person over a couple of days
+(max). Much build automation before merging into main</p>
+<p><img width=700 src="https://user-images.githubusercontent.com/29195/130552454-aa8c1fc0-7927-4072-b31a-263677c5ca86.png"></p>
+<p>Merge hell or trunk-based? You decide. Compare this to above:</p>
+<p><img width=700 src="https://user-images.githubusercontent.com/29195/130552521-4bef7f5a-b861-4f9a-947c-32e9b6aadf70.png"></p>
+<h2 id="standard-files">Standard Files</h2>
+<ul>
+<li><strong>README.md</strong> - landing page for GitHub repository web
+page
+<ul>
+<li>Zenodo doi badge
+<ul>
+<li>https://zenodo.org/account/settings/github/</li>
+</ul></li>
+<li>License badge</li>
+<li>Test suite badge</li>
+<li>Code coverage badge</li>
+</ul></li>
+<li><strong>LICENSE.md</strong> - license for repository
+<ul>
+<li>https://www.youtube.com/watch?v=oHNKTlz1lps</li>
+<li>https://choosealicense.com/</li>
+<li>Understand what a real Apache-license project looks like
+<ul>
+<li>https://github.com/zephyrproject-rtos/zephyr/releases/tag/zephyr-v2.6.0</li>
+</ul></li>
+</ul></li>
+<li><strong>.gitignore</strong> - used to ignore files from being
+committed to the repository
+<ul>
+<li>https://github.com/github/gitignore</li>
+</ul></li>
+<li><strong>.gitattributes</strong> - used to provide per-repository
+settings for all developers</li>
+<li><strong>.github</strong> Folder - provide issues template, pull
+request template, and README.md
+<ul>
+<li>https://github.com/timm/keys/tree/main/.github/workflows</li>
+</ul></li>
+<li><strong>requirements.txt</strong>: things to install first (or
+equivalent in your language)</li>
+<li><strong>INSTALL.md</strong>: install instructions more complex than
+requirements.txt</li>
+<li><strong><a href="https://github.com/bmcfee/spatialtree">setup.py,
+__init__.py</a></strong> (or equivalent in your language)</li>
+<li><strong>CONTRIBUTING.md:</strong>
+<ul>
+<li>https://gist.github.com/PurpleBooth/b24679402957c63ec426</li>
+<li>https://github.com/atom/atom/blob/master/CONTRIBUTING.md</li>
+</ul></li>
+<li><strong>CODE-OF-CONDUCT.md</strong>:
+<ul>
+<li>https://chromium.googlesource.com/external/github.com/coreos/seismograph/+/edbe2360e9af362914868df0c7c1ace62e8e1778/code-of-conduct.md</li>
+</ul></li>
+</ul>
+<h2 id="case-study-black">Case Study (Black)</h2>
+<p><img width=800 src="https://user-images.githubusercontent.com/29195/130550744-02b6b5b3-2ced-45a2-8d57-ea75b3708988.png"></p>
+<h2 id="case-study-zephyr">Case Study (Zephyr)</h2>
+<p>15 real-time operating systems 2018, 2020</p>
+<p>Why is the Zephyr operating syste,s succeeding so well? - Perception
+of open governance (no one owns it) - So you can contribute, without
+anyone ever locking away your work - AND you can get everyone else’s
+contributions</p>
+<p><img width=700 src="https://user-images.githubusercontent.com/29195/130550329-18ca9f19-13ed-4fe5-bb70-d3a54dbca4ce.png"></p>
+<p><img width=700 src="https://user-images.githubusercontent.com/29195/130550433-bb6c8952-df95-42de-81b6-573c9b3cf014.png"></p>
+<p><img width=700 src="https://user-images.githubusercontent.com/29195/130550489-4bc8e2a2-fd66-4b8a-b0a9-adba362df3ef.png"></p>
+<h2 id="shields.io">Shields.io</h2>
+<p><img width=700 src="https://user-images.githubusercontent.com/29195/130550982-484c0f92-0033-4f90-9e51-a29ae62eabcd.png"></p>
+
+
+
+
+</div>
+</body>
+</html>

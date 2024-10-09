@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Debugging</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<header id="title-block-header">
+<h1 class="title">Debugging</h1>
+</header>
+<h2 id="debugging">Debugging</h2>
+<p><strong>Debugging:</strong> The process by which a programmer
+detects, and reproduces a software fault.</p>
+<p>Please download the files debugging.py for use in the following
+sections. Most of this debugging tutorial will be done using UNIX
+commands. If you are on a windows machine, please install Windows
+Subsystem for Linux (WSL) and use that to execute the commands in the
+walkthrough.</p>
+<h3 id="debugging-using-print-statements-logging">Debugging using print
+statements, logging</h3>
+<p>debugging.py is supposed to perform selection sort on an array of
+integers, passed into the function as the variable arr.</p>
+<pre><code>def selectionSort(arr):  
+   n = len(arr)  
+   for i in range(n):  
+       lowestIndex = i  
+       for j in range(n):  
+           if arr[j] &lt; arr[lowestIndex]:  
+               lowestIndex \= j
+
+       arr[lowestIndex] = arr[i]  
+       arr[i] = arr[lowestIndex]  
+       n = n - 1
+
+   return arr
+
+arr_in = [5, 3, 2, 1, 8, 10, 11, 9, 23]
+
+arr_out = selectionSort(arr_in)
+
+print(arr_out)</code></pre>
+<p>If you’ve finished Homework 1, you should have python3.13 installed.
+To run debugging.py,<br />
+copy it to a work_dir folder, and run the following command in your
+command line:</p>
+<pre><code>~/work_dir$ chmod u+x debugging.py  
+~/work_dir$ python3.13 debugging.py  
+[23, 11, 8, 5, 8, 10, 11, 9, 23]</code></pre>
+<p>Unfortunately, our selection sort has a bug in it, as the array the
+program output is not in sorted order. How could we go about finding our
+bug?</p>
+<p><strong>Print debugging</strong><br />
+The first and easiest solution most of us think of is to print out the
+state of the array after every operation that affects the array. With
+enough print statements, we’ll be able to pinpoint at what point in the
+algorithm something unexpected occurs. Let’s augment our previous
+version of debugging.py to include print statements.</p>
+<pre><code>def selectionSort(arr):
+   n = len(arr)
+   for i in range(n):
+       lowestIndex = i
+       for j in range(n):
+           if arr[j] &lt; arr[lowestIndex]:
+               lowestIndex = j
+
+
+       print(&quot;lowest index &quot;, lowestIndex) # what index contains the lowest value?
+       print(&quot;i &quot;, i) # where in the array should the ith smallest value be?
+       print(&quot;n &quot;, n) # where are we considering the end of the array?
+
+
+       print(&quot;before &quot;, arr) # what is array state before we swap anything?
+       arr[lowestIndex] = arr[i]
+       print(&quot;first &quot;, arr) # what is array state after the first write?
+       arr[i] = arr[lowestIndex]
+       print(&quot;final&quot;, arr) # what is array state after the second write?
+       n = n - 1
+
+
+   return arr</code></pre>
+<p>Adding print statements to the code serves as a good exercise of
+whether you understand the code you’ve written. My methodology for
+adding print statements is as follows:</p>
+<ol type="1">
+<li>Print any variable that changes
+<ol type="1">
+<li>lowestIndex, i, n<br />
+</li>
+</ol></li>
+<li>Print data structures before changes, and after changes
+<ol type="1">
+<li>Arr<br />
+</li>
+</ol></li>
+<li>Comment all of your print statements to explain what each value /
+change represents</li>
+</ol>
+<p>In this example, we do not need to print j, as it is captured in
+lowestIndex, and only used to determine lowestIndex.</p>
+<p>Upon executing our new debugging.py, you’ll immediately notice that
+the output was much longer than before, probably causing your shell
+window to scroll downwards. While print debugging can be useful, working
+with the artifacts of it, specifically text on the command line, can be
+difficult, and is prone to accidental loss. If we wanted to save our
+print statements to a file for ease of use, we can use the python
+logging library.</p>
+<p>The important difference between printing to stdout / stderr, and
+using a logger to write to a log file, is that in many of the services
+you’ll be deploying in this course, prints to stdout / stderr are not
+captured in any way. When you print to a log file, you can either have
+another service that consumes your logs and sends them to a centralized
+database (ex. ElasticSearch), or you can remote directly into the server
+that is hosting your service, and download the log files from the
+server. Let’s examine our debugging.py, but with all of the print
+statements rewritten to use python’s logging library.</p>
+<pre><code>import logging, sys
+logging.basicConfig(filename=&#39;debugging.log&#39;, encoding=&#39;utf-8&#39;, level=logging.DEBUG, format=&#39;%(asctime)s %(message)s&#39;)
+logging.debug(&quot;NEW LOG&quot;)
+
+
+def selectionSort(arr):
+   logger = logging.getLogger(__name__)
+   n = len(arr)
+   for i in range(n):
+       lowestIndex = i
+       for j in range(n):
+           if arr[j] &lt; arr[lowestIndex]:
+               lowestIndex = j
+
+
+       logger.debug(&quot;lowest index: %r&quot;, lowestIndex) # index w/ lowest value
+       logger.debug(&quot;i: %r&quot;, i) # ith smallest index
+       logger.debug(&quot;n: %r&quot;, n) # end of array
+
+
+       logger.debug(&quot;before: %r&quot;, arr) # array state before we swap anything?
+       arr[lowestIndex] = arr[i]
+       logger.debug(&quot;first: %r&quot;, arr) # state after the first change?
+       arr[i] = arr[lowestIndex]
+
+
+       logger.debug(&quot;final: %r&quot;, arr) # array state after the second change?
+       n = n - 1
+
+
+   return arr</code></pre>
+<p>The update to use loggers was relatively simple; the print statements
+have been replaced with calls to logger.debug, and the basic logging
+configuration needed to be set up. For our logger, I’ve set it to output
+to debugging.log, encoded the output in utf-8, and changed the output
+format to prepend the ascii time to all messages. Let’s re-run our code
+and examine the output. Since we are working with log files and not
+command line output, it is easy to leave comments on the file to help
+facilitate your understanding of the log.</p>
+<pre><code>~/work_dir$ python3.13 debugging.py
+~/work_dir$ cat debugging.py
+
+
+2024-08-27 11:34:14,335 NEW LOG
+lowest index  3
+i  0
+n  9
+before  [5, 3, 2, 1, 8, 10, 11, 9, 23]
+first  [5, 3, 2, 5, 8, 10, 11, 9, 23] ### 5 is swapped from index 0 into index 3
+final [5, 3, 2, 5, 8, 10, 11, 9, 23]  ### 5 is swapped from index 3 into index 0
+lowest index  2
+i  1
+n  8 ### why are not considering the last element (23) of the array?
+before  [5, 3, 2, 5, 8, 10, 11, 9, 23]
+first  [5, 3, 3, 5, 8, 10, 11, 9, 23] ### 3 is swapped from index 2 into index 1
+final [5, 3, 3, 5, 8, 10, 11, 9, 23]  ### 3 is swapped from index 1 into index 2</code></pre>
+<p>As the inline comments call out, the first operation that edits the
+array, arr[lowestIndex] = arr[i], is causing the element in
+arr[lowestIndex] to be overwritten by the element in arr[i]. This can be
+easily fixed by saving arr[lowestIndex] into a temporary variable, and
+then writing that temporary variable into arr[i]. Let’s update the code
+to use a temporary variable, then re-examine our output.</p>
+<pre><code>import logging, sys
+logging.basicConfig(filename=&#39;partial_debugging.log&#39;, encoding=&#39;utf-8&#39;, level=logging.DEBUG, format=&#39;%(asctime)s %(message)s&#39;)
+logging.debug(&quot;NEW LOG&quot;)
+
+
+def selectionSort(arr):
+   logger = logging.getLogger(__name__)
+   n = len(arr)
+   for i in range(n):
+       lowestIndex = i
+       for j in range(n):
+           if arr[j] &lt; arr[lowestIndex]:
+               lowestIndex = j
+
+
+       logger.debug(&quot;lowest index: %r&quot;, lowestIndex) # what index contains the lowest value?
+       logger.debug(&quot;i: %r&quot;, i) # where in the array should the ith smallest value be?
+       logger.debug(&quot;n: %r&quot;, n) # where are we considering the end of the array?
+
+
+       lowestNum = arr[lowestIndex]
+
+
+       logger.debug(&quot;lowestNum: %r&quot;,lowestNum) # lowest number found in unsorted array
+
+
+       logger.debug(&quot;before: %r&quot;, arr) # array state before we swap anything
+       arr[lowestIndex] = arr[i]
+       logger.debug(&quot;first: %r&quot;, arr) # array state after the first change
+       arr[i] = lowestNum
+
+
+       logger.debug(&quot;final: %r&quot;, arr) # array state after the second change
+       n = n - 1
+
+
+   return arr
+</code></pre>
+<pre><code>\~/work\_dir$ python3.13 debugging.py  
+\[23, 10, 5, 8, 1, 2, 3, 9, 11\]</code></pre>
+<p>Unfortunately, even though we fixed a bug, our program actually had
+multiple bugs! And while this process of adding logging to our file has
+been useful to record unexpected behavior for later examination, it has
+reduced the readability of the algorithm, and required editing our code
+and re-executing it after every change. As shown by this exercise,
+logging is best added AS YOU WRITE THE CODE, and not after the fact.
+Logging is best used to capture specific, important lines of output from
+your code that you can use for diagnosing and solving bugs in your code
+AFTER they have happened.</p>
+<p>What we really want to find our final bug in debugging.py is the
+ability to step through our code line by line, and inspect the contents
+of all of the variables and arrays as the unexpected behavior occurs.
+Python provides <strong>PDB</strong>, a debugger for the python
+programming language that is included in your installation of
+python3.13. Let’s cover how we can use <strong>PDB</strong> to find our
+bug more efficiently than using print statements and inspecting
+logs.</p>
+<h3 id="debugging-with-pdb">Debugging with PDB</h3>
+<p><strong>Debugger:</strong> A program that allows you to interact with
+the execution of a program. Most if not all programming languages come
+with a debugger. Debuggers typically provide the following ways of
+interacting with a program:</p>
+<ul>
+<li>Placing <strong>breakpoints</strong> to halt execution of the
+program when it reaches a certain line<br />
+</li>
+<li>Stepping through the program one instruction at a time<br />
+</li>
+<li>Inspecting values of variables during execution and after the
+program has crashed<br />
+</li>
+<li>Conditionally halt the execution of the program when a given
+condition is met.</li>
+</ul>
+<p><strong>PDB:</strong> Debugger for the Python programming language.
+Included in python.<br />
+To use <strong>PDB</strong> in debugging.py, import pdb, and add a call
+to breakpoint() on the line of code you’d like the debugger to stop
+execution on:</p>
+<pre><code>import pdb
+def selectionSort(arr):
+   n = len(arr)
+   for i in range(n):
+       lowestIndex = i
+       for j in range(n):
+           if arr[j] &lt; arr[lowestIndex]:
+               lowestIndex = j
+
+
+       breakpoint()
+       lowestNum = arr[lowestIndex]
+       arr[lowestIndex] = arr[i]
+       arr[i] = lowestNum
+
+
+       n = n - 1
+
+
+   return arr</code></pre>
+<p>Now when you execute debugging.py, you’ll be prompted with the pdb
+debugger, indicated by the (pdb) on your command line. To display code
+11 lines above and below the breakpoint, enter l (l as in list).</p>
+<pre><code>~/work_dir$ python3.13 debugging.py
+&gt; /home/ubuntu/Home/PHD/tacsc510/pdb_partial_debugging.py(11)selectionSort()
+-&gt; breakpoint()
+(Pdb) l
+  6             lowestIndex = i
+  7             for j in range(n):
+  8                 if arr[j] &lt; arr[lowestIndex]:
+  9                     lowestIndex = j
+ 10     
+ 11  -&gt;         breakpoint()
+ 12             lowestNum = arr[lowestIndex]
+ 13             arr[lowestIndex] = arr[i]
+ 14             arr[i] = lowestNum
+ 15     
+ 16             n = n - 1</code></pre>
+<p>Now we have loaded our program into PDB and stopped its execution, we
+have many options in interacting with our stalled program. Here are the
+main commands you should know:</p>
+<ul>
+<li><strong>l</strong>(ist): Displays 11 lines around the current line
+or continue the previous listing<br />
+</li>
+<li><strong>s</strong>(tep): Execute the current line, stop at the first
+possible location<br />
+</li>
+<li><strong>n</strong>(ext): Continue execution until the next line in
+the current function is reached or it returns<br />
+</li>
+<li><strong>b</strong>(reak): set a breakpoint<br />
+</li>
+<li><strong>p</strong>(rint): Evaluate the expression in the current
+context and print its value</li>
+<li><strong>d</strong>(isplay): Same as print, but prints whenever the
+expression evaluates to a new value<br />
+</li>
+<li><strong>r</strong>(eturn): Continue execution until the current
+function returns<br />
+</li>
+<li><strong>q</strong>(uit) - Quit the debugger</li>
+</ul>
+<p>Below is an attached video of using pdb to step through debugging.py
+and find the remaining bug:</p>
+<p><a href="https://www.youtube.com/PDB_VIDEO_NOT_HERE_YET">PDB
+Usage</a></p>
+<h2 id="static-analysis">Static Analysis</h2>
+<p><strong>Static Analysis:</strong> the process of evaluating a system
+or component based on its form, structure, content or documentation.
+Does <strong>NOT</strong> involve the execution of the program. Searches
+through code to detect bug patterns and security vulnerabilities.</p>
+<p><strong>Why do we statically analyze our code?</strong> To find
+faults in our programs without executing the code. Code inspection can
+identify where code may not meet specifications or where recommended
+programming practices are being broken. Well tested code written by
+experts often has a surprising number of obvious bugs that can be found
+via automated static analysis, without wasting time and money on a test
+deployment. [2] Static analysis tools serve an important role in
+cataloging and raising awareness of developers about subtle correctness
+issues that lead to future bug prevention. [2]</p>
+<p>For debugging.py, the truth of the matter is that both bugs could be
+found via static analysis tools, without ever needing to run our code.
+Let’s review a few of the most useful static analysis tools for
+python:</p>
+<ul>
+<li><a href="https://pypi.org/project/pyflakes">pyflakes</a>: Checks a
+python source file for errors that would cause the program to fail
+during execution<br />
+</li>
+<li><a href="https://github.com/Microsoft/pyright">pyright</a>: Static
+type checker for python<br />
+</li>
+<li><a href="https://pylint.readthedocs.io/en/latest/">pylint</a>: Looks
+for programming errors, helps enforce a coding standard, finds code
+smells, which are indications of deeper problems in a system<br />
+</li>
+<li><a href="https://pypi.org/project/autopep8/">Autopep8</a> -
+Automatically formats python code to conform to the PEP 8 style
+guide.<br />
+</li>
+<li><a href="https://bandit.readthedocs.io/en/latest/">Bandit</a> -
+Finds common security issues in python code</li>
+<li><a href="https://radon.readthedocs.io/en/latest">Radon</a> -
+Calculates metrics like cyclomatic complexity, maintainability index
+from your source code</li>
+</ul>
+<p>and many more you can find at <a
+href="https://github.com/analysis-tools-dev/static-analysis?tab=readme-ov-file">analysis-tools.dev</a></p>
+<h2 id="software-testing">Software Testing</h2>
+<p><strong>Testing:</strong> The process of finding software faults via
+<strong>dynamic verification</strong> of the behavior of a program, on a
+finite set of test cases, suitably selected, against the expected
+behavior. Involves the execution of the program.</p>
+<p><strong>Fault:</strong> as an incorrect step, process, or data
+definition in a program.</p>
+<p><strong>Why do we test?</strong> Without testing, you don’t know if
+your program actually behaves as expected. Before writing dedicated test
+cases, you may have only passed a tiny amount of inputs through your
+system, and only seen a tiny amount of outputs. Testing is the process
+of selecting good representative inputs for all possible interactions in
+your program and seeing whether they map to the expected output . Good
+tests provide a lens into how the program is working, and allow you to
+find software faults when they fail unexpectedly.</p>
+<p><strong>Test Case:</strong> Defines an individual test against a
+software system. Defines an input to the system and the expected output.
+Can be done at a high level against the entire software system, or at a
+low level against code units like methods classes.</p>
+<p><strong>White-box testing:</strong> Writing tests with full
+understanding of the code. Tests are focused on exercising all code
+paths; logical decisions as both true and false, loops at their
+boundaries, and context-dependent testing of internal data
+structures.</p>
+<p><strong>Black-box testing:</strong> Writing tests while ignoring the
+internals of the program. Tests are focused on whether inputs produce
+expected outputs dictated by customer requirements.</p>
+<p><strong>Unit Testing:</strong> Testing of individual hardware or
+software units or groups of related units. Test cases consist of
+individual methods, interleaved methods, or classes. Done by programmers
+as white-box testing. Automation of unit testing is desired for
+consistency and ease of repeatability.</p>
+<p><strong>System Testing:</strong> Testing conducted on a complete,
+integrated system to evaluate the system compliance with its specified
+requirements. Test cases are generated from analyzing customer
+requirements, and can be written before the system has even begun
+development. As system testing is black box, testing is often done by an
+external test group and not the programmers, as too much knowledge of
+the code can result in a lack of breadth in test cases.</p>
+<p><strong>Verification:</strong> Are we building the product right?
+Done via white-box testing<br />
+<strong>Validation:</strong> Are we building the right product? Done via
+black-box testing</p>
+<p><strong>Code Coverage:</strong> A measure of test case
+completeness.</p>
+<ul>
+<li><p><strong>Method Coverage:</strong> Have all methods been
+called?<br />
+</p></li>
+<li><p><strong>Statement Coverage:</strong> Have all the statements in a
+method been executed?<br />
+</p></li>
+<li><p><strong>Decision/Branch Coverage:</strong> Have all decisions
+been executed in both the true and false paths?<br />
+</p></li>
+<li><p><strong>Condition Coverage:</strong> Have all conditionals been
+executed in both the true and false paths?</p>
+<p><strong>Limitation of Code Coverage:</strong> The assumption that you
+are done testing if you have high coverage is incorrect. Coverage only
+tells you if you’ve covered the code that’s been written. There may be
+requirements you have missed while writing your code, which cannot be
+discovered via code coverage. [1]</p>
+<p><strong>Test-driven Design:</strong> Writing your test cases
+<strong>BEFORE</strong> you write the code that the case will
+test.</p></li>
+</ul>
+<h2 id="homework-2-assignment">Homework 2 Assignment</h2>
+<ol type="1">
+<li>Download and unzip <a
+href="https://moodle-courses2425.wolfware.ncsu.edu/mod/resource/view.php?id=524797">hw2.zip</a></li>
+<li>Execute AutoPep8 and <strong>two</strong> of the static analysis
+tools mentioned earlier on all files in hw2.zip
+<ol type="1">
+<li>Hw2_debugging.py consists of an implementation of mergeSort that
+uses multiple helper methods in rand.py to sort the array that is
+currently failing
+<ol type="1">
+<li>Make all of the code changes the static analysis tools
+recommend.<br />
+</li>
+<li>Re-run each tool, save the trace created by the tool in a folder
+called ‘post_traces’<br />
+</li>
+<li>Fix the code, and commit your fixed version of hw2_debugging.py to
+your HW1 repository, or a seperate HW2 repo with the same badges as
+HW1.</li>
+</ol></li>
+<li>Write 3 test cases to verify your merge sort works, that are
+executable via pytest.</li>
+<li>Configure autopep8, and the two static analysis tools you’ve used to
+run on your HW2 repo every commit. Add badges for each of the static
+analysis tools.</li>
+<li>Configure your new merge_sort test to run on the HW2 repo every
+commit, to ensure no regression can occur without a test failing.</li>
+<li>Submit a PDF with the static analysis traces and a link to your HW2
+repository to Moodle.</li>
+</ol></li>
+</ol>
+<h2 id="important-links">Important Links:</h2>
+<p><a
+href="https://docs.python.org/3/library/pdb.html">https://docs.python.org/3/library/pdb.html</a><br />
+<a
+href="https://missing.csail.mit.edu/2020/debugging-profiling/">https://missing.csail.mit.edu/2020/debugging-profiling/</a></p>
+<h2 id="references">References:</h2>
+<p>Brian Marick, “How to Misuse Code Coverage,” <a
+href="http://www.exampler.com/testingcom/writings/coverage.pdf">http://www.exampler.com/testingcom/writings/coverage.pdf</a>
+[1]</p>
+<p>Ayewah, Pugh, Hovemeyer, Morgenthaler, Penix, “Using Static Analysis
+to Find Bugs,” IEEE Software, vol. 25, no. 5, 2008. [2]</p>
+
+
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ethics</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<header id="title-block-header">
+<h1 class="title">Ethics</h1>
+</header>
+<p>It is ethical to improve the revenue of your company since that money
+becomes wages which becomes groceries which becomes dinner so everyone
+and their kids can sleep better at night.</p>
+<p>It is also ethical to change the design of software in order to
+ensure that (say) the software is not unduly discriminatory towards a
+particular social group (e.g. some groups characterized by age, race, or
+gender).</p>
+<p><img src="https://raw.githubusercontent.com/txt/se20/master/etc/img/dilema.png"></p>
+<h2 id="ethics">Ethics</h2>
+<p>SE is about choice.</p>
+<ul>
+<li>mySQL makefile: 3 billion choices.</li>
+<li>Linux kernel feature map = 7000 variables + 300,000 constraints
+<ul>
+<li>So very many ways to configure that kernel!</li>
+</ul></li>
+</ul>
+<p>What if those choices have ethical implications?</p>
+<p>Maybe, maybe not.</p>
+<p>Software has an increasing impact of modern society.</p>
+<ul>
+<li>They are used by geologists to predict landslides</li>
+<li>By biologists working to create a vaccine for HIV (2)</li>
+<li>Influence criminal sentencing</li>
+<li>Control autonomous vehicles</li>
+<li>enable medical advances</li>
+<li>Algorithmic decision making has entered many high-stakes domains,
+such as finance, hiring, admissions, criminal justice, and social
+welfare.</li>
+</ul>
+<p><img src="img/hpofair.png" width=600></p>
+<h2 id="unethical-software">Unethical Software?</h2>
+<p>Is it doing so, responsibly and fairly? Maybe not.</p>
+<ul>
+<li>Google’s sentiment analyzer model which determines positive or
+negative sentiment, gives grossly inappropriate and socially dangerous
+negative score to sentences like “I am a Jew”, and “I am
+homosexual”</li>
+<li>Facial recognition software which predicts characteristics such as
+gender, age from images has been found to have a much higher error rate
+for dark-skinned women compared to light-skinned men</li>
+<li>A popular photo tagging app assigns animal category labels to dark
+skinned people.</li>
+<li>Some recidivism assessment models used by the criminal justice
+system are more likely to falsely label black defendants as future
+criminals (at twice the rate as white defendants)
+<ul>
+<li>But see also <a
+href="https://ieeexplore.ieee.org/document/9173639">Peter Sykacek</a>’s
+comment on this. This issue here might have been that the software was
+actually age-biased, not racially-biased.</li>
+</ul></li>
+<li>Amazon.com stopped using automated recruiting tools after finding
+anti-women bias</li>
+<li>Predictive policing software used to deploy police to where they are
+most likely needed has been found to overestimate crime rates in certain
+areas without taking into account the possibility that more crime is
+observed there simply because more offenders have been sent there in the
+past.</li>
+</ul>
+<h2 id="model-stores">Model stores</h2>
+<ul>
+<li><p>Machine learning methods can be packaged and executed in cloud
+“containers” (e.g. using tools likeopendatahub.io).</p></li>
+<li><p>Many such containers are available for rent, in “Model Stores” at
+the AWS marketplace ];the Wolfram neural net repository and the
+ModelDepot [1] (see Table 1, Figure 1). Users rent these models along
+with the cloud-CPU needed to run them.Then, they upload their data to
+the cloud-based learner which later on, delivers them a model generated
+by a machine learner.</p></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/txt/se20/master/etc/img/model.png"></p>
+<p><img src="https://raw.githubusercontent.com/txt/se20/master/etc/img/store.png"></p>
+<p>Model Store models have no tools for (a) detecting or (b) mitigating
+discriminatory bias. - This is troubling these models are susceptible to
+issues of unfairness. - That is, using Model Stores, developers can
+unwittingly unleash models that are highly discriminatory. - Worse yet,
+given the ubiquity of the internet, these discriminatory models could be
+unleashed on large sections of the general public.</p>
+<p>Examples:</p>
+<ul>
+<li>hyScoreis an NLP tool which, amongst other things, performs
+sentiment analysis of content. hyScore accepts arbitrary free form text
+which, potentially, could reference social groups we might want
+toprotect.</li>
+<li>Credit Default Predictor uses 23 attributes include gender,
+education,age, and previous history of payments to generate an predictor
+of the chances a customer will default on a loan</li>
+<li>A Hospital Readminission model predicts the probably that a patient
+will not be readmitted after discharge. This model’s inputs include
+financial class, sex and age. Depending on the protected attributes a
+hospital may decide not to release the patient as the model shows high
+probability of readmission, while another patient with same other
+attributes but different protected attribute values can be released</li>
+</ul>
+<h2 id="kinds-of-ethics">Kinds of Ethics</h2>
+<p>The Institute for Electronics and Electrical Engineers (IEEE) has
+recently discussed general principles for implementing autonomous and
+intelligent systems (A/IS). They propose that the design of such A/IS
+systems satisfy certain criteria:</p>
+<ul>
+<li>Human Rights: A/IS shall be created and operated to respect,
+promote, and protect internationally recognized human rights.</li>
+<li>Well-being: A/IS creators shall adopt increased human well-being as
+a primary success criterion for development.</li>
+<li>Data Agency: A/IS creators shall empower individuals with the
+ability to access and securely share their data, to maintain people’s
+capacity to have control over their identity.</li>
+<li>Effectiveness: A/IS creators and operators shall provide evidence of
+the effectiveness and fitness for purpose of A/IS.</li>
+<li>Transparency: The basis of a particular A/IS decision should always
+be discoverable.</li>
+<li>Accountability: A/IS shall be created and operated to provide an
+unambiguous rationale for all decisions made.</li>
+<li>Awareness of Misuse: A/IS creators shall guard against all potential
+misuses and risks of A/IS in operation.</li>
+</ul>
+<p>Other organizations, like Microsoft offer their own principles for
+AI:</p>
+<ul>
+<li>Transparency AI systems should be understandable</li>
+<li>Fairness: AI systems should treat all people fairly</li>
+<li>Inclusiveness AI systems should empower everyone and engage
+people</li>
+<li>Reliability &amp; Safety AI systems should perform reliably and
+safely</li>
+<li>Privacy &amp; Security: AI systems should be secure and respect
+privacy</li>
+<li>Accountability: AI systems should have algorithmic
+accountability</li>
+<li>Ethics is a rapidly evolving concept so it hardly surprising to say
+that mapping the stated ethical concerns of one organization (Microsoft)
+into another (IEEE) is not easy.</li>
+</ul>
+<p>Nevertheless, the following table shows one way we might map together
+these two sets of ethical concerns. Note that:</p>
+<ul>
+<li>“accountability” and “transparency” appear in both the IEEE and
+Microsoft lists. Clearly these are concerns shared by many people.</li>
+<li>Missing from the Microsoft list is “effectiveness” but we would
+argue that what IEEE calls “effectiveness” can be expressed in terms of
+other Microsoft terms (see below).</li>
+<li>Assessed in terms of the Microsoft terminology, the IEEE goals or
+“well-being” and “awareness of misuse” are synonyms since they both
+reply on “fairness and “reliability and safely”.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/txt/se20/master/etc/img/ethicsy.png"></p>
+<p>The reader might dispute this mapping, perhaps saying that we have
+missed, or missed out, or misrepresented, some vital ethical concern.
+This would be a good thing since that would mean you are now engaging in
+discussions about software and ethics. In fact, the best thing that
+could happen below is that you say “that is wrong; a better way to do
+that would be…” As George Box said, all models are wrong; but some are
+useful.</p>
+<p>In any case, what the above table does demonstrate is that:</p>
+<ul>
+<li>Large organizations are now very concerned with ethics.</li>
+<li>When they talk about ethics, there is much overlap in what they
+say.</li>
+<li>This is a pressing need to extend our current design thinking to
+include ethical considerations</li>
+</ul>
+<h2 id="explore-the-choices">Explore the choices</h2>
+<p><img width=600 src="https://raw.githubusercontent.com/txt/se20/master/etc/img/12steps.png"></p>
+<h2 id="ethics-take-the-lead">Ethics: Take the lead</h2>
+<p>From the IEEE:</p>
+<p><img src="https://raw.githubusercontent.com/txt/se20/master/etc/img/ethicsHow.png"></p>
+<h2 id="how-to-fix-bias-with-algorithms">How to fix Bias? (with
+algorithms)</h2>
+<h3 id="how-not-to-fix">How not to fix</h3>
+<p>Why not just remove the protected attribute (age, gender,etc) -
+Empirically, does not work - We tried it - Almost no change in bias
+metrics even after that. - Why? - attributes are connected - so removing
+on thing still keeps the bias in the all the others. - e.g. 2016, Amazon
+Prime same day delivery. - highly discriminatory against black
+neighborhood - excluded minority neighborhoods in Boston, Atlanta,
+Chicago, Dallas, New York City, and Washington, D.C., - while extending
+the service to white neighborhoods - Model trained on “zip code” which
+can be a surrogate for “race” (given racial separation in many major US
+cities). - Poor observed correlation zip code to race - But connected
+via the labels “good Delvers” “slower Delivery”</p>
+<h3 id="recognize-that-bias-is-inevitable">Recognize that bias is
+inevitable</h3>
+<ul>
+<li>All data mining is biased
+<ul>
+<li>without bias, uou can’t ignore things</li>
+<li>without ignoring things, can’t prune</li>
+<li>without pruning, no summarization into a model</li>
+<li>without a model, can’t predict the future</li>
+<li>So bias makes us blind and bias lets us see</li>
+</ul></li>
+<li>Some bias is good
+<ul>
+<li>prefer simple models over complex ones</li>
+<li>prefer models that suggest fewest changes</li>
+<li>prefer models that can be quickly updated</li>
+</ul></li>
+<li>But some bias can get you into trouble Data contains many
+models</li>
+</ul>
+<p>The “best” model is assesses using criteria C1,C2,C3,C4…. - If we
+build models optimizing for C1,C2 (and ignroethe rest) - Then it is a
+random variable whether or not it satisfies C3,C4…. The thing is, all
+the above a huge assembly of <em>choices</em> made by software
+engineers.</p>
+<h3 id="so-measure-and-check-for-bias">So measure and check for
+bias</h3>
+<pre><code>  truth   |
+no  | yes | learner
+----------------------
+TN  | FN  | silent
+FP  | TP  | loud</code></pre>
+<p>Divide data into groups (e.g. divide on gender, age, nationality,
+anything really)</p>
+<ul>
+<li>Look for differences in those groups:</li>
+<li>EOD= Equal Opportunity Difference:Difference of TruePositive
+Rates(TP) for unprivileged and privileged groups [40].</li>
+<li>A0D = Average Odds Difference:Average of difference in False
+Positive (FP) and True Positive (TP) for unprivileged and privileged
+groups</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/txt/se20/master/etc/img/mitigate.png"></p>
+<ul>
+<li>Re weighting: double up or remove certain rows to adjust the results
+<ul>
+<li>or give each row a magic weight to do the same thing</li>
+</ul></li>
+<li>Optimized pre-processing:
+<ul>
+<li>again, magic weights but this time on al the decisions inside
+pre-pressing and the learner</li>
+<li>runs some optimiser to find better weightings.</li>
+</ul></li>
+<li>Reject options (a post processor)
+<ul>
+<li>Reweighs predictions to negate known bias</li>
+</ul></li>
+<li>Adverbial debasing
+<ul>
+<li>Mask the protected attribute.</li>
+<li>Given a target class X and a protected attribute Y
+<ul>
+<li>maximize accuracy for X</li>
+<li>and minimize accuracy for Y</li>
+</ul></li>
+<li>So the learner you use, by definition, knows nothing of Y</li>
+</ul></li>
+</ul>
+<p>Demo: <a href="https://aif360.res.ibm.com/data">AI360</a></p>
+<h2 id="more-generally">More generally</h2>
+<p>Software contains choices.</p>
+<p>SE people make choices.</p>
+<p>SE people can make bad choices or better choices</p>
+<p>Not clear that legal and political institutions are keeping up with
+the technology choice space in this area. - So It is up to us.</p>
+<h2 id="case-studies">Case Studies</h2>
+<p><a
+href="https://www.scu.edu/ethics/focus-areas/technology-ethics/resources/technology-ethics-cases/">https://www.scu.edu/ethics/focus-areas/technology-ethics/resources/technology-ethics-cases/</a></p>
+<p><a
+href="https://onlineethics.org/resources?combine=software&amp;field_keywords_target_id=&amp;field_resource_type_target_id=13236">https://onlineethics.org/resources?combine=software&amp;field_keywords_target_id=&amp;field_resource_type_target_id=13236</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://arxiv.org/pdf/2301.10407">Don’t Lie to Me: Avoiding
+Malicious Explanations with STEALTH</a>; Lauren Alvarez, Tim Menzies;
+IEEE Software, April 2023</li>
+<li>Microsoft’s notes on AI and ethics: 2019.
+https://www.microsoft.com/en-us/ai/our-approach-to-ai</li>
+<li>IEEE and ethics:
+https://standards.ieee.org/content/dam/ieee-standards/standards/web/documents/other/ead/ead-for-business.pdf</li>
+<li><a href="https://arxiv.org/pdf/2003.10354.pdf">Fairway: A Way to
+Build Fair ML Software</a> Authors: Joymallya Chakraborty, Suvodeep
+Majumder, Zhe Yu, Tim Menzies, FSE’20</li>
+<li><a
+href="https://krvarshney.github.io/pubs/BellamyDHHHKLMMNRRSSSVZ_sm2019.pdf">Think
+Your Artificial Intelligence Software Is Fair? Think Again</a> Rachel
+K.E. Bellamy, Kuntal Dey, Michael Hind, Samuel C. Hoffman, Stephanie
+Houde, Kalapriya Kannan, Pranay Lohia, Sameep Mehta, Aleksandra
+Mojsilovic, Seema Nagar, Karthikeyan Natesan Ramamurthy, John Richards,
+Diptikalyan Saha, Prasanna Sattigeri, Moninder Singh, Kush R. Varshney,
+and Yunfeng Zhang. IEEE Software, July/August, 2019.
+<ul>
+<li>See also the clairifaction from [Peter
+Sykacek[(https://ieeexplore.ieee.org/document/9173639)</li>
+</ul></li>
+<li><a
+href="https://thetalkingmachines.com/sites/default/files/2019-11/999.full_.pdf">Preventing
+undesirable behavior of intelligent machines</a> Philip S. Thomas, Bruno
+Castro da Silva, Andrew G. Barto, Stephen Giguere, Yuriy Brun, Emma
+Brunskills, Science, 366, 999–1004 (2019)3</li>
+</ul>
+
+
+
+
+</div>
+</body>
+</html>

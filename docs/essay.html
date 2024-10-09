@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>HW1: A beautiful repo</title>
+  <title>essay</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -111,74 +111,154 @@ style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10p
 
 <div style='clear:both'></div>
 <header id="title-block-header">
-<h1 class="title">HW1: A beautiful repo</h1>
+<h1 class="title">essay</h1>
 </header>
-<p><br clear=all></p>
-<h2 id="what-to-hand-in">What to hand in:</h2>
+<h2 id="for-essay">for essay</h2>
 <ul>
-<li>A one page pdf with a screen snap from point6</li>
-<li>On that page, also write the url to the repo crated below. (where we
-can look at all your wonderful badges).</li>
+<li>ensure it is usinng software</li>
+<li>standard structure (abstract, intro…)</li>
 </ul>
-<p>Note:</p>
+<h2 id="essay-ethics">Essay (ethics)</h2>
+<p>Work solo. <strong>IMPORTANT</strong>: read <a href="ethics.html">the
+lecture on ethics</a> before you start.</p>
+<h2 id="what-to-write">What to write</h2>
 <ul>
-<li>Points 1..9 are easy.</li>
-<li>Points 10,11,12,13 will require much messing around with web-based
-help files. Go work it out.</li>
-<li>Point 14 is optional.</li>
+<li>Using these <a href="img/12steps.png">7 steps</a> as an outline</li>
+<li>Address one of the <a
+href="https://onlineethics.org/resources?combine=software&amp;field_keywords_target_id=&amp;field_resource_type_target_id=13236">case
+studies</a></li>
 </ul>
-<h2 id="todo">Todo</h2>
-<ol type="1">
-<li>Your team should create an organization on Github</li>
-<li>Crate a repo in that organization. Make it public.</li>
-<li>Find the big green CODE button. Create a new workshop on main.</li>
-<li>In the terminal, install python3.13 by running the following command
-(it is all on one line). Then check you have python3.13.</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="at">-y</span><span class="kw">;</span> <span class="fu">sudo</span>  apt upgrade <span class="at">-y</span><span class="kw">;</span> <span class="fu">sudo</span> apt install software-properties-common <span class="at">-y</span><span class="kw">;</span> <span class="fu">sudo</span> add-apt-repository ppa:deadsnakes/ppa <span class="at">-y</span> <span class="kw">;</span> <span class="fu">sudo</span> apt update <span class="at">-y</span> <span class="kw">;</span> <span class="fu">sudo</span> apt install python3.13 <span class="at">-y</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3.13</span> <span class="at">-B</span> <span class="at">--version</span></span></code></pre></div>
-<ol start="5" type="1">
-<li>Now write a short python program (10 lines) and add an error. From
-the command line, run that file. You should see errors on the command
-line. VSCode should now be asking if you want Python support installed.
-Do it.</li>
-</ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> myfile.py</span></code></pre></div>
-<ol start="6" type="1">
-<li>Run the code again. Take you mouse and point to one of the errors on
-the screen. Observe how it highlights like a hyperlink. Take a screen
-snap of you point to that error. Include the whole window so we can see
-you can see the code and error at the same time.</li>
-<li>Go to https://choosealicense.com/licenses/ and find text for your
-license of choice. Change /workspaces/LICENSE.md to have that
-content.</li>
-<li>Goto to https://github.com/github/gitignore and find the
-VisualStudio.gitignore and the Python.gitignore. Add all that content to
-/worskspaces/.gitignore</li>
-<li>Go to http://shields.io and
-https://dev.to/envoy_/150-badges-for-github-pnk and work out how to add
-a bade to a markdown file. Go to /workspaces/README.md. Delete its
-contents. Add badges to the top for</li>
-</ol>
+<p>YOur answer must cover, at the very least: - who is <em>hurt</em> by
+the current design; - how we might <em>fix</em> that? - Important:
+ensure that your text justifies why the new design addresses the
+problems you document. - and how will your fix <em>empower traditionally
+disempowered social groups</em>? - ie. don’t just fix this particular
+problem; rather, address deeper issues that might cause problems in the
+future).</p>
+<h2 id="word-limit">Word limit</h2>
 <ul>
-<li>language python</li>
-<li>license bsd-2 (or what ever you selected)</li>
-<li>platform linux</li>
-</ul>
-<ol start="10" type="1">
-<li>Look up “pytest”. Add a test engine to you code. Add two tests: one
-that fails, one that passes.
+<li>No less that three pages (in the format shown below, excluding
+references);
 <ul>
-<li>Important: make the tests in a SEPARATE file to your code file.</li>
+<li>no more than four</li>
 </ul></li>
-<li>Look up how to do a Python workflows.
-https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python#testing-with-pytest-and-pytest-cov</li>
-<li>Make your code auto test each time you commit (using the
-workflows)</li>
-<li>Add a badge showing if your tests pass or fail. See
-https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/monitoring-workflows/adding-a-workflow-status-badge</li>
-<li>Optional. Add a code coverage badge.</li>
-</ol>
+<li>HARD LIMITS:
+<ul>
+<li>we will not grade after four pages.</li>
+<li>we will not read if less than three.</li>
+<li>we will not read if it is the wrong format (see below)</li>
+</ul></li>
+</ul>
+<h2 id="how-to-write">How to write</h2>
+<p>Create an overleaf.com account</p>
+<ul>
+<li><p>Go to
+https://www.overleaf.com/gallery/tagged/ieee-official</p></li>
+<li><p>Select :IEEE Bare Demo Template for conferences”</p>
+<ul>
+<li>https://www.overleaf.com/latex/templates/ieee-bare-demo-template-for-conferences/ypypvwjmvtdf</li>
+</ul></li>
+<li><p>Hit “open as template”</p></li>
+<li><p>Add your name and email to list of authors.</p></li>
+<li><p>Add these lines before <code>\begin{document}</code></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>  \usepackage[switch]{lineno}</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  \linenumbers</span></code></pre></div></li>
+<li><p>Write at a three to four page paper.</p></li>
+<li><p>Hit the “recompile” button</p></li>
+<li><p>Look to the right of “recompile: for the download icon</p></li>
+<li><p>Submit to Moodle</p></li>
+</ul>
+<h2 id="grading-rubric">Grading Rubric</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Grade</th>
+<th>What</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-3</td>
+<td>POOR ESSAY STRUCCTURE</td>
+<td>We want coherent paragraphs, not a bullet list. References are used
+in a way that enhances the argument. Paragraphs should be content-full
+(rather that a set of irrelevances). Arguments should be defended and
+not just be opinions of the form “I think that…” (with no supporting
+clauses). Each section should start with some clarification/structuring
+preamble.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PROBLEM DEFINITION</td>
+<td>+1 if it states the problem and +1 more if does it well;
+e.g. situates current problem in broader content</td>
+</tr>
+<tr>
+<td>2</td>
+<td>GATHER RELEVANT FACTS</td>
+<td>+1 if it gather assess relevant facts and +1 more if does it well;
+e.g. extensive literature review</td>
+</tr>
+<tr>
+<td>2</td>
+<td>IDENTIFY STAKEHOLDERS</td>
+<td>+1 if it identifies the stakeholders and +1 more if does it well;
+e.g. shows how skackholder requirements can be contradictory</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LIST OF 5 OPTIONS</td>
+<td>+5 if it develops a list of iat least five options</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SOFTWARE DESIGN</td>
+<td>+2 of some of those options need to includes a redesign for a better
+version of the software where the better software mitigates some of the
+issues discussed by the original software. And +1 more if it does it
+well; e.g. clever design</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TESTING</td>
+<td>2 if it tests options using criteria like harm, publicity,
+defensibility, reversibility, virtue, colleague, professional,
+organizational test ( see guidance on that at
+https://github.com/txt/se20/blob/master/etc/img/12steps.png) And 2 more
+if it does it well; e.g. writes extensively insightful notes on three or
+more of the tests</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CHOICE</td>
+<td>+1 if tentative choice and +1 if final Choice</td>
+</tr>
+<tr>
+<td>-2,+1</td>
+<td>OTHER</td>
+<td>-2 if the essay is mostly “I think X, I think Y” without any
+citations or comment on the amazing things other people have thunk in
+this matter. +1 more if it beyond the specifics of your answer, the real
+test will be ““does the student understand general principles that can
+be applied in other contexts”; i.e. if the essay defined clear steps to
+making ethical decisions (beyond the 12 steps of
+https://github.com/txt/se20/blob/master/etc/img/12steps.png) for future
+applications.</td>
+</tr>
+<tr>
+<td>20</td>
+<td>TOTAL</td>
+<td>plus, maybe, +1 bonus</td>
+</tr>
+</tbody>
+</table>
 
 
 

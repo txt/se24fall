@@ -28,18 +28,21 @@ Five considerations influence the design  of this subject:
 |Aug21|                  |       | this file and [syllabus](syllabus.html)    |
 |Aug23|                  |       | [beware LLMs](https://discord.com/channels/1274829971772145784/1275150262251683871/1275996582571147344); [fundamentals](03code.html)    |
 |Aug29|  [homework 1](hw1.html) |       |  |
-|Sep12| hw2              |         | | 
+|Sep5|               |         | [scripting1](https://github.com/lualure/src/tree/master/demo) |
+|Sep10|               |         | [testing](tests.html) | 
+|Sep12| [hw2](debug.html)              |         | | 
 |Sep17| wellness day     |no class | |
-|Sep26|  hw3             |         | |
-|Oct1|   [project 1](project1.html)           |         | |
-|Oct3|  hw3              |         | |
-|Oct10| hw4              |         | |
+|Sep26|  [hw3](vim.html)             |         | |
+|Sep30|               |         | [licenses](license.html);<br>[process](process.html) |
+>Oct1|   [project 1](project1.html)           |         | [ethics](ethics.html) |
+|Oct3|                  |         | |
+|Oct10| [hw4](data.html)              |         | |
 |Oct15| fall break       |no class | | 
 |Oct17| mid-term exam    |         | |
-|Oct24| hw5              |         | |
-|Oct31| project2         |         | |
-|Nov27| project3         |no class | |
+|Oct24| [hw5](git.html)              |         | |
+|Oct31| [project2](project23.html)         |         | |
+|Nov27| [project3](project23.html)         |no class | |
 |Nov28| thanksgiving     |no class | |
-|Dec3| essay due         |no class | |
+|Dec3| [essay due](essay.html)         |no class | |
 |Dec5|  final exam       |no class | |
 

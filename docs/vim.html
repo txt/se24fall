@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>vim</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<header id="title-block-header">
+<h1 class="title">vim</h1>
+</header>
+<h1 id="introduction-to-vim">Introduction to Vim</h1>
+<p><img src="img/Vimlogo.svg" alt="VimLogo" /> Welcome to this
+introductory lecture on Vim, a powerful and efficient text editor. In
+this session, we’ll cover Vim’s basic modes, commands, and some useful
+plugins. By the end, you should have a foundational understanding of Vim
+and be able to start customizing it with plugins.</p>
+<h2 id="what-is-vim">What is Vim</h2>
+<p>Vim is a highly efficient, modal text editor designed for both
+programmers and general text editing. It stands out due to its unique
+modes: normal, insert, and visual, which streamline navigation, editing,
+and selection processes. Vim’s powerful features include extensive
+keyboard shortcuts, customization options, and a vast array of plugins.
+Although it has a steep learning curve, mastering Vim can significantly
+enhance productivity and speed in coding and text manipulation
+tasks.</p>
+<h3 id="why-use-vim">Why use Vim?</h3>
+<p>It’s a choice. As said before vim has a steep learning curve, but
+once you master the shortcuts and customize it to your preferences one
+can see how useful it is to have a completely mouse-free programming
+experience. Not only that but if you want an entry level experience
+there are vim emulators implemented in most other modern text
+editors.</p>
+<h2 id="basic-navigation-and-editing">Basic Navigation and Editing</h2>
+<figure>
+<img src="img/vimraw.png" alt="basicVim" />
+<figcaption aria-hidden="true">basicVim</figcaption>
+</figure>
+<p>When programming, you spend most of your time reading/editing, not
+writing. For this reason, Vim is a modal editor: it has different modes
+for inserting text vs manipulating text.</p>
+<p>Vim is programmable, and Vim’s interface itself is a programming
+language: keystrokes are commands, and these commands are
+composable.</p>
+<p>Vim avoids the use of the mouse, because it’s too slow; Vim even
+avoids using the arrow keys because it requires too much movement.</p>
+<p>The end result is an editor that can match the speed at which you
+think.</p>
+<p>For this reason Vim has multiple operating modes:</p>
+<ul>
+<li><strong>Normal Mode:</strong> For navigation and editing.</li>
+<li><strong>Insert Mode:</strong> For inserting text.</li>
+<li><strong>Replace Mode:</strong> For replacing text.</li>
+<li><strong>Visual Mode:</strong> For selecting text.</li>
+<li><strong>Command-Line Mode:</strong> For executing commands.</li>
+</ul>
+<p>Keystrokes have different meanings in different operating modes. For
+example, the letter x in Insert mode will just insert a literal
+character ‘x’, but in Normal mode, it will delete the character under
+the cursor, and in Visual mode, it will delete the selection.</p>
+<p>You change modes by pressing <code>ESC</code> (the escape key) to
+switch from any mode back to Normal mode. From Normal mode:</p>
+<ul>
+<li>enter Insert mode with <code>i</code>,</li>
+<li>Replace mode with <code>R</code>,</li>
+<li>Visual mode with <code>v</code>,</li>
+<li>Visual Line mode with <code>V</code>,</li>
+<li>Visual Block mode with <code>&lt;C-v&gt;</code>
+(<code>Ctrl-V</code>, sometimes also written ^V),</li>
+<li>and Command-line mode with <code>:</code>.</li>
+</ul>
+<ol type="1">
+<li><p><strong>Open Vim:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> filename.txt</span></code></pre></div>
+<p>** Note that if the file doesnt exist vim will create that
+file</p></li>
+<li><p><strong>Basic Navigation:</strong></p></li>
+</ol>
+<ul>
+<li><code>h</code> - Move left</li>
+<li><code>j</code> - Move down</li>
+<li><code>k</code> - Move up</li>
+<li><code>l</code> - Move right</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Entering and exiting insert mode:</strong></li>
+</ol>
+<ul>
+<li>press <code>i</code> to enter insert</li>
+<li>type some text and press <code>ESC</code> to return to normal
+mode</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Basic Commands:</strong></li>
+</ol>
+<ul>
+<li>Save with <code>:w</code></li>
+<li>Quit with <code>:q</code></li>
+<li>Save and quit with <code>:wq</code></li>
+</ul>
+<ol start="5" type="1">
+<li><strong>Text Manipulation:</strong></li>
+</ol>
+<ul>
+<li><code>dd</code> - Deletes a whole line</li>
+<li><code>x</code> - Deletes a single character</li>
+<li><code>yy</code> - Copies a line</li>
+<li><code>p</code> - Pastes below the cursor</li>
+<li><code>u</code> - Undoes the last change</li>
+<li><code>Ctrl-r</code> - Redoes last change</li>
+</ul>
+<h3 id="in-class-exercise-5-10-minutes">In class exercise (5-10
+minutes)</h3>
+<p>Use Vim to write a code that solves the following problem (Any
+programming language). No mouse usage only the commands we just
+learned:</p>
+<p>You are given two integer arrays <code>nums1</code> and
+<code>nums2</code>, sorted in non-decreasing order, and two integers
+<code>m</code> and <code>n</code>, representing the number of elements
+in <code>nums1</code> and <code>nums2</code> respectively.</p>
+<p>Merge <code>nums1</code> and <code>nums2</code> into a single array
+sorted in non-decreasing order and return that array.</p>
+<p>Heres some example code in python:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solution:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> merge(<span class="va">self</span>, nums1, m, nums2, n) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">        return a list that contains the merged array</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">        &quot;&quot;&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>nums1 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>nums2 <span class="op">=</span> [<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> Solution()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s.merge(nums1, m, nums2, n))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># EXPECTED OUTPUT:</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># [1,2,2,3,5,6]</span></span></code></pre></div>
+<h2 id="vim-is-too-basic">Vim is too basic</h2>
+<p>Yes, it is. But did i mention it is <strong>highly
+customizeable</strong>?</p>
+<figure>
+<img src="img/customVim.png" alt="vimCustom" />
+<figcaption aria-hidden="true">vimCustom</figcaption>
+</figure>
+<p>Your vim instalation has a global file called <code>.vimrc</code>.
+This file can also be set locally where Vim is being ran so you can have
+multiple configurations, think of it as multiple python
+environments.</p>
+<p>The <code>.vimrc</code> file is a configuration file for Vim, a text
+editor. It lets you customize Vim’s behavior and appearance to fit your
+needs.</p>
+<p>In it you can set various preferences for example:</p>
+<ol type="1">
+<li><strong>Options:</strong></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> number        <span class="st">&quot; Show line numbers</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">set tabstop=4     &quot;</span> Set tab width to 4 spaces</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> shiftwidth=4  <span class="st">&quot; Use 4 spaces for indentation</span></span></code></pre></div>
+<ol start="2" type="1">
+<li><strong>Commands:</strong></li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">autocmd</span> BufWritePre <span class="pp">*</span> :%s/\s\+$//e <span class="st">&quot; Remove trailing spaces before saving</span></span></code></pre></div>
+<ol start="3" type="1">
+<li><strong>Plugins</strong></li>
+</ol>
+<ul>
+<li>To extend Vim’s functionality you can list plugins in there, but
+where to find these plugins?</li>
+</ul>
+<h3 id="vimawesome"><a
+href="https://vimawesome.com/">VimAwesome</a></h3>
+<p>VimAwesome is a comprehensive platform dedicated to discovering and
+exploring plugins for the Vim text editor. It curates a wide range of
+Vim plugins, categorized by functionality and popularity, providing
+users with a streamlined way to enhance their Vim setup.</p>
+<h3 id="how-to-use-the-plugins">How to use the plugins?</h3>
+<p>First you need a plugin manager to easily install and manage plugins.
+One very popular option is <code>vim-plug</code> which you can install
+with the following command in a terminal window (different instalations
+for Windows machines)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fLo</span> ~/.vim/autoload/plug.vim <span class="at">--create-dirs</span> <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span></code></pre></div>
+<p>Then you can open your <code>.vimrc</code> file and add the following
+lines to the top of your file</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">call</span> plug#begin<span class="er">(</span><span class="st">&#39;~/.vim/plugged&#39;</span><span class="kw">)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot; List plugins here</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">call plug#end()</span></span></code></pre></div>
+<h3 id="recommended-plugins">Recommended plugins:</h3>
+<ol type="1">
+<li>NerdTree</li>
+</ol>
+<figure>
+<img src="img/NerdTree.png" alt="NerdTree" />
+<figcaption aria-hidden="true">NerdTree</figcaption>
+</figure>
+<p><a href="https://vimawesome.com/plugin/nerdtree-red">NERDTree</a> is
+a popular Vim plugin that provides a file system explorer within Vim. It
+allows you to navigate your project’s directory structure and manage
+files efficiently from within the editor.</p>
+<ol start="2" type="1">
+<li>FuzzyFinder</li>
+</ol>
+<figure>
+<img src="img/fuzzyFinder.png" alt="FuzzyFinder" />
+<figcaption aria-hidden="true">FuzzyFinder</figcaption>
+</figure>
+<p>The <a href="https://vimawesome.com/plugin/fzf">FuzzyFinder(fzf)</a>
+plugin for Vim simplifies locating files and other items by allowing you
+to search with just a few letters of their names. Instead of needing to
+type exact file names or paths, you enter a partial string, and the
+plugin displays a list of matches based on fuzzy matching, which means
+it looks for items that contain the letters you typed, even if they are
+not in the exact order. This approach speeds up the process of finding
+and opening files, making navigation in large projects much more
+efficient.</p>
+<ol start="3" type="1">
+<li>CVcolorscheme</li>
+</ol>
+<figure>
+<img src="img/cvcolorscheme.png" alt="CVcolorscheme" />
+<figcaption aria-hidden="true">CVcolorscheme</figcaption>
+</figure>
+<p>The <code>cvcolorscheme</code> <a
+href="https://vimawesome.com/plugin/vim-colorschemes-sweeter-than-fiction">plugin</a>
+for Vim is designed to enhance the appearance of the Vim editor by
+providing a collection of visually appealing color schemes.</p>
+<p>With <code>cvcolorscheme</code>, users can switch between multiple
+color schemes effortlessly, tailoring their Vim environment to their
+personal preferences and improving their overall coding experience. This
+plugin helps users find a color scheme that suits their style and
+reduces eye strain during long coding sessions.</p>
+<h2 id="neovim">Neovim</h2>
+<p>An option to those who might fall in love with the vim text editor is
+using <code>Neovim</code> instead.</p>
+<p>Neovim is an extensible, modern text editor that builds upon the
+foundation of Vim, aiming to improve its usability and expand its
+capabilities. It introduces several enhancements, such as improved
+support for plugins, better integration with external tools, and a more
+maintainable codebase. Neovim enhances the Vim experience with features
+like built-in terminal emulation, asynchronous plugin execution, and a
+focus on ease of configuration and extensibility. It is designed to
+provide a more powerful and flexible environment for developers while
+maintaining compatibility with Vim’s core functionalities and
+commands.</p>
+<p>Most of what was covered in this lecture applies to Neovim as well
+but there are some upgrades. Notably:</p>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 37%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Vim</th>
+<th>Neovim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Codebase</strong></td>
+<td>Legacy codebase, complex to maintain</td>
+<td>Modernized codebase, improved maintainability</td>
+</tr>
+<tr>
+<td><strong>Asynchronous Plugins</strong></td>
+<td>Limited support for asynchronous operations</td>
+<td>Built-in support for asynchronous plugins, improving
+performance</td>
+</tr>
+<tr>
+<td><strong>Built-in Terminal</strong></td>
+<td>No built-in terminal emulator</td>
+<td>Includes a built-in terminal emulator for running shell commands and
+scripts</td>
+</tr>
+<tr>
+<td><strong>Configuration</strong></td>
+<td>Configuration primarily via <code>.vimrc</code></td>
+<td>Configuration can be done via <code>init.vim</code> or
+<code>init.lua</code>, with support for Lua scripting</td>
+</tr>
+<tr>
+<td><strong>Extensibility</strong></td>
+<td>Supports plugins but can be limited in flexibility</td>
+<td>Enhanced plugin architecture with more robust API, allowing for more
+powerful extensions</td>
+</tr>
+<tr>
+<td><strong>UI Integration</strong></td>
+<td>GUI integration often requires external tools</td>
+<td>Improved support for external UIs and GUI clients, with a focus on
+extensibility</td>
+</tr>
+<tr>
+<td><strong>Community Contributions</strong></td>
+<td>Established, with a large number of plugins</td>
+<td>Active development community, with ongoing improvements and modern
+features</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Generally good, but can be limited by synchronous operations</td>
+<td>Optimized for performance with asynchronous processing, reducing lag
+in plugin operations</td>
+</tr>
+<tr>
+<td><strong>Lua Support</strong></td>
+<td>Limited Lua support, primarily uses Vimscript</td>
+<td>Native Lua support for configuration and plugin development,
+offering more flexibility and performance</td>
+</tr>
+<tr>
+<td><strong>Default Behavior</strong></td>
+<td>Traditional Vim behaviors and defaults</td>
+<td>Includes additional default features and settings for a more modern
+experience</td>
+</tr>
+</tbody>
+</table>
+<h2 id="homework">Homework</h2>
+<p>Using either vim or neovim, install and configure the plugins
+mentioned here and submit screenshots of vim running in your machine
+with all 3 plugins operational!</p>
+<p>Plugins to be installed: * NerdTree * FuzzyFinder * CVcolorscheme</p>
+<p>Where to find them? * <a
+href="https://vimawesome.com/">VimAwesome</a></p>
+
+
+
+
+</div>
+</body>
+</html>

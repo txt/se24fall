@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>data</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<h1 id="data-wrangling">Data Wrangling</h1>
+<p>Data wrangling, also known as data munging, is the process of
+cleaning, transforming, and organizing raw data into a more usable
+format for analysis or reporting. This process is essential because raw
+data is often messy, incomplete, or unstructured, making it difficult to
+derive meaningful insights without proper preparation. Often times, we
+find ourselves handling complex data that needs to be incrementally
+broken down into different shapes and forms at different stages to
+finally come off as meaningful information. Data wrangling enables us to
+break down a complex data processing task into several subtasks, carry
+out those subtasks with off-the-shelf tools, and seamlessly integrate
+the subtasks into a final comprehensive piece of information. This
+tutorial will teach us command-line tools to facilitate data
+wrangling.</p>
+<p>You can follow this tutorial using Linux or MacOS terminals. If you
+are on Windows, you can use WSL (Windows Sub-system for Linux) command
+line.</p>
+<h2 id="pipes">PIPES</h2>
+<p>Pipes are a fundamental inter-process communication mechanism on
+operating systems. They enable the output of one process to be
+redirected to another. When you write a command on the terminal, the
+shell is actually creating a process that can execute your command.
+Since pipes are used to glue together different processes, you can also
+use pipes on the terminal to enable communication between different
+commands. The pipe command, represented as a bar symbol
+<strong>|</strong>, lets you transfer the output of one command as the
+input of the next. To understand pipes, first let’s review some handy
+shell commands. Feel free to open your command line or terminal. Type in
+the following commands and observe the output:</p>
+<ol type="1">
+<li><strong>ls:</strong> prints out the list of files and
+sub-directories in the present working directory</li>
+<li><strong>ls -l:</strong> prints out the list of files and
+sub-directories in the present working directory including detailed
+information related to the permissions, owner, size, dates etc. of each
+of the files.</li>
+<li><strong>wc &lt;filename&gt;:</strong> counts the lines, words, and
+characters in a file</li>
+<li><strong>wc -l &lt;filename&gt;:</strong> counts only the lines in a
+file</li>
+</ol>
+<p>That’s all fine and dandy. But, what if you want to count the number
+of files in the present working directory?</p>
+<p>If you remember the definition of data wrangling, it can involve a
+handful of operations on a piece of data. These operations are typically
+done in a specific order - one after the other. So, one needs an
+organized and synchronous pipeline that takes as input the original
+piece of data and in stages transforms it into the desired piece of
+information. Now, we will look at how we can create a simple but
+powerful data pipeline in the shell environment using the pipe ( | )
+command.</p>
+<p>Type the following command and behold: <code>ls | wc -l</code>. We
+are now able to count the number of files in the current directory. Now
+we will try to understand how the pipe command works. But to understand
+that, we must remember that “In Unix (like systems), everything is a
+file”. So, during the command “ls | wc -l”, the shell takes the output
+of the command “ls” and passes that onto the command “wc -l” as input in
+the form of a file (remember that “wc” expects a file as an input).</p>
+<p>Now let’s try to understand some complex examples of the pipe
+command. In the given hw4.zip file, take a look inside the dataset1
+directory and you will see 30 files. Each of these files contains some
+text. Suppose someone asks us to filter only the files containing the
+word “sample” and exactly 3 lines containing the word “CSC510”. We can
+execute the following command:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;CSC510&quot;</span> file<span class="pp">*</span><span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">&quot;:3$&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d:</span> <span class="at">-f1</span></span></code></pre></div>
+<p>Now, if we are asked to sort the names of these files in a descending
+order based on the size of the files, we can enhance the previous
+command as follows:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;CSC510&quot;</span> file<span class="pp">*</span><span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">&quot;:3$&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d:</span> <span class="at">-f1</span> <span class="kw">|</span> <span class="fu">xargs</span> ls <span class="at">-l</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k5,5nr</span></span></code></pre></div>
+<p>Additionally, when printing the names of these filtered files, if we
+want to change the file name format from “file_#” to “the_file_#”, we
+can use the following command including “sed” for the substitution:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;CSC510&quot;</span> file<span class="pp">*</span><span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">&quot;:3$&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d:</span> <span class="at">-f1</span> <span class="kw">|</span> <span class="fu">xargs</span> ls <span class="at">-l</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k5,5nr</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/file_/the_name_/&#39;</span></span></code></pre></div>
+<p>Now, if we want to append “_filtered” at the end of each file name,
+we can execute the following command adding “gawk”:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">&quot;CSC510&quot;</span> file<span class="pp">*</span><span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">&quot;:3$&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d:</span> <span class="at">-f1</span> <span class="kw">|</span> <span class="fu">xargs</span> ls <span class="at">-l</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k5,5nr</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/file_/the_name_/&#39;</span> <span class="kw">|</span> <span class="fu">gawk</span> <span class="st">&#39;{ print $9 &quot;_filtered&quot; }&#39;</span></span></code></pre></div>
+<p>In this relatively complex example, we have seen the usage of
+multiple tools like <code>grep</code>, <code>cut</code>,
+<code>xargs</code>, <code>sort</code>, <code>sed</code>, and
+<code>gawk</code>. Let’s take a moment to appreciate the immense power
+bestowed upon us through these tools especially when they are combined
+with pipes. This entire pipeline might seem enigmatic at this point.
+But, it will all make sense by the end of the tutorial.</p>
+<p>Let’s now try to unravel this enigma. The command <code>cut</code>
+extracts a specific column from a piece of data containing multiple
+columns separated by some field separator that is specified with the
+<code>d</code> flag. <code>xargs</code> takes a number of rows and runs
+the command that follows (in this case ls-l) on each of the rows one at
+a time. <code>sort</code> command sorts the list of given inputs based
+on some criteria (in this case, the options for sort are <code>k</code>
+which specifies the range of columns used for sorting, <code>n</code>
+which means numeric sort and <code>r</code> which means in reverse order
+i.e. descending order). Next, we will look at the <code>grep</code>,
+<code>sed</code>, and <code>gawk</code> commands in more detail.</p>
+<h2 id="grep">GREP</h2>
+<p>grep is a powerful command-line tool used for searching plain-text
+data sets for lines that match a regular expression. The name stands for
+Global Regular Expression Print. It’s commonly used in Unix-based
+systems like Linux and macOS. Whether you’re searching for a specific
+string in a file, filtering output from other commands, or looking for
+patterns across multiple files, grep is the tool for the job.</p>
+<p><strong><em>Basic Syntax: grep [options] pattern
+[file…]</em></strong></p>
+<ul>
+<li><p><strong><em>pattern:</em></strong> The string or regular
+expression you want to search for.</p></li>
+<li><p><strong><em>file:</em></strong> The file(s) where the search is
+performed. If no file is specified, grep searches the input from
+standard input (like output from another command).</p></li>
+</ul>
+<h4 id="common-options">Common Options</h4>
+<ul>
+<li><code>-i</code>: Ignore case distinctions in both the pattern and
+the input files.<br />
+Example: grep -i “hello” file.txt</li>
+<li><code>-r</code> or <code>-R</code>: Recursively search
+directories.<br />
+Example: grep -r “hello” /path/to/directory<br />
+</li>
+<li><code>-l</code>: Print only the names of files with matching
+lines.<br />
+Example: grep -l “hello” *.txt<br />
+</li>
+<li><code>-n</code>: Prefix each line of output with the line number
+within its file.<br />
+Example: grep -n “hello” file.txt<br />
+</li>
+<li><code>-v</code>: Invert the match, showing lines that do not match
+the pattern.<br />
+Example: grep -v “hello” file.txt<br />
+</li>
+<li><code>-c</code>: Print only a count of matching lines per
+file.<br />
+Example: grep -c “hello” file.txt</li>
+<li><code>-o</code>: Print only the matched parts of matching
+lines.<br />
+Example: grep -o “hello” file.txt</li>
+</ul>
+<p>grep is extremely powerful when used with regular expressions.
+Regular expressions allow you to search for complex patterns. Let’s go
+over a quick primer of regular expressions below:</p>
+<h3 id="quick-primer-on-regular-expressions-regex">Quick Primer on
+Regular Expressions (Regex)</h3>
+<p>Regular expressions (regex) are sequences of characters that define
+search patterns, primarily used for string matching and manipulation.
+They are powerful tools for searching, replacing, and parsing text in
+many programming languages and tools like grep, sed,gawk, and editors
+like VSCode.</p>
+<h4 id="basic-components-of-regex">Basic Components of Regex</h4>
+<ol type="1">
+<li><strong>Literals</strong></li>
+</ol>
+<ul>
+<li>These are the simplest regex elements. They match the exact
+characters they represent.</li>
+<li>Example: cat matches “cat” in “catapult” or “scattered”.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Metacharacters</strong></li>
+</ol>
+<ul>
+<li>Metacharacters are special symbols that have specific meanings in
+regex.<br />
+</li>
+<li>Common metacharacters: . ^ $ * + ? {} [] ()  |</li>
+</ul>
+<h4 id="common-metacharacters-and-their-uses">Common Metacharacters and
+Their Uses</h4>
+<ol type="1">
+<li><strong>. (Dot)</strong></li>
+</ol>
+<ul>
+<li>Matches any single character except a newline.<br />
+</li>
+<li>Example: c.t matches “cat”, “cut”, “cot”.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>^ (Caret)</strong></li>
+</ol>
+<ul>
+<li>Matches the start of a string.<br />
+</li>
+<li>Example: ^The matches “The” only if it’s at the beginning of a
+line.</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>$ (Dollar)</strong></li>
+</ol>
+<ul>
+<li>Matches the end of a string.<br />
+</li>
+<li>Example: end$ matches “end” only if it’s at the end of a line.</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>* (Asterisk)</strong></li>
+</ol>
+<ul>
+<li>Matches 0 or more occurrences of the preceding element.<br />
+</li>
+<li>Example: ca*t matches “ct”, “cat”, “caaaat”.</li>
+</ul>
+<ol start="5" type="1">
+<li><strong>+ (Plus)</strong></li>
+</ol>
+<ul>
+<li>Matches 1 or more occurrences of the preceding element.<br />
+</li>
+<li>Example: ca+t matches “cat”, “caaaat”, but not “ct”.</li>
+</ul>
+<ol start="6" type="1">
+<li><strong>? (Question Mark)</strong></li>
+</ol>
+<ul>
+<li>Matches 0 or 1 occurrence of the preceding element.<br />
+</li>
+<li>Example: colou?r matches both “color” and “colour”.</li>
+</ul>
+<ol start="7" type="1">
+<li><strong>{} (Braces)</strong></li>
+</ol>
+<ul>
+<li>Matches a specific number of occurrences of the preceding
+element.<br />
+</li>
+<li>Example: a{3} matches “aaa”.</li>
+<li>{min,}: At least min occurrences.</li>
+<li>{min,max}: Between min and max occurrences.</li>
+</ul>
+<ol start="8" type="1">
+<li><strong>[] (Square Brackets)</strong></li>
+</ol>
+<ul>
+<li>Matches any one of the characters inside the brackets.</li>
+<li>Example: [aeiou] matches any vowel.</li>
+<li>[0-9] matches any digit.</li>
+</ul>
+<ol start="9" type="1">
+<li><strong>() (Parentheses)</strong></li>
+</ol>
+<ul>
+<li>Groups parts of a regex together and captures the matched
+text.<br />
+</li>
+<li>Example: (ab)+ matches “ab”, “abab”, “ababab”.</li>
+</ul>
+<ol start="10" type="1">
+<li><strong>| (Pipe)</strong></li>
+</ol>
+<ul>
+<li>Acts as a logical OR between patterns.<br />
+</li>
+<li>Example: cat|dog matches either “cat” or “dog”.</li>
+</ul>
+<ol start="11" type="1">
+<li><strong> (Backslash)</strong></li>
+</ol>
+<ul>
+<li>Escapes a metacharacter to treat it as a literal.<br />
+</li>
+<li>Example: . matches a literal dot instead of any character.</li>
+</ul>
+<h4 id="character-classes">Character Classes</h4>
+<ul>
+<li><code>\d</code>: Matches any digit (equivalent to [0-9]).</li>
+<li><code>\D</code>: Matches any non-digit.</li>
+<li><code>\w</code>: Matches any word character (alphanumeric +
+underscore).</li>
+<li><code>\W</code>: Matches any non-word character.</li>
+<li><code>\s</code>: Matches any whitespace character (space, tab,
+newline).</li>
+<li><code>\S</code>: Matches any non-whitespace character.</li>
+</ul>
+<h4 id="anchors">Anchors</h4>
+<ul>
+<li>^: As mentioned earlier, it matches the start of a string.</li>
+<li>$: Matches the end of a string.</li>
+</ul>
+<p>We will be using the -E flag with grep when we want to match regular
+expression patterns since the -E flag enables extended regular
+expressions to facilitate advanced patterns like alternation,
+repetition, and optional items. Some examples of using regular
+expression search patterns with grep are as follows:</p>
+<ol type="1">
+<li>Find lines that start with “Error”: grep -E “^Error”
+logfile.txt<br />
+</li>
+<li>Find lines that end with a digit: grep -E “[0-9]$” data.txt</li>
+<li>Find lines that contain either “cat” or “dog”: grep -E “cat|dog”
+animals.txt</li>
+<li>Find lines where “error” appears exactly three times: grep -E
+“(error.*){3}” logfile.txt</li>
+<li>Find lines with a date in YYYY-MM-DD format: grep -E
+“[0-9]{4}-[0-9]{2}-[0-9]{2}” file.txt</li>
+<li>Find lines with an email address: grep -E
+“[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}” file.txt</li>
+<li>Find lines that do not contain the word “success”: grep -E -v
+“success” logfile.txt</li>
+<li>Find lines with at least one whitespace character: grep -E “”
+file.txt</li>
+<li>Find lines where the word “fail” is followed by a number: grep -E
+“fail[0-9]” file.txt</li>
+<li>Find lines with a 5-digit zip code: grep -E “0-9]{5}
+addresses.txt</li>
+</ol>
+<h2 id="sed">SED</h2>
+<p>SED, short for Stream EDitor, is a powerful text-processing utility
+found in Unix and Unix-like operating systems. It is used to perform
+basic text transformations on an input stream (a file or input from a
+pipeline). SED operates by reading the input line by line, applying
+specified editing commands, and then outputting the modified text. It’s
+widely used for tasks like searching, find-and-replace operations, text
+deletion, and insertion.</p>
+<p>This tutorial will introduce you to the basics of SED, covering
+simple operations and more advanced features.</p>
+<p><strong><em>Basic Syntax: sed ‘command’ input_file</em></strong></p>
+<ul>
+<li><p><strong><em>command:</em></strong> This is where you specify what
+operation SED should perform, such as substitution or deletion.</p></li>
+<li><p><strong><em>input_file:</em></strong> The file you want SED to
+process. If you omit the file, SED will read from the standard input
+(such as the terminal or another command’s output).</p></li>
+</ul>
+<h3 id="common-sed-commands">Common SED Commands</h3>
+<h4 id="substitution-command">Substitution Command</h4>
+<p>The substitution command (s) is one of the most commonly used SED
+commands. It replaces specified text within a line.
+<strong><em>Example:</em></strong> To replace “apple” with “orange” in a
+file:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/apple/orange/&#39;</span> input_file</span></code></pre></div>
+<p>This command replaces the first occurrence of “apple” with “orange”
+in each line of the file.</p>
+<h4 id="global-substitution">Global Substitution</h4>
+<p>By default, SED replaces only the first occurrence of the pattern in
+each line. To replace all occurrences in a line, use the g flag:
+<strong><em>Example:</em></strong> To replace all occurrences of “apple”
+with “orange” in each line:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/apple/orange/g&#39;</span> input_file</span></code></pre></div>
+<h4 id="deleting-lines">Deleting Lines</h4>
+<p>The delete command (d) removes entire lines that match a given
+pattern. <strong><em>Example:</em></strong> To delete all lines
+containing the word “delete_me”:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;/delete_me/d&#39;</span> input_file</span></code></pre></div>
+<p>This removes any line in the file that contains “delete_me”.</p>
+<h4 id="deleting-specific-text">Deleting Specific Text</h4>
+<p>If you only want to delete specific text within a line without
+removing the entire line, you can use the substitution command with an
+empty replacement string. <strong><em>Example:</em></strong> To remove
+the word “delete_me” from a line:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/delete_me//&#39;</span> input_file</span></code></pre></div>
+<p>This removes “delete_me” wherever it appears in a line, but leaves
+the rest of the line intact.</p>
+<h3 id="advanced-features">Advanced Features</h3>
+<h4 id="addressing">Addressing</h4>
+<p>You can specify which lines to apply your SED commands to by using
+line numbers or patterns. <strong><em>Single Line:</em></strong> To
+apply a command to a specific line, you can use its line number. For
+example, to replace “foo” with “bar” only on line 3:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;3s/foo/bar/&#39;</span> input_file</span></code></pre></div>
+<p><strong><em>Range of Lines:</em></strong> To apply a command to a
+range of lines, use the format start_line, and end_line. For example, to
+delete lines 3 through 5:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;3,5d&#39;</span> input_file</span></code></pre></div>
+<p><strong><em>Pattern Matching:</em></strong> You can also use patterns
+to match lines. For example, to replace “foo” with “bar” only on lines
+containing “baz”:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;/baz/s/foo/bar/&#39;</span> input_file</span></code></pre></div>
+<p><strong><em>Using Multiple Commands:</em></strong> You can chain
+multiple commands together by separating them with a semicolon or by
+using the -e option. For example, to replace “foo” with “bar” and then
+delete lines containing “delete_me”:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/foo/bar/; /delete_me/d&#39;</span> input_file</span></code></pre></div>
+<p>Alternatively:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-e</span> <span class="st">&#39;s/foo/bar/&#39;</span> <span class="at">-e</span> <span class="st">&#39;/delete_me/d&#39;</span> input_file</span></code></pre></div>
+<p><strong><em>Writing to a New File:</em></strong> To save the output
+to a new file instead of displaying it on the screen, redirect the
+output:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/foo/bar/&#39;</span> input_file <span class="op">&gt;</span> output_file</span></code></pre></div>
+<ul>
+<li><p>Exercise: To replace the third occurrence of “foo” in each line
+with “bar”:<br />
+sed ‘s/foo/bar/3’ input_file</p></li>
+<li><p>Exercise: To replace “foo” with “bar” only on lines from 10 to
+20:<br />
+sed ‘10,20s/foo/bar/’ input_file</p></li>
+</ul>
+<h2 id="gawk">GAWK</h2>
+<p>GAWK is GNU Project’s version of AWK. The AWK programming language
+was originally created in the 1970s as a powerful text-processing
+language used in Unix and Unix-like operating systems. GAWK is designed
+for pattern scanning and processing. It allows you to extract
+information, perform calculations, and generate formatted reports,
+making it an essential tool for data analysis and text manipulation.</p>
+<p>This tutorial will cover the basics of GAWK, including how to use it
+for simple tasks like text extraction, as well as more advanced features
+like working with fields, patterns, and GAWK scripts. If you don’t have
+gawk installed, you should be able to easily install it using your
+operating system’s package manager (e.g. apt or brew).</p>
+<p><strong><em>Basic Syntax: gawk ‘pattern { action }’
+input_file</em></strong></p>
+<ul>
+<li><p><strong><em>pattern:</em></strong> The condition that GAWK tests
+for each line. If the pattern is true, GAWK executes the associated
+action.</p></li>
+<li><p><strong><em>action:</em></strong> The command(s) GAWK runs when
+the pattern is matched. If no action is specified, GAWK prints the
+entire line.</p></li>
+<li><p><strong><em>input_file:</em></strong> The file that GAWK
+processes. If omitted, GAWK reads from standard input.</p></li>
+</ul>
+<h3 id="working-with-fields">Working with Fields</h3>
+<p>GAWK automatically splits each line of input into fields based on a
+delimiter (by default, whitespace). Each field is represented by $1, $2,
+etc., where $1 is the first field, $2 is the second, and so on. $0
+represents the entire line.</p>
+<h4 id="extracting-specific-fields">Extracting Specific Fields</h4>
+<p>To print specific fields from a file:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gawk</span> <span class="st">&#39;{ print $1, $3 }&#39;</span> input_file</span></code></pre></div>
+<p>This command prints the first and third fields from each line of the
+file.</p>
+<h4 id="changing-the-field-separator">Changing the Field Separator</h4>
+<p>If your data is separated by something other than whitespace, you can
+change the field separator using the -F option.</p>
+<p>For example, if your fields are separated by commas:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gawk</span> <span class="at">-F,</span> <span class="st">&#39;{ print $1, $2 }&#39;</span> input_file</span></code></pre></div>
+<p>This prints the first and second fields from a comma-separated
+file.</p>
+<h3 id="using-patterns">Using Patterns</h3>
+<p>GAWK allows you to specify patterns that determine which lines are
+processed.</p>
+<h4 id="simple-pattern-matching">Simple Pattern Matching</h4>
+<p>To print lines that match a specific pattern:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gawk</span> <span class="st">&#39;/pattern/ { print $0 }&#39;</span> input_file</span></code></pre></div>
+<p>This command prints all lines containing the word “pattern”.</p>
+<h4 id="matching-with-conditions">Matching with Conditions</h4>
+<p>You can also use conditions to match patterns. For example, to print
+lines where the value in the third field is greater than 100:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gawk</span> <span class="st">&#39;$3 &gt; 100 { print $0 }&#39;</span> input_file</span></code></pre></div>
+<p>This command prints any line where the third field is greater than
+100.</p>
+<h3 id="performing-calculations">Performing Calculations</h3>
+<p>GAWK can perform arithmetic operations on fields, which is
+particularly useful for data analysis.</p>
+<h4 id="simple-arithmetic">Simple Arithmetic</h4>
+<p>To calculate the sum of the values in the second and third
+fields:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gawk</span> <span class="st">&#39;{ print $2 + $3 }&#39;</span> input_file</span></code></pre></div>
+<p>This prints the sum of the second and third fields for each line.</p>
+<h4 id="aggregating-data">Aggregating Data</h4>
+<p>To calculate the total sum of a particular field across all
+lines:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gawk</span> <span class="st">&#39;{ sum += $2 } END { print sum }&#39;</span> input_file</span></code></pre></div>
+<p>This sums the values in the second field across all lines and prints
+the result at the end.</p>
+<h3 id="using-built-in-variables">Using Built-in Variables</h3>
+<p>GAWK provides several built-in variables that are useful for more
+complex tasks:</p>
+<ul>
+<li>NR: The current record (line) number.</li>
+<li>NF: The number of fields in the current record.</li>
+<li>FS: The input field separator.</li>
+<li>OFS: The output field separator.</li>
+</ul>
+<p>Example: To print the line number followed by the last field on each
+line:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gawk</span> <span class="st">&#39;{ print NR, $NF }&#39;</span> input_file</span></code></pre></div>
+<h3 id="writing-gawk-scripts">Writing GAWK Scripts</h3>
+<p>For more complex tasks, you can write a GAWK script and store it in a
+file. A GAWK script file typically looks like this:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">BEGIN</span> { FS = <span class="st">&quot;,&quot;</span><span class="kw">;</span> <span class="ex">OFS</span> = <span class="st">&quot;\t&quot;</span> } {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">(</span><span class="va">$3</span> <span class="op">&gt;</span> 100<span class="kw">)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">print</span> <span class="va">$1</span>, <span class="va">$3</span> <span class="pp">*</span> 2</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">END</span> { print <span class="st">&quot;Processing Complete&quot;</span> }</span></code></pre></div>
+<p>You can run the script with:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gawk</span> <span class="at">-f</span> script.gawk input_file</span></code></pre></div>
+<p>This script sets the field separator to a comma and the output field
+separator to a tab. It then prints the first field and doubles the value
+of the third field for lines where the third field is greater than 100.
+Finally, it prints “Processing Complete” after processing the entire
+file.</p>
+<h2 id="and-finally">And, finally …</h2>
+<p>You’ve probably been wondering: <strong><em>when to use grep, sed,
+and gawk?</em></strong> Typically, try to use <strong>grep</strong> for
+searching, <strong>sed</strong> for substitutions, and
+<strong>gawk</strong> for more complex tasks. The renowned computer
+scientist <a
+href="https://en.wikipedia.org/wiki/Douglas_McIlroy">Douglas Mcilroy</a>
+who coined the concept of pipelines, recommended the following:
+<strong><em>don’t use sed when you can use grep and don’t use (g)awk
+when you can use sed</em></strong>.</p>
+<p>In this tutorial, we learnt about various useful shell commands to
+facilitate data wrangling. We have seen complex example tasks that had
+to be broken down into smaller subtasks thus teaching us an important
+organizational lesson of task decomposition. Decomposing a complex task
+into smaller subtasks makes debugging and team-work much more convenient
+since different team members can work on different parts of the pipeline
+and can eventually integrate their individual parts to form the
+whole.</p>
+<h2 id="homework">Homework</h2>
+<ol type="1">
+<li><p>Download and unzip <a
+href="https://moodle-courses2425.wolfware.ncsu.edu/mod/resource/view.php?id=547767">hw4.zip</a>.</p></li>
+<li><p>Inside the hw4.zip, you will find a bash script called
+<code>infinite.sh</code>. Run the script using
+<code>bash infinite.sh</code>. The script will now run infinitely in the
+background. Your task is to write a simple script task1.sh to kill this
+process.</p></li>
+<li><p>Recall the example where we counted and modified the names of the
+files containing the word “sample” and exactly 3 lines containing the
+word “CSC510” in each file of dataset1. Now, we are challenged to do a
+similar task but with slightly different specifications.</p>
+<ol type="a">
+<li>First list the files containing the word “sample” and at least 3
+occurrences of the word “CSC510”. Note that we are no longer talking
+about lines containing the word “CSC510” but instead the actual number
+of times the word “CSC510” occurs. You are <strong>not allowed to use
+<code>gawk</code> for this task</strong> but instead use a combination
+of <code>grep</code> and <code>uniq</code> (note: if you are unfamiliar
+with <code>uniq</code>, on a terminal write <code>man uniq</code> and
+you will get the user manual for the command <code>uniq</code>).</li>
+<li>Sort in descending order the list of the filtered files based on the
+occurrences of the word “CSC510”. You have to break the ties by the size
+of the files. You will <strong>have to</strong> use <code>gawk</code>
+along with the other commands for this task.</li>
+<li>Finally, from each file name substitute “file_” with “filtered_” and
+list the final output.</li>
+</ol>
+<p>Build a single pipeline of commands for all the tasks a, b, and c and
+store the pipeline inside a script called task2.sh.</p></li>
+<li><p>Take a look at titanic.csv which is a dataset containing
+passenger details and their survival during the Titanic disaster. We
+want you to analyze this dataset from the shell using the tools that you
+have learnt in this tutorial.</p>
+<ol type="a">
+<li>Extract passengers from 2nd class who embarked at Southampton.</li>
+<li>Then replace male/female labels with respectively M/F.</li>
+<li>Finally, calculate the average age of the filtered passengers.</li>
+</ol>
+<p>Build a single pipeline of commands for all the tasks a, b, and c and
+store the pipeline inside a script called task3.sh.</p></li>
+<li><p>Push task1.sh, task2.sh, and task3.sh files to your HW4 GitHub
+repository with the same badges as those from HW1.</p></li>
+<li><p>Submit a PDF report containing the following information:</p>
+<ol type="a">
+<li>Group number</li>
+<li>Names of the group members</li>
+<li>GitHub link of your HW4 repository</li>
+<li>Output of task1.sh, task2.sh, and task3.sh</li>
+</ol></li>
+</ol>
+<h2 id="important-links">Important Links</h2>
+<ol type="1">
+<li><a
+href="https://alvinalexander.com/unix/edu/examples/grep.shtml">GREP
+examples</a></li>
+<li><a href="https://learnxinyminutes.com/docs/sed/">SED
+examples</a></li>
+<li><a href="https://learnxinyminutes.com/docs/awk/">AWK
+examples</a></li>
+<li><a
+href="https://www.geeksforgeeks.org/tee-command-linux-example/">Debugging
+pipes with <strong>tee</strong></a></li>
+<li><a href="https://regex101.com/">Debugging regular
+expressions</a></li>
+<li><a href="https://missing.csail.mit.edu/2020/data-wrangling/">MIT
+missing semester</a></li>
+</ol>
+
+
+
+
+</div>
+</body>
+</html>

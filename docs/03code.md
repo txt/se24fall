@@ -19,7 +19,7 @@ Terminology (watch for these words):
 - Variables:
   - row, rows, done (which divides into best and rest); todo
 - SE Notes: 
-  - refactoring, DRY, WET
+  - refactoring, five lines, DRY, WET
   - styles, patterns, idioms, function-oriented 
   - decorators, little languages, configuration, pipes, iterators, exception handling,
   - make, regular expressions,
@@ -29,6 +29,10 @@ Terminology (watch for these words):
   - Y,  dependent, X,  independent, goals, 
   - labelling, active learning, 
   - multi-objective, aggregation function, chebyshev
+    - explore, exploit, adaptive, acquisition function, cold-start, warm-start,
+      diversity, perversity, 
+    - (population|surrogate|pool|stream)-based
+    - model-query synthesis
   - regression, classification, Bayes classifier, 
   - entropy, standard deviation
   - over-fitting, order effects, learner variability, cross-validation, temporal validation
@@ -133,15 +137,15 @@ and maximize fuel consumption.
 
      Clndrs   Volume  HpX  Model  origin  Lbs-  Acc+  Mpg+
      -------  ------  ---  -----  ------  ----  ----  ----
-      4       90      48   78     2       1985  21.5   40
+      4       90      48   78     2       1985  21.1   40
       4       98      79   76     1       2255  17.7   30
-      4       98      68   77     3       2045  18.5   30
+      4       98      68   77     3       2045  18.4   30
       4       79      67   74     2       2000  16     30
       ...
       4      151      85   78     1       2855  17.6   20
       6      168      132  80     3       2910  11.4   30
       8      350      165  72     1       4274  12     10
-      8      304      150  73     1       3672  11.5   10
+      8      304      150  73     1       3672  11.1   10
       ------------------------------      ----------------
         independent features (x)          dependent goals (y)
 
@@ -196,6 +200,51 @@ def chebyshevs(self:DATA) -> DATA:
   self.rows = sorted(self.rows, key=lambda r: self.chebyshev(r))
   return self
 ```
+
+### Active Learning Buzzwords
+
+e.g.
+
+```
+Before:
+
+      y y y         n n   : Y (dependent, many missing values)
+    1 2 3 4 5 6 7 8 9 10  : X (independent, most fully known)
+    
+So:
+
+             x2 x2        : AQ1: explore  (usual initial tactic)
+       x1                 : AQ2: exploit (once we know where the good stuff is)
+      x3 x3        x3 x3  : AQ3: representativeiness
+    x4     x4    x4   x4  : AQ4: diversity
+    x5     x5 x5 x5       : AQ5: perversity (to boldly go where no one has gone before)
+```
+
+| words | note |
+|-------:|:-----|
+|explore|     looking for places that can change our mind<br>In the above, try x=6 |
+|exploit|   go to where things look best<br>In the above, try x=(2,3,4) (since that is where things look best). A.k.a. greedy search |
+|adaptive | moving from explore to exploit as the reasoning continues |
+|acquisition functions | the thing that tells us to _explore/exploit_/whatever|
+| informativeness |  a.k.a. exploit. Go where its looks good. |
+| representiveness| equal parts in all regions e.g. x=2,3,4 half the time and x=9,10 half the time|
+| diversity |  ignore the Y values and sample randomly and widely|
+| perversity (my term)| go where you ain't gone before. |
+| cold-start | no prior knowledge |
+| warm-start | some prior (steam-based is usually warm-start) |
+| population-based| objective function knowm, we (e.g.) surf its gradients looking for cool pleases to study next|
+| surrogate-based | objective function unknown so we build an approximation from the available data|
+| pool-based | surrogate-based. have knowledge of lots of independent variables |
+| stream-based| surrogate based. have a (small) window of next examples, after which we wills ee another and and anouter. This is usually a warm-start tactic|
+| model-query synthesis| surrogate or population-based.  look at model so far, infer where to try next. Kind an extreme version of _explore_. May include e.g. feature weighting to decide what to ignore|
+
+In most of my current experiments:
+
+- surrogate-based
+- usually cold-start
+  - but work over summer by grad students suggests that diversity sampling (to create a warm start) means that exploit defeats adaptive and/or explore
+- in batch-mode (when we read all the data) we are pool-based
+  - area open for research: stream-based
 
 ### Configuration
 Other people define their command line options separate to the settings.
@@ -496,6 +545,14 @@ code may not be the same the order needed by the compiler.
 So he wrote a "tangle" system where code and comments, ordered for explaining, was rejigged at load time into
 what the compiler needs. I found I could do a small part of Knthu's tangle  with a [5 line decorator](#decorators).
 
+#### Pattern: Short functions
+
+- Robert Martin:
+  - Functions should do one thing. They should do it well. They should do it only.
+  - Smaller functions are mostly robust, easy to read and maintain.
+  - So the first rule of functions is that they should be small. 
+    - How small? Some say [five lines](https://www.amazon.com/Five-Lines-Code-when-refactor/dp/161729831X)
+  - The second rule of functions is that they should be smaller than that. 
 
 ####  Pattern: DRY, not WET
 - WET = Write everything twice. 
@@ -649,6 +706,8 @@ the = o(
             bootstraps=512,
             confidence=0.05))
 ```
+With the above, now our code can say things like `the.stats.cohen`.
+
 If you want, you can even redefine `+`  (`__add__`) or `=` (`__eq__`):
 
 ```python
