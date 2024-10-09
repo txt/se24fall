@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Git</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<header id="title-block-header">
+<h1 class="title">Git</h1>
+</header>
+<h2 id="what-is-git">What is Git?</h2>
+<p>Git is a free and open source distributed version control system used
+for handel everything of projects during software development. It is
+often used to control source code by programmers collaboratively
+developing software.</p>
+<h3 id="git-data-structure">Git data structure</h3>
+<p>Git has two data structures: a mutable index (also called stage or
+cache) that caches information about the working directory and the next
+revision to be committed; and an object database that stores immutable
+objects. The index serves as a connection point between the object
+database and the working tree.<br /> In Git terminology, a file is
+called a <strong>blob</strong>, and it’s just a bunch of bytes. A
+directory is called a <strong>tree</strong>, and it maps names to blobs
+or trees (so directories can contain other directories).</p>
+<h2 id="main-concepts">Main Concepts</h2>
+<h3 id="repository">Repository</h3>
+<p>A repository (or repo) is a storage space for files, directories,
+historical records, commits, and heads. It can be local (on your
+computer) or remote (on a server like GitHub). <br /> <br /> Some
+components of the repository:<br /> * .git Directory: contains all the
+configurations, logs, branches, HEAD, and more * Working Tree: the
+directories and files in your repository * Index: is the staging area in
+git. It’s basically a layer that separates your working tree from the
+Git repository. * HEAD and head: HEAD is a pointer that points to the
+current branch. A repository only has 1 <strong>active</strong> HEAD.
+head is a pointer that points to any commit. A repository can have any
+number of heads.</p>
+<h3 id="commit">Commit</h3>
+<p>A commit is a snapshot of a set of changes. For example, if you added
+5 files, and removed 2 others, these changes will be contained in a
+commit. Each commit has a unique ID.</p>
+<h3 id="branch">Branch</h3>
+<p>A branch is a parallel version of your project. By default, Git
+creates a <code>main</code> (or <code>master</code>) branch. Branches
+allow you to develop features independently from the main codebase.</p>
+<h3 id="stages-of-git">Stages of Git</h3>
+<ul>
+<li>Modified: Changes have been made to a file but file has not been
+committed to Git Database yet</li>
+<li>Staged: Marks a modified file to go into your next commit
+snapshot</li>
+<li>Committed: Files have been committed to the Git Database</li>
+</ul>
+<h3 id="merge">Merge</h3>
+<p>Merging is the process of combining changes from different branches.
+It integrates the work from one branch into another.</p>
+<h3 id="clone">Clone</h3>
+<p>Cloning is copying a repository from a remote server to your local
+machine.</p>
+<h3 id="pull-and-push">Pull and Push</h3>
+<ul>
+<li><strong>Pull</strong>: Fetches changes from a remote repository and
+merges them into your local branch.</li>
+<li><strong>Push</strong>: Sends your committed changes to a remote
+repository.</li>
+</ul>
+<h2 id="basic-commands">Basic Commands</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create an empty Git repository.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set &amp; Print Some Basic Config Variables (Global)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.email <span class="st">&quot;MyEmail@ncsu.com&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.name <span class="st">&quot;My Name&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Quickly check available commands</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git help</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#To intentionally untrack file(s) &amp; folder(s) from git. Based on different languages, </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;temp/&quot;</span> <span class="op">&gt;&gt;</span> .gitignore</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;private_key&quot;</span> <span class="op">&gt;&gt;</span> .gitignore</span></code></pre></div>
+<p>There are different styles of gitignore file. reference:
+https://github.com/github/gitignore. For example, Python developers
+might consider using <a
+href="https://github.com/github/gitignore/blob/main/Python.gitignore">https://github.com/github/gitignore/blob/main/Python.gitignore</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clone a repository</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>repository-url<span class="op">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the status of your files. Will display the branch, untracked files, changes and other differences</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># list existing branches &amp; remotes</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-a</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new branch</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="op">&lt;</span>myNewBranch<span class="op">&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># delete a branch</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> <span class="op">&lt;</span>myBranch<span class="op">&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># rename a branch</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-m</span> <span class="op">&lt;</span>myBranchName<span class="op">&gt;</span> <span class="op">&lt;</span>myNewBranchName<span class="op">&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add files to staging area</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Commit your changes</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Commit message&quot;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># By default, git push will push and merge changes from the current branch to its remote-tracking branch</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># By default, git pull will update your current branch</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new branch</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Switching Branches</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Restoring Files to a Previous State</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="op">&lt;</span>branch-name<span class="op">&gt;</span> -- <span class="op">&lt;</span>file-name<span class="op">&gt;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking Out a Specific Commit</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="op">&lt;</span>commit-hash<span class="op">&gt;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge a branch into the current branch</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></span></code></pre></div>
+<h2 id="special-situation">Special situation</h2>
+<h3 id="stash">Stash</h3>
+<p>You’ve been doing some work in your git repo, but you want to pull
+from the remote. Since you have uncommitted changes to some files, you
+are not able to run git pull. Instead, you can run git stash to save
+your changes onto a stack!</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="co">#checking if everything is okay</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash list</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash pop</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#or</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash apply</span></code></pre></div>
+<h3 id="fix-merge-conflix">Fix merge conflix</h3>
+<p>When we merge current branch to main branch, some conflicts might
+happen, like:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Auto-merging</span> filename.txt</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">CONFLICT</span> <span class="er">(</span><span class="ex">content</span><span class="kw">)</span><span class="bu">:</span> Merge conflict in filename.txt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div>
+<p>This means that Git has identified conflicting changes in “filename”
+that need to be resolved.<br /> Open the files with conflicts in your
+text editor or IDE. Conflicts sections shows your current branch, named
+“<strong>HEAD</strong>”, and the branch you try to merge, named
+“branch-name”.<br /> <strong>Step:</strong><br /> * Resolve the
+Conflict: Edit the file to resolve the conflict by choosing the right
+changes to keep. * Stage the Resolved Files: Once you have resolved the
+conflicts, you need to stage the changes. * Commit the Merge: After
+staging the resolved files, commit the merge. * Finish the Merge
+Process: After committing, the merge conflict resolution is complete.
+There are some good visual tools to help with dealing conlicts like
+VSCodes, IntelliJ. To minimize the chance of conflicts, pull changes
+from the upstream branches regularly and resolve smaller conflicts
+incrementally. When working in a team, communicate about major changes
+or rebase regularly to reduce the chances of conflicts. <br /> ###
+Reverse In Git, “reverse” typically refers to undoing changes or
+reverting a commit. There are several ways to reverse changes in Git: *
+<strong>Revert a Commit:</strong> Creates a new commit that undoes the
+changes made by a previous commit without rewriting history. This is
+useful when you want to keep the history intact and record the fact that
+a commit was reverted.<br />
+<code>sh     git revert &lt;commit-hash&gt;</code> But if you have
+merged a branch into your main branch, but later realized that you need
+to undo this merge.
+<code>sh     #find the commit hash of the merge that you want to reverse     git log --oneline     #use "-m" option to specify the parent of the merge you want to keep. The "-m 1" option typically specifies that you want to keep the changes from the first parent (usually the main branch before the merge).     git revert -m 1 &lt;merge-commit-hash&gt;</code>
+* <strong>Reset a Commit:</strong> Moves the <strong>HEAD</strong>
+pointer and potentially the branch pointer to a previous commit,
+effectively “erasing” commits from the history. This can be destructive
+as it changes the commit history, making it as though certain commits
+never happened.<br /> The git reset command is used to undo commits by
+moving the HEAD and the current branch to a specified commit. There are
+three modes of reset: * <strong>soft</strong>: Moves the
+<strong>HEAD</strong> to a specified commit and leaves changes staged
+for commit. * <strong>mixed</strong> (default): Moves the
+<strong>HEAD</strong> to a specified commit, unstages changes (moves
+them to the working directory), but doesn’t touch the working directory.
+* <strong>hard</strong>: Moves the <strong>HEAD</strong> to a specified
+commit and deletes all changes in the working directory and index.
+<code>sh     git reset [--soft | --mixed | --hard] &lt;commit-hash&gt;</code>
+<strong>Important</strong>: Using –hard will lose all changes after the
+specified commit, and they cannot be recovered easily. * <strong>Undo
+Changes in the Working Directory:</strong> Reverts changes made to files
+in the working directory that haven’t been staged or committed
+yet.<br /> If you want to undo changes to a file that haven’t been
+staged or committed yet, you can use the “git checkout” (in older
+versions) or “git restore” (in newer versions) command.
+<code>sh     git restore &lt;file&gt;     #or for older version     git checkout -- &lt;file&gt;</code>
+* <strong>Unstage Changes:</strong> If you’ve added changes to the
+staging area (using “git add”) and want to unstage them without losing
+changes in the working directory:
+<code>sh     git reset HEAD &lt;file&gt;</code> * <strong>Reflog to
+Recover Lost Commits:</strong> If you accidentally use “git reset –hard”
+or otherwise lose commits, you can often recover them using the Git
+reflog, which tracks all movements of <strong>HEAD</strong>.
+<code>sh     git reflog</code> Find the commit hash of the desired
+state, and then reset or checkout to that commit.</p>
+<h2 id="some-materials">Some materials</h2>
+<p>YouTube video: <a
+href="https://www.youtube.com/watch?v=USjZcfj8yxE">Learn git in 15
+mins</a><br /> Interacting git learning website: <a
+href="https://learngitbranching.js.org/">Learn Git Branch</a></p>
+<h2 id="in-class-exercises">In class exercises</h2>
+<p>Try git comments in Learn Git Branch website.</p>
+<h2 id="homework">Homework</h2>
+<p>Note that for the homework, we will be looking for evidence that you
+completed these tasks in your <a
+href="https://github.com/txt/se24fall/commits/main/">commit log</a>.</p>
+<ol type="1">
+<li>Initialize a new Git repository:
+<ul>
+<li>Create a new directory called git-homework.</li>
+<li>Initialize a Git repository in this directory.</li>
+</ul></li>
+<li>Create a new project and add it to the repository:
+<ul>
+<li>Create a file called README.md and write a brief description about
+the repository.</li>
+<li>Add LICENSE.md, .gitignore, INSTALL.md, CONTRIBUTING.md,
+CODE-OF-CONDUCT.md into your repo. (reference:
+https://txt.github.io/se24fall/process.html#standard-files;
+https://choosealicense.com/licenses/)</li>
+<li>Create a simple webpage(.html file) discribing your team(including
+team number, all team members’ names, and emails).</li>
+<li>Stage and commit with an appropriate commit message.</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>HTML<span class="dt">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;en&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">META</span><span class="ot"> charset</span><span class="op">=</span><span class="st">&quot;UTF-8&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">META</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;viewport&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Sample Web Page<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>Great content!!!!!</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<ol start="3" type="1">
+<li>Modify the file(.html file) and commit the changes:
+<ul>
+<li>Add links to emails.</li>
+<li>Commit and push changes with descriptive message.</li>
+<li>View the commit history and check differences between commits.
+<!-- * git add...; git commit...; git push...; --></li>
+</ul></li>
+<li>Create a new branch:
+<ul>
+<li>Create a new branch called “feature”.
+<!-- * git add...; git commit...; git push...; --></li>
+</ul></li>
+<li>Switch to the new branch and make change:
+<ul>
+<li>switch to the feature branch.</li>
+<li>Add a footer to the website.</li>
+<li>Commit and push the changes with an appropriate message.</li>
+</ul></li>
+<li>Simulate a merge conflict:
+<ul>
+<li>Switch back to the main branch.</li>
+<li>Make a change to the same part (where the footer was added in
+feature) but with different content. For example, add a different footer
+message.</li>
+<li>Commit and push the changes.</li>
+</ul></li>
+<li>Merge and resolve the conflict:
+<ul>
+<li>Merge the feature branch into the main branch.</li>
+<li>Resolve the conflict to include both changes or create a
+consolidated footer message.</li>
+<li>After resolving the conflict, stage the changes and complete the
+merge.</li>
+</ul></li>
+<li>Revert a commit:
+<ul>
+<li>Make a new commit by adding a line to the project(.html file).</li>
+<li>Then undo the most recent commit.</li>
+</ul></li>
+<li>Stash Changes:
+<ul>
+<li>Create a new branch named “temp”, and make some changes but do not
+commit them.</li>
+<li>Use git stash to save the changes.</li>
+<li>Switch to the main branch and make another commit.</li>
+<li>Switch back to your “temp” branch and apply the stashed changes
+using git stash apply.</li>
+</ul></li>
+<li>Clean Up the Repository:
+<ul>
+<li>Delete all the branches.</li>
+</ul></li>
+<li>Put the screen snap of the webpage on the README.md file.<br />
+Submitting: create an pdf include your repo link and one screen snap
+with your terminal comments and return information of step 9. Scale:
+Each step is worth 0.3 points. Totally 3 points.</li>
+</ol>
+
+
+
+
+</div>
+</body>
+</html>
