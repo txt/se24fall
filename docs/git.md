@@ -217,22 +217,6 @@ these tasks in your [commit log](https://github.com/txt/se24fall/commits/main/).
     * Add LICENSE.md, .gitignore, INSTALL.md,  CONTRIBUTING.md, CODE-OF-CONDUCT.md into your repo. (reference: https://txt.github.io/se24fall/process.html#standard-files; https://choosealicense.com/licenses/)
     * Create a simple webpage(.html file) discribing your team(including team number, all team members' names, and emails).
     * Stage and commit with an appropriate commit message.
-  
-```html
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-<META charset="UTF-8">
-<META name="viewport"
- content="width=device-width, initial-scale=1.0">
-<title>Sample Web Page</title>
-</head>
-<body>
-Great content!!!!!
-</body>
-</html>
-```
-
 3. Modify the file(.html file) and commit the changes:
     * Add links to emails.
     * Commit and push changes with descriptive message.
