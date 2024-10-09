@@ -1,4 +1,4 @@
-# Git
+% Git
 
 ## What is Git?
 Git is a free and open source distributed version control system used for handel everything of projects during software development. It is often used to control source code by programmers collaboratively developing software.
@@ -54,10 +54,16 @@ $ git config --global user.name "My Name"
 # Quickly check available commands
 $ git help
 
-#To intentionally untrack file(s) & folder(s) from git. Based on different languages, there sre different styles of gitignore file. reference: https://github.com/github/gitignore
+#To intentionally untrack file(s) & folder(s) from git. Based on different languages, 
 echo "temp/" >> .gitignore
 echo "private_key" >> .gitignore
+```
+There are different styles of gitignore file. reference:
+https://github.com/github/gitignore. For example, Python developers might
+consider
+using [https://github.com/github/gitignore/blob/main/Python.gitignore](https://github.com/github/gitignore/blob/main/Python.gitignore).
 
+```sh
 # Clone a repository
 git clone <repository-url>
 
@@ -187,14 +193,34 @@ Interacting git learning website: [Learn Git Branch](https://learngitbranching.j
 Try git comments in Learn Git Branch website. 
 
 ## Homework
+
+Note that for the homework, we will be looking for evidence that you completed
+these tasks in your [commit log](https://github.com/txt/se24fall/commits/main/).
+
 1. Initialize a new Git repository:
     * Create a new directory called git-homework.
     * Initialize a Git repository in this directory.
 2. Create a new project and add it to the repository:
     * Create a file called README.md and write a brief description about the repository.
-    * Add LICENSE.md, .gitignore, INSTALL.md, requirements.txt, CONTRIBUTING.md, CODE-OF-CONDUCT.md into your repo. (reference: https://txt.github.io/se24fall/process.html#standard-files; https://choosealicense.com/licenses/)
-    * Creat a simple webpage(.html file) discribing your team(including team number, all team members' names, and emails).
+    * Add LICENSE.md, .gitignore, INSTALL.md,  CONTRIBUTING.md, CODE-OF-CONDUCT.md into your repo. (reference: https://txt.github.io/se24fall/process.html#standard-files; https://choosealicense.com/licenses/)
+    * Create a simple webpage(.html file) discribing your team(including team number, all team members' names, and emails).
     * Stage and commit with an appropriate commit message.
+  
+```html
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<META charset="UTF-8">
+<META name="viewport"
+ content="width=device-width, initial-scale=1.0">
+<title>Sample Web Page</title>
+</head>
+<body>
+Great content!!!!!
+</body>
+</html>
+```
+
 3. Modify the file(.html file) and commit the changes:
     * Add links to emails.
     * Commit and push changes with descriptive message.
