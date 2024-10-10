@@ -127,6 +127,14 @@ Automatic merge failed; fix conflicts and then commit the result.
 ```
 This means that Git has identified conflicting changes in "filename" that need to be resolved.<br />
 Open the files with conflicts in your text editor or IDE. Conflicts sections shows your current branch, named "**HEAD**", and the branch you try to merge, named "branch-name".<br />
+```sh
+<<<<<<< HEAD
+This is a different line on main branch.
+=======
+This is the modified line on current branch.
+>>>>>>> feature
+
+```
 **Step:**<br />
 * Resolve the Conflict: Edit the file to resolve the conflict by choosing the right changes to keep.
 * Stage the Resolved Files: Once you have resolved the conflicts, you need to stage the changes.
