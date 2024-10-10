@@ -1,4 +1,4 @@
-# Git
+% Git
 
 ## What is Git?
 Git is a free and open source distributed version control system used for handel everything of projects during software development. It is often used to control source code by programmers collaboratively developing software.
@@ -14,6 +14,7 @@ A repository (or repo) is a storage space for files, directories, historical rec
 <br />
 <br />
 Some components of the repository:<br />
+
 * .git Directory: contains all the configurations, logs, branches, HEAD, and more
 * Working Tree: the directories and files in your repository
 * Index: is the staging area in git. It’s basically a layer that separates your working tree from the Git repository.
@@ -54,10 +55,16 @@ $ git config --global user.name "My Name"
 # Quickly check available commands
 $ git help
 
-#To intentionally untrack file(s) & folder(s) from git. Based on different languages, there sre different styles of gitignore file. reference: https://github.com/github/gitignore
+#To intentionally untrack file(s) & folder(s) from git. Based on different languages, 
 echo "temp/" >> .gitignore
 echo "private_key" >> .gitignore
+```
+There are different styles of gitignore file. reference:
+https://github.com/github/gitignore. For example, Python developers might
+consider
+using [https://github.com/github/gitignore/blob/main/Python.gitignore](https://github.com/github/gitignore/blob/main/Python.gitignore).
 
+```sh
 # Clone a repository
 git clone <repository-url>
 
@@ -125,6 +132,7 @@ Auto-merging filename.txt
 CONFLICT (content): Merge conflict in filename.txt
 Automatic merge failed; fix conflicts and then commit the result.
 ```
+
 This means that Git has identified conflicting changes in "filename" that need to be resolved.<br />
 Open the files with conflicts in your text editor or IDE. Conflicts sections shows your current branch, named "**HEAD**", and the branch you try to merge, named "branch-name".<br />
 ```sh
@@ -136,26 +144,33 @@ This is the modified line on current branch.
 
 ```
 **Step:**<br />
+
 * Resolve the Conflict: Edit the file to resolve the conflict by choosing the right changes to keep.
 * Stage the Resolved Files: Once you have resolved the conflicts, you need to stage the changes.
 * Commit the Merge: After staging the resolved files, commit the merge.
 * Finish the Merge Process: After committing, the merge conflict resolution is complete.
 There are some good visual tools to help with dealing conlicts like VSCodes, IntelliJ. To minimize the chance of conflicts, pull changes from the upstream branches regularly and resolve smaller conflicts incrementally.
 When working in a team, communicate about major changes or rebase regularly to reduce the chances of conflicts. <br />
+
 ### Reverse
+
 In Git, "reverse" typically refers to undoing changes or reverting a commit. There are several ways to reverse changes in Git:
+
 * **Revert a Commit:**
 Creates a new commit that undoes the changes made by a previous commit without rewriting history. This is useful when you want to keep the history intact and record the fact that a commit was reverted.<br />
     ```sh
     git revert <commit-hash>
     ```
+
     But if you have merged a branch into your main branch, but later realized that you need to undo this merge.
+
     ```sh
     #find the commit hash of the merge that you want to reverse
     git log --oneline
     #use "-m" option to specify the parent of the merge you want to keep. The "-m 1" option typically specifies that you want to keep the changes from the first parent (usually the main branch before the merge).
     git revert -m 1 <merge-commit-hash>
     ```
+
 * **Reset a Commit:**
 Moves the **HEAD** pointer and potentially the branch pointer to a previous commit, effectively "erasing" commits from the history. This can be destructive as it changes the commit history, making it as though certain commits never happened.<br />
 The git reset command is used to undo commits by moving the HEAD and the current branch to a specified commit. There are three modes of reset:
@@ -195,13 +210,17 @@ Interacting git learning website: [Learn Git Branch](https://learngitbranching.j
 Try git comments in Learn Git Branch website. 
 
 ## Homework
+
+Note that for the homework, we will be looking for evidence that you completed
+these tasks in your [commit log](https://github.com/txt/se24fall/commits/main/).
+
 1. Initialize a new Git repository:
     * Create a new directory called git-homework.
     * Initialize a Git repository in this directory.
 2. Create a new project and add it to the repository:
     * Create a file called README.md and write a brief description about the repository.
-    * Add LICENSE.md, .gitignore, INSTALL.md, requirements.txt, CONTRIBUTING.md, CODE-OF-CONDUCT.md into your repo. (reference: https://txt.github.io/se24fall/process.html#standard-files; https://choosealicense.com/licenses/)
-    * Creat a simple webpage(.html file) discribing your team(including team number, all team members' names, and emails).
+    * Add LICENSE.md, .gitignore, INSTALL.md,  CONTRIBUTING.md, CODE-OF-CONDUCT.md into your repo. (reference: https://txt.github.io/se24fall/process.html#standard-files; https://choosealicense.com/licenses/)
+    * Create a simple webpage(.html file) discribing your team(including team number, all team members' names, and emails).
     * Stage and commit with an appropriate commit message.
 3. Modify the file(.html file) and commit the changes:
     * Add links to emails.

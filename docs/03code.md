@@ -115,6 +115,10 @@ if they can select their own training data:
 what we have seen so far...
 - Active learners  guess what is be the next more informative
 $Y$ labels to collect.. 
+- Guidied by some _acquisition function_. E.g. in the following, "solid" is our guess of the mean, 
+    "dots" are the observations made so far, "purple" is the uncertainty, "green" is the acquisition function.
+
+<img src="img/aq.png" width=500>
 
 ### Training Data
 
