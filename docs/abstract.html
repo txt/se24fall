@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Abstraction</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+<body>
+<div class=wrapper>
+<p>
+csc 510-001, (1877)<br>
+fall 2024, software engineering<br>
+Tim Menzies, timm@ieee.org, com sci, nc state
+<hr>
+<a href="index.html">home</a>
+:: <a href="syllabus.html">syllabus</a>
+:: <a href="https://docs.google.com/spreadsheets/d/17AdVB6rGsKSf8Ut6gG5RD01IngOLjQvVxFdkSS76cYY/edit?usp=sharing">corpus</a> 
+:: <a href="https://docs.google.com/spreadsheets/d/1as_d35pZSKT1zcVWEcqa59AaU7AmNYHpDvdlkdgaCdI/edit?gid=0#gid=0">groups</a> 
+:: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4180&bp=s">moodle</a>
+:: <a href="https://github.com/txt/se24fall/blob/main/LICENSE">license</a>  </p>
+<img src="img/banner.png" align=left width=280
+style="padding: 10px; padding-right: 15px; -webkit-filter: drop-shadow(-10px 10px 10px #222); filter: drop-shadow(-10px 10px 10px #222); ">
+
+<div style='clear:both'></div>
+<header id="title-block-header">
+<h1 class="title">Abstraction</h1>
+</header>
+<p><img src="https://raw.githubusercontent.com/txt/se20/master/etc/img/abstract.png"></p>
+<p>Historically, abstraction has enabled:</p>
+<ul>
+<li>millions of useful tools, class libraries</li>
+<li>billions of dollars in the acquisition of novel tech companies (see
+below)</li>
+<li>the teaching of software engineering (since it lets us teach many
+concrete ideas with a smaller number of abstractions);</li>
+<li>testing
+<ul>
+<li>abstracting lots of functionality into
+<ul>
+<li>a small number of tests</li>
+<li>that cover much of the functionality</li>
+</ul></li>
+</ul></li>
+<li>hardware-independent programming language and operating systems
+<ul>
+<li>so very large communities of programmers to co-ordinate with each
+other</li>
+</ul></li>
+<li>cloud computing</li>
+<li>And, well, everything
+<ul>
+<li>Is abstraction the core of everything we do?</li>
+<li>Is the whole history of computer science is the search for usefuls,
+implementable, abstractions?</li>
+</ul></li>
+</ul>
+<h2 id="what-is-abstraction">What is abstraction?</h2>
+<p>Formal definition</p>
+<ul>
+<li>abstraction = freedom from representational qualities</li>
+<li>i.e. a step above the details to… something else</li>
+</ul>
+<p>Between the programmer and the lower-level details (e.g. the
+hardware, the lower-level language constructs) there is a layers of
+abstraction</p>
+<ul>
+<li>Programmers talk to the abstraction</li>
+<li>Automated tools map the abstraction to something lower down</li>
+</ul>
+<p>Concrete example of abstraction:</p>
+<ol type="1">
+<li>Concrete: Countries have states. States have cities. Cities have
+suburbs. Suburbs have streets. Streets have houses.</li>
+<li>Abstract: Things, at level <code>i</code> have sub-things at level
+<code>i+1</code>.
+<ul>
+<li>Note that number 2, would need some tools for instance creation</li>
+<li>Maybe something as simple as a yaml config file to make your
+country</li>
+</ul></li>
+</ol>
+<p>If you are only building one application, then clearly number1 - And
+if you racing to get “it” out the door then there is clearly a case for
+using the first, most obvious design.</p>
+<p>But - If you are testing “it” then - abstractions reduce the number
+of tests. - eg. in the above, one test, not four - Abstract: - if we
+delete things, do we also delete sub-things versus - Concrete: - if we
+delete suburbs, do we also delete streets? - if we delete cities, do we
+also delete suburbs? - if we delete states, do we also delete cities? -
+if we delete countries, do we also delete states? - If after doing “it”,
+- And if you want to support very large communities not just doing “it0”
+but also “it1, it2…” - And you want to build something unique that might
+be the basis for an entirely new industry - Supporting billions of
+dollars in IT acquisitions - Then you need abstraction.</p>
+<h2 id="kinds-of-abstractions">Kinds of abstractions</h2>
+<p>Abstraction has been applied, successfully, dozens of times in the
+history of computing</p>
+<ul>
+<li>All these following use the same idea… abstraction</li>
+</ul>
+<p>The following list is sorted by their memory footprint, largest to
+smallest:</p>
+<ol type="1">
+<li>Operating systems</li>
+<li>Virtual machines</li>
+<li>Containers</li>
+<li>Serverless systems</li>
+<li>Erlang’s trick</li>
+<li>Unix Pipes</li>
+<li>OO class hierarchies</li>
+<li>Macros</li>
+<li>Iterators and error handlers
+<ul>
+<li>These last two is not the same as the rest
+<ul>
+<li>Iterators and error handlers are abstraction tricks for programmers
+are smaller than</li>
+<li>Implemented and popularized by Barbara Liskov</li>
+</ul></li>
+<li>The rest allow you jump computation around one of more CPUs</li>
+</ul></li>
+</ol>
+<p>Also, for other notes on abstraction that lead to different
+programming languages (LISP, Smalltalk, Java, Javascript, CoffeeScript)
+- see next lecture</p>
+<h2 id="why-abstraction">Why abstraction?</h2>
+<ul>
+<li>Aesthetics:
+<ul>
+<li>Truth is beauty and beauty is truth and darn I love me a good
+abstraction</li>
+<li>Is the whole history of science trying to prove “x” (where “x” is an
+abstraction standing in for multiple concrete things)?</li>
+</ul></li>
+<li>Innovation: abstraction + tool support
+<ul>
+<li>Roll your own tech company</li>
+</ul></li>
+<li>Simplicity:
+<ul>
+<li>If you underlying data structures are complex,
+<ul>
+<li>you want some way to talk to them without having to know everything
+about them</li>
+</ul></li>
+<li>Combine N concrete things into one abstract thing
+<ul>
+<li>e.g. see above, testing</li>
+<li>e.g. <a href="https://mustache.github.io/">mustache macros</a></li>
+<li>e.g. <a href="https://github.com/docopt">docopt</a></li>
+</ul></li>
+</ul></li>
+<li>Portability: If you want to run your code on a range of different
+hardware
+<ul>
+<li>you want to write code in hardware independent manner
+<ul>
+<li>so code can run all over the place</li>
+</ul></li>
+<li>Add an abstraction layer between
+<ul>
+<li>operating systems below and</li>
+<li>the application above</li>
+<li>Once you get “it” going for one OS on one machine
+<ul>
+<li>It runs wherever that OS runs</li>
+</ul></li>
+<li>e g.</li>
+<li>UNIX (see below)</li>
+<li>Some abstractions make things so easy, can port then to many
+langauges
+<ul>
+<li>mustache</li>
+<li>docopt</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Scheduling: If computing environments are dynamic, we want to bounce
+our computation around the hardware to take full advantage of unused
+resources.
+<ul>
+<li>And when we bounce a “program”, we want to bounce with it:
+<ul>
+<li>all the current variable settings,</li>
+<li>contents of RAM,</li>
+<li>activation records of current functions,</li>
+<li>return addresses for when those functions return,</li>
+<li>network connections,</li>
+<li>hooks to GUIs and databases, etc etc.</li>
+</ul></li>
+<li>Think of the <em>layers</em> pattern, on steroids
+<ul>
+<li>Where you grab whole layers and move them to another piece
+hardware</li>
+</ul></li>
+<li>Under the hood, again, this is abstraction.</li>
+</ul></li>
+</ul>
+<h2 id="how-to-abstract">How to abstract</h2>
+<p>Warning:</p>
+<ul>
+<li>Good abstractions needs experience
+<ul>
+<li>To see across multiple applications</li>
+</ul></li>
+<li>Good abstractions need test cases
+<ul>
+<li>To test out the practicality, utility of things like number2</li>
+</ul></li>
+<li>Suggestion: rule of three
+<ul>
+<li>First time, just do concretely</li>
+<li>Second time, be concrete again, but make a little note</li>
+<li>Third time: “not you again? time to abstract!”</li>
+</ul></li>
+</ul>
+<p>BTW, best abstractions needs really, really smart people</p>
+<ul>
+<li>Barbara Liskov won at $250K prize for her work on abstraction in
+programming languages.
+<ul>
+<li><a href="https://amturing.acm.org/vp/liskov_1108679.cfm">Her award
+lecture</a> is amazing
+<ul>
+<li>at minute 1:09:00 to 1:11:00 the whole world disappears and her and
+Guy Steele (*)debate iterator design and the rest of us can just
+listen</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><em>(*) You don’t know who Guy Steele is? Shame on you! <a
+href="https://apps.dtic.mil/dtic/tr/fulltext/u2/a030751.pdf">Read it</a>
+and weep.</em></p>
+<h2 id="design-patters">Design Patters</h2>
+<p>Q: So what have programmers seen before that might repeat in future
+systems?<br />
+A: Patterns</p>
+<ul>
+<li><p>e.g. <em>idioms</em> : small code-level patterns</p></li>
+<li><p>e.g. <em>design patterns</em>: common collections of a few
+classes</p></li>
+<li><p>e.g. <em>archtirctures</em>: recurring “big picture” structures
+seen in large systems</p></li>
+<li><p>The power of patterns</p>
+<ul>
+<li>Patterns come with review heuristics</li>
+<li>Which can identify problems… which can be solved … using other
+patterns.</li>
+<li>So patterns take us naturally to design review/ critique/
+improvement</li>
+</ul></li>
+</ul>
+<h3 id="patterns-example-1-3-tiered-architectures">Patterns example 1:
+3-tiered architectures</h3>
+<p>Data : model : dialog</p>
+<ul>
+<li>Data = ? SQL</li>
+<li>Model = ? some object system</li>
+<li>Dialog = ? some gui tool</li>
+</ul>
+<figure>
+<img
+src="https://user-images.githubusercontent.com/29195/132729813-e4ff6bb9-51e7-4985-a005-fc05b70362de.png"
+alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
+<ul>
+<li>Problem: data and dialog both need the same constraint info (e.g. 0
+&lt;= age &lt;= 120): Where to store it?
+<ul>
+<li>A solution: Ruby on Rails, DRY: “don’t repeat yourself”
+<ul>
+<li>Database and Web-GUi generated from a class model</li>
+<li>Simplified (amazing) last decade’s web designs</li>
+<li>Each web url has actually a method on a class</li>
+</ul></li>
+<li>A very popular solution (until we went much more “REST” ful)</li>
+<li>Review heuristics:
+<ul>
+<li>Not so good if you repeat information at different layers</li>
+<li>Layers = communication effort up and down the layers = maybe
+slow</li>
+<li>Buiness model NOT hard wrired into the database or dialog? Then we
+can’t lock up a user community! THey could take their logic and go
+elsewhere!</li>
+</ul></li>
+</ul></li>
+</ul>
+<figure>
+<img
+src="https://user-images.githubusercontent.com/29195/132729905-53b58504-3ed8-425b-99f4-9a326043360d.png"
+alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
+<h3 id="patterns-example-2-composite-design-patterns">Patterns example
+2: Composite design patterns</h3>
+<figure>
+<img
+src="https://user-images.githubusercontent.com/29195/132732186-f1aeec90-3d7c-4890-affc-61a0b2d376dc.png"
+alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
+<figure>
+<img
+src="https://user-images.githubusercontent.com/29195/132730145-249b070f-5779-4d0d-b5a5-575a8160e74d.png"
+alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
+<figure>
+<img
+src="https://user-images.githubusercontent.com/29195/132730161-7cdc5972-5870-48b2-8583-79ae3821b533.png"
+alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
+<figure>
+<img
+src="https://user-images.githubusercontent.com/29195/132730271-1d4248a2-0137-4e17-9fc4-789044e73056.png"
+alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
+<p>Patterns have review heuristics:</p>
+<ul>
+<li>E.g. delete cascade? in composites
+<ul>
+<li>If “it” gets deleted, then do you delete the sub-parts</li>
+</ul></li>
+</ul>
+<h3 id="patterns-example-3-crud-low-level-code-idiom">Patterns example
+3: CRUD: low-level code idiom</h3>
+<p>CRUD = create, read, update, delete</p>
+<ul>
+<li>In SQL: INSERT = C, SELECT = R , UPDATE and DELETE.</li>
+<li>In http: : GET = R, DELETE.= D, PUT=?, POST=?
+<ul>
+<li>PUT : might create new user or update info on an existing user (so
+PUT = C or U?)</li>
+<li>POST : sends data to the server and leaves it up to the server to do
+something with it</li>
+</ul></li>
+</ul>
+<p>BTW, CRUD can leap from idiom to architecture (web-scale RESTful
+applications)</p>
+<p>Regardless - the main points here is that complex systems can be
+abstracted into reasonable chunks via Patterns - Such abstraction
+simplifies how we discuss even complex systems</p>
+<p>Patterns have review heuristics:</p>
+<ul>
+<li>Everything is just CRUD? what about other actions?</li>
+<li>Can only see CRUD for some service? How to test it effectively?</li>
+<li>Limited Scope: CRUD only covers basic data operations, not capturing
+complex transactions or specific business rules within an
+application.</li>
+<li>Complexity in Large Systems: As applications grow, the simplistic
+CRUD approach can become cumbersome, making it difficult to manage
+intricate relationships between data entities and complex update
+scenarios.</li>
+<li>Poor Error Handling: CRUD operations often lack built-in mechanisms
+for handling complex error conditions or validation, which can lead to
+issues in data integrity.</li>
+</ul>
+<h2 id="error-handling">Error handling</h2>
+<p>Throw a ball into a stadium, wait for what returns while holding a
+catchers mitt. Only catch things you know how to handle</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> atom(token: <span class="bu">str</span>) <span class="op">-&gt;</span> Atom:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Numbers become numbers; every other token is a symbol.&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>: <span class="cf">return</span> <span class="bu">int</span>(token)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>: <span class="cf">return</span> <span class="bu">float</span>(token)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> Symbol(token)</span></code></pre></div>
+<h2 id="iterators">Iterators</h2>
+<p>When you code recursive data structures, give programmers so way to
+way around that code.</p>
+<p>e.g. What does this return?</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> items(x):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">isinstance</span>(x,(<span class="bu">str</span>,<span class="bu">list</span>,<span class="bu">tuple</span>)):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> y <span class="kw">in</span> x:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> z <span class="kw">in</span> items(y):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">yield</span> z</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> x</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> items([<span class="dv">10</span>,[[<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>],<span class="dv">15</span>], <span class="dv">20</span>,<span class="dv">30</span>,[<span class="dv">40</span>,<span class="dv">50</span>,<span class="st">&quot;tim&quot;</span>]]):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>   <span class="bu">print</span>(x)</span></code></pre></div>
+<p>Another example (in awk). This example shows that <em>iterators</em>
+can be implemented in any language, it you think the right way.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode awk"><code class="sourceCode awk"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># application code</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span><span class="op">(</span>csv<span class="op">(</span>lst<span class="op">,</span>file<span class="op">))</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  doSOmething<span class="op">(</span>lst<span class="op">)</span></span></code></pre></div>
+<p>Handles numerous details for reading CSV files. For example, the
+following CSV file has blank lines (to be skipped), white space and
+comments (that need deleting), strings containing numbers that need to
+be coerced into real numbers, and record that that split on “,” (which
+need to be combined with the next line).</p>
+<pre><code>name,   # who
+age,    # in year`s
+shoesize # posint
+#########################
+
+
+# family1
+tim, # what
+21,  # a 
+10   # nice guy
+jane  ,  6,  2
+
+
+# family2
+tim, 21, 10 
+jane,6,2</code></pre>
+<p>The <code>csv</code> iterator reader is below. This iterator calls a
+sub-iterator <code>getline</code> that returns 0 on end of line:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode awk"><code class="sourceCode awk"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterator code</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> csv<span class="op">(</span>a<span class="op">,</span>file<span class="op">,</span>                        <span class="co"># passed arguments     </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>             i<span class="op">,</span>j<span class="op">,</span>b4<span class="op">,</span> ok<span class="op">,</span>line<span class="op">,</span>x<span class="op">,</span>y<span class="op">)</span> <span class="op">{</span>         <span class="co"># locals</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  file  <span class="op">=</span> file <span class="op">?</span> file <span class="op">:</span> <span class="st">&quot;-&quot;</span>                 <span class="co"># [1] ... read from standard input or file       </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  ok <span class="op">=</span> <span class="kw">getline</span> <span class="op">&lt;</span> file</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>ok <span class="op">&lt;</span><span class="dv">0</span><span class="op">)</span> <span class="op">{</span>                              <span class="co"># [2] ... complain if missing file</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>     <span class="kw">print</span> <span class="st">&quot;missing &quot;</span>file <span class="op">&gt;</span> <span class="st">&quot;/dev/stderr&quot;</span><span class="op">;</span> </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>     <span class="cf">exit</span> <span class="dv">1</span> <span class="op">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>ok<span class="op">==</span><span class="dv">0</span><span class="op">)</span> <span class="op">{</span> <span class="fu">close</span><span class="op">(</span>file<span class="op">);</span><span class="cf">return</span> <span class="dv">0</span> <span class="op">}</span>       <span class="co"># [3] ... signal that there is no data                                 </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  line <span class="op">=</span> b4 <span class="dt">$0</span>                         </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span><span class="op">(</span><span class="ot">/([</span><span class="ss"> </span><span class="ot">\</span><span class="sc">t</span><span class="ot">]*|</span><span class="ss">#</span><span class="ot">.*$)/</span><span class="op">,</span> <span class="st">&quot;&quot;</span><span class="op">,</span> line<span class="op">)</span>           <span class="co"># [4] ... kill white space and comments      </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>line<span class="op">)</span>       <span class="cf">return</span> csv<span class="op">(</span>a<span class="op">,</span>file<span class="op">,</span> line<span class="op">)</span> <span class="co"># [5] ... skip blanks lines</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>line <span class="op">~</span> <span class="ot">/</span><span class="ss">,</span><span class="ot">$/</span><span class="op">)</span> <span class="cf">return</span> csv<span class="op">(</span>a<span class="op">,</span>file<span class="op">,</span> line<span class="op">)</span> <span class="co"># [6] ... contact incomplete rows with next</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span><span class="op">(</span>line<span class="op">,</span> a<span class="op">,</span> <span class="st">&quot;,&quot;</span><span class="op">)</span>                       <span class="co"># [7] ... split line into cells on comma</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span>i <span class="kw">in</span> a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>a[i]</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>a[i]<span class="op">+</span><span class="dv">0</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> x<span class="op">==</span>y <span class="op">?</span> y <span class="op">:</span> x                     <span class="co"># [8] ... coerce number strings, if any</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span>                                  <span class="co"># [9] ... signal that there is more to come</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The point being made here is that “abstraction” is a tool you can
+use, in any language - You just need to think a little more… abstractly
+- Thing “producer” and “consumer” when the consumer does not want to, or
+need to, understand all the details - Which is very useful if I start
+changing low-level representations - e.g. I’m talking to a zip file and
+not a raw file - Then <code>csv</code> can change internally while the
+application code remains the same.</p>
+<p>By the way, if we are talking abstractions about consumers and
+producers then that takes us naturally to pipes (see below)</p>
+<h2 id="pipes">Pipes</h2>
+<p>Doug McIlroy, Bell Labs’ “Computing Techniques Research Department”
+1986</p>
+<ul>
+<li>“We should have some ways of coupling programs like garden
+hose.”</li>
+<li>“Let programmers screw in another segment when it becomes necessary
+to massage data in another way.”</li>
+<li>“Expect the output of every program to become the input to another,
+as yet unknown, program. Don’t clutter output with extraneous
+information.”</li>
+</ul>
+<p>Pipes changed the whole idea of UNIX:</p>
+<ul>
+<li>Implemented in 1973 when (“in one feverish night”, wrote McIlroy) by
+Ken Thompson.</li>
+<li>“It was clear to everyone, practically minutes after the system came
+up with pipes working, that it was a wonderful thing. Nobody would ever
+go back and give that up if they could.”</li>
+<li>The next day”, McIlroy writes, “saw an unforgettable orgy of
+one-liners as everybody joined in the excitement of plumbing.”</li>
+</ul>
+<p>Pipes changed how we think about software</p>
+<ul>
+<li>Not applications</li>
+<li>But tools.
+<ul>
+<li>Compose the things together, if you had made them so that they
+actually worked together.</li>
+<li>People went back and consciously put into programs the idea that
+they read from a list of files</li>
+<li>And if there were no files they read from the standard input so that
+they could be used in pipelines.</li>
+</ul></li>
+</ul>
+<p>You’ve probably all used pipes already. Here we download an install
+shell script then pipe it to the <code>sh</code> command (so it
+runs)</p>
+<pre><code>curl -s http://example.com/install.sh | sh</code></pre>
+<p>(By the way, that is a security risk. <a
+href="https://blog.dijit.sh//don-t-pipe-curl-to-bash">Use with
+care!</a>)</p>
+<p>Examples</p>
+<ul>
+<li><code>nroff</code> is a text formatter (old version of latex)</li>
+<li><code>lp</code> is the line printer</li>
+<li><code>col</code> handles escape sequences that sets up text in 2
+columns</li>
+<li><code>tbl</code> is an nroff pre-processor that expresses tables in
+terms of lower-level nroff commands</li>
+<li><code>eqn</code> is an nroff pre-processor that expresses equations
+in terms of lower-level nroff commands</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nroff</span> files <span class="kw">|</span> <span class="fu">col</span> <span class="kw">|</span> <span class="fu">lp</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tbl</span> file-1 file-2 . . . <span class="kw">|</span> <span class="ex">eqn</span> <span class="kw">|</span> <span class="fu">nroff</span> <span class="at">-ms</span></span></code></pre></div>
+<p>Think of pipes as <code>produce</code>, <code>translate</code>,
+<code>filter</code>, <code>consume</code>:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> /usr/bin/ <span class="kw">|</span>                <span class="co">#produce </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s:.*/::&#39;</span>  <span class="kw">|</span>                <span class="co">#translate: strip directory part</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-i</span> <span class="st">&#39;^z&#39;</span>   <span class="kw">|</span>                <span class="co">#filter   : select items starting with z</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">xargs</span> <span class="at">-d</span> <span class="st">&#39;\n&#39;</span> aFinalConsumer    <span class="co">#consume </span></span></code></pre></div>
+<p>Note that in the above, the <code>filters</code> inside the
+<code>pipes</code> could be written in any language at all, by different
+teams.</p>
+<p>Also, operating systems <em>love</em> pipes since they can run each
+part of the process as a separate process, maybe even on different
+machines (*)</p>
+<p>(*) That said, there is the data bus / network cost of streaming data
+between parts of the pipe.</p>
+<p>Problems with pipes:</p>
+<ul>
+<li>Assumes a one-way flow, here to there
+<ul>
+<li>Not ideal for GUI envrionments where users want to call functions in
+any order</li>
+<li>Which makes pipes are more an “under the hood” idea</li>
+</ul></li>
+<li>Also, I’ve had problems with pipes and concurrency: sending data off
+on long retrevial arcs (e.g. from another part of the network)
+<ul>
+<li>But that’s just me</li>
+</ul></li>
+</ul>
+<h2 id="oo-class-hierachies">OO Class Hierachies</h2>
+<p>Smalltalk class hierarchy (somewhere in the 1980s)</p>
+<ul>
+<li>Count the “abstract classes” (mostly, the non-leaf classes)
+<ul>
+<li>i.e. classes that will never be instantiated</li>
+<li>but exist to defined shared properties of the subclasses.</li>
+<li>my counts is 40% “abstract”; i.e. nearly half.
+<ul>
+<li>That’s a lot of abstraction!</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img align=right src="https://i.pinimg.com/originals/e2/c1/4a/e2c14a7f83ea042e9dc8e0031e5e1a72.jpg"></p>
+<pre><code>Object
+|    Behavior
+|    |    ClassDescription
+|    |    |    Class
+|    |    |    Metaclass
+|    BlockClosure
+|    Boolean
+|    |    False
+|    |    True
+|    Browser
+|    Collection
+|    |    Bag
+|    |    MappedCollection
+|    |    SequenceableCollection
+|    |    |    ArrayedCollection
+|    |    |    |    Array
+|    |    |    |    ByteArray
+|    |    |    |    WordArray
+|    |    |    |    LargeArrayedCollection
+|    |    |    |    |    LargeArray
+|    |    |    |    |    LargeByteArray
+|    |    |    |    |    LargeWordArray
+|    |    |    |    CompiledCode
+|    |    |    |    |    CompiledMethod
+|    |    |    |    |    CompiledBlock
+|    |    |    |    Interval
+|    |    |    |    CharacterArray
+|    |    |    |    |    String
+|    |    |    |    |    |    Symbol
+|    |    |    LinkedList
+|    |    |    |    Semaphore
+|    |    |    OrderedCollection
+|    |    |    |    RunArray
+|    |    |    |    SortedCollection
+|    |    HashedCollection
+|    |    |    Dictionary
+|    |    |    |    IdentityDictionary
+|    |    |    |    |    MethodDictionary
+|    |    |    |    RootNamespace
+|    |    |    |    |    Namespace
+|    |    |    |    |    SystemDictionary
+|    |    |    Set
+|    |    |    |    IdentitySet
+|    ContextPart
+|    |    BlockContext
+|    |    MethodContext
+|    File
+|    |    Directory
+|    FileSegment
+|    Link
+|    |    Process
+|    |    SymLink
+|    Magnitude
+|    |    Association
+|    |    Character
+|    |    Date
+|    |    LargeArraySubpart
+|    |    Number
+|    |    |    Float
+|    |    |    Fraction
+|    |    |    Integer
+|    |    |    |    LargeInteger
+|    |    |    |    |    LargeNegativeInteger
+|    |    |    |    |    LargePositiveInteger
+|    |    |    |    |    |    LargeZeroInteger
+|    |    |    |    SmallInteger
+|    |    Time
+|    Memory
+|    Message
+|    |    DirectedMessage
+|    MethodInfo
+|    Point
+|    ProcessorScheduler
+|    Rectangle
+|    Signal
+|    |    Exception
+|    |    |    Error
+|    |    |    |    Halt
+|    |    |    |    |    ArithmeticError
+|    |    |    |    |    |    ZeroDivide
+|    |    |    |    |    MessageNotUnderstood
+|    |    |    |    UserBreak
+|    |    |    Notification
+|    |    |    |    Warning
+|    Stream
+|    |    ObjectDumper
+|    |    PositionableStream
+|    |    |    ReadStream
+|    |    |    WriteStream
+|    |    |    |    ReadWriteStream
+|    |    |    |    |    ByteStream
+|    |    |    |    |    |    FileStream
+|    |    Random
+|    |    TextCollector
+|    |    TokenStream
+|    UndefinedObject
+|    ValueAdaptor
+|    |    NullValueHolder
+|    |    PluggableAdaptor
+|    |    |    DelayedAdaptor
+|    |    ValueHolder</code></pre>
+<ul>
+<li><p>More on “Streams”</p>
+<ul>
+<li>Streams are objects that support sequential access to collections
+and files of sequential data. Streams can be open on sequenceable
+collections of any kind of object, on a source of random numbers, or on
+files.</li>
+<li>There are two separate sets of stream classes, one for streams on
+collections, and one for streams on files.</li>
+<li>More on “Random” as a stream:
+<ul>
+<li><a
+href="https://github.com/bonzini/smalltalk/blob/master/kernel/FileStream.st#L528-L533">FileStream
+atEnd</a>
+<ul>
+<li>produces a finite stream of characters, terminating at end of
+file</li>
+</ul></li>
+<li><a
+href="https://github.com/bonzini/smalltalk/blob/master/kernel/Random.st#L110-L115">Random
+atEnd</a>
+<ul>
+<li>produces an infinite stream of machine-generated pseudo-random
+floating-point numbers of good quality in the range 0.0 through, but not
+including, 1.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><a
+href="https://blog.acolyer.org/2016/09/05/on-the-criteria-to-be-used-in-decomposing-systems-into-modules/">On
+the criteria to be used in decomposing systems into modules</a>. David
+Parnas, 1971</p>
+<ul>
+<li>Death to flowcharts! (and, by implication, pipes)</li>
+</ul>
+<h2 id="macros">Macros</h2>
+<p>The LISP <code>dolist</code> macro lets you do things to
+<code>one</code> item ata time from a <code>lst</code> (list).</p>
+<p>e.g.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">dolist</span> (one lst) </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>   (<span class="kw">print</span> one))</span></code></pre></div>
+<p>What does this high level abstraction hide under-the-hood?</p>
+<p>Lets find out:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>[<span class="dv">3</span>]<span class="op">&gt;</span> (<span class="kw">macroexpand-1</span> &#39;(<span class="kw">dolist</span> (one lst) (<span class="kw">print</span> one)))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>(DO* ((#:LIST-2990 LST (CDR #:LIST-2990))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      (ONE NIL))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>     ((ENDP #:LIST-2990) NIL)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>     (DECLARE (LIST #:LIST-2990))</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>     (SETQ ONE (CAR #:LIST-2990))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>     (PRINT ONE)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">3</span>]<span class="op">&gt;</span> (<span class="kw">macroexpand-1</span> (<span class="kw">macroexpand-1</span> &#39;(<span class="kw">dolist</span> (one lst) (<span class="kw">print</span> one))))</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>(BLOCK NIL</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>       (LET* ((#:LIST-2991 LST)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>              (ONE NIL))</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>             (DECLARE (LIST #:LIST-2991))</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>             (TAGBODY #:LOOP-2992</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>                      (IF (ENDP #:LIST-2991)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>                          (GO #:END-2993))</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>                      (SETQ ONE (CAR #:LIST-2991))</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>                      (PRINT ONE)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                      (SETQ #:LIST-2991</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>                            (CDR #:LIST-2991))</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>                      (GO #:LOOP-2992)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>                      #:END-2993</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>                      (RETURN-FROM NIL</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>                                   (PROGN NIL))))) <span class="co">;</span></span></code></pre></div>
+<p>Note that <code>defmacro</code> is a LISP built in that lets you
+write your own macros. Note that a Python variant of this become so
+acrimonious that <a href="https://lwn.net/Articles/759654/">Python’s
+founder resigned from the community</a>. LISP programmers would just
+shrug and say “whatever, use it, don’t use it, up to you”.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defmacro</span><span class="fu"> aif </span>(test-form then-form &amp;optional else-form)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>   `(<span class="kw">let</span> ((it ,test-form))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>          (<span class="kw">if</span> it ,then-form ,else-form)))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a> (aif (<span class="op">+</span> <span class="dv">2</span> <span class="dv">7</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>   (<span class="kw">format</span> <span class="kw">nil</span> <span class="st">&quot;~A does not equal NIL.&quot;</span> it)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>   (<span class="kw">format</span> <span class="kw">nil</span> <span class="st">&quot;~A does equal NIL.&quot;</span> it))</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a> <span class="co">;; ⇒ &quot;9 does not equal NIL.&quot;</span></span></code></pre></div>
+<p>LISP is not so popular these days. For cool languages that support
+macros:</p>
+<ul>
+<li>use LISP (hey, still lots of support and development)</li>
+<li>but look at JULIA also (a hot new language)!</li>
+</ul>
+<h2 id="queuing-theory">Queuing Theory</h2>
+<p>Before going on… this is going to seem a digression, but just stay
+with me here</p>
+<p>The point of this little digression is that it is useful to jump
+around things between service providers.</p>
+<ul>
+<li>And the smaller the thing, the faster we can jump it</li>
+<li>And the more little gaps we can jump them into</li>
+</ul>
+<p>N tellers/ checkout people. How many lines? One? N?</p>
+<p><img src="https://operationsroom.files.wordpress.com/2016/10/na-cl845_number_16u_20161006202714.jpg" width=700></p>
+<p>Answer: see <a
+href="http://www.treewhimsy.com/TECPB/Articles/SevenInsights.pdf">7
+insights into Queue Theory</a></p>
+<p><a href="https://arxiv.org/pdf/1708.08127.pdf">According to the RIOT
+paper</a> Computers execute in highly dynamic environment.</p>
+<ul>
+<li>For example, Schad et al. [11] found that the runtime of a widely
+used benchmarks suite can vary by up to 33% even when run on supposedly
+identical instances within the same cloud environment.</li>
+<li>Not only CPU, but also bandwidth can be highly variable within the
+cloud.
+<ul>
+<li>Schad et al. report that network bandwidth between the same type of
+EC2 instances can vary from 410KB/s to 890KB/s.</li>
+</ul></li>
+<li>Hence, even after a workflow is planned and deployed, it is
+important to monitor instances and repeat the scheduling process during
+deployment when necessary.</li>
+<li>If repeated rescheduling are too slow, then there is much waste of
+computer rescues.</li>
+</ul>
+<h2 id="erlangs-trick">Erlang’s Trick</h2>
+<p>Some languages are designed for concurrency. To do so, they use new
+abstractions.</p>
+<p>Consider the following block-structured programs (where variables in
+a sub-block can access variables in parent blocks):</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> aa(x):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> bb(y): <span class="cf">return</span> aa(y<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">1</span> <span class="cf">else</span> bb(x)</span></code></pre></div>
+<p>Here, we can’t run <code>bb</code> by itself without dragging along
+everything we know about `<code>aa</code>.</p>
+<p>So instead, what if all functions are in the global space and all
+variables can only access the local space of each function?</p>
+<p>Here’s a small database language that can derive child info from a
+database on <code>father</code>s and <code>mother</code>s.
+<code>X</code> and <code>Y</code> are variabes scoped to within a
+<code>clause</code> (and clauses end with a <em>fulll stop</em>).</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode prolog"><code class="sourceCode prolog"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>child(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>) <span class="kw">:-</span> mother(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">.</span>  # clause1</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>child(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>) <span class="kw">:-</span> father(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">.</span>  # clause2</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>descendant(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>) <span class="kw">:-</span> child(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">.</span>                    # clause3</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>descendant(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>) <span class="kw">:-</span> child(<span class="dt">X</span><span class="kw">,</span><span class="dt">Z</span>)<span class="kw">,</span> descendant(<span class="dt">Z</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">.</span>   # clause4</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>father(tim<span class="kw">,</span>don)<span class="kw">.</span>            # <span class="kw">clause</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>father(janet<span class="kw">,</span>don)<span class="kw">.</span>          # clause6</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>mother(tim<span class="kw">,</span>jane)<span class="kw">.</span>           # clause7</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>mother(janet<span class="kw">,</span>don)<span class="kw">.</span>          # clause8</span></code></pre></div>
+<p>Note now that the clauses can all be run seperately on different CPUs
+since everything we need to know about (eg) <code>descendant</code> is
+available locally when we call that function.</p>
+<p>Now Erlang’s <em>unit of swap</em> is really, really small. From <a
+href="https://www.infoq.com/presentations/erlang-software-for-a-concurrent-world/">Erlang</a>
+- Erlang is a concurrent language. - By that I mean that threads are
+part of the programming language, they do not belong to the operating
+system. - That’s really what’s wrong with programming languages like
+Java and C++. - It’s threads aren’t in the programming language, threads
+are something in the operating system s – and they inherit all the
+problems that they have in the operating system. - One of those problems
+is granularity of the memory management system. - The memory management
+in the operating system protects whole pages of memory, so the smallest
+size that a thread can be is the smallest size of a page. - That’s
+actually too big. - If you add more memory to your machine – you have
+the same number of bits that protects the memory so the granularity of
+the page tables goes up – you end up using say 64kB for a process you
+know running in a few hundred bytes.</p>
+<p>Sounds like a crazy idea, right? Well, its actually a crazy 19
+billion dollar idea.</p>
+<ul>
+<li>2015 WhatsApp aqcuired by Facebook</li>
+<li>50 engineers running software for a billion users</li>
+<li>Erlang particularly suited to juggling communications from a huge
+number of users, and it lets engineers deploy new code on the fly</li>
+<li>E.g. <a href="https://www.youtube.com/watch?v=rRbY3TMUcgQ">watch at
+home (NSFW)</a>.
+<ul>
+<li>See their intro-demo: a chat bot with 300,000 users sending near
+instant updates to each other.</li>
+</ul></li>
+</ul>
+<p>And its not just one company:</p>
+<ul>
+<li>Cisco ships 2 million devices per year running Erlang (comments at
+the Code BEAM Stockholm conference in 2018).</li>
+<li>This translates to 90% of all internet traffic going through routers
+and switches controlled by Erlang.</li>
+<li>Ericsson has Erlang at the core of its GPRS, 3G, 4G and 5G
+infrastructure.
+<ul>
+<li>With a market share of 40%, there’s a high probability a program
+written in Erlang assigned the IP address your smartphone is using today
+(amongst other things).</li>
+<li>Since being released as open source, Erlang has been spreading
+beyond Telecoms, establishing itself in other verticals such as FinTech,
+Gaming, Healthcare, Automotive, IoT and Blockchain.</li>
+</ul></li>
+<li>For more see <a
+href="https://www.erlang-solutions.com/blog/which-companies-are-using-erlang-and-why-mytopdogstatus.html">here</a>
+<ul>
+<li>e.g. English National Health Service (NHS).</li>
+<li>The NHS obviously requires high availability and handles over 65
+million record requests every day through its Spine, a centralised point
+allowing the exchange of information across national and local systems.
+Using Riak (written in Erlang), the NHS has managed 99.999% availability
+for over five years.</li>
+</ul></li>
+</ul>
+<p>See also Elixr (Erlang + prettier syntax, not sure it has the same
+systems advantage as Erlang).</p>
+<h2 id="serverless">Serverless</h2>
+<p>Servless is an abstraction that is smaller than containers</p>
+<p><a
+href="https://swizec.com/412eabb35fe281cb452e125f38b49f56/Vercel-cloud-function-demo884651.gif">demo</a></p>
+<ul>
+<li>Serverless
+<ul>
+<li>e.g. AWS Lambda (btw, why is it called “lambda”? See below).</li>
+<li>Why even have an operating system, just start with your current
+application and only ship the little bits needed for the
+application</li>
+<li>Good news:
+<ul>
+<li>Cheaper</li>
+<li>Smaller memory (so more scalable)</li>
+<li>Productivity: less to configure, less messing with threading. Just
+explore the unit of code to the outside world are simple event driven
+functions.</li>
+</ul></li>
+<li>Bad news:
+<ul>
+<li>Debugging. If you ship a bare bones unit of functionality, you may
+not get the debugging tools needed to understand a drash.</li>
+<li>Security: more tiny components, less protection from other OS
+facilites (which not execist in your tiny comptuational slice)</li>
+<li>Vendor lock-in : - But in the serveless world, no OS abstraction
+between comptuation and support environment
+<ul>
+<li>So not “write once, run everywhre”</li>
+</ul></li>
+<li>Configuration: can’t make <em>any</em> assumptions about background
+utilities from “the operating system” cause their ain’t one
+<ul>
+<li>You have to do it all.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="containers-and-virtual-machines">Containers and Virtual
+Machines</h2>
+<p>If iterators is small abstraction</p>
+<ul>
+<li>and OS is large abstraction</li>
+<li>then containers are in the middle</li>
+</ul>
+<p><img width=800 src="https://imesh.github.io/images/contvsvm.png"></p>
+<h2 id="unix">UNIX</h2>
+<p>If iterators and error handlers are “little abstractions”, then
+operating systems are “big abstractions”.</p>
+<p><img align=right width=500 src="https://upload.wikimedia.org/wikipedia/commons/4/49/Baby_Bells.svg"></p>
+<ul>
+<li>Pre-unix: operating systems were hardware-specific</li>
+<li>The breakup of the Bell System was mandated on January 8, 1982
+<ul>
+<li>So after laying down all that copper
+<ul>
+<li>Bell Corporation was not allowed to use it all.</li>
+<li>And they actually set up commercial competitors!</li>
+</ul></li>
+</ul></li>
+<li>They needed someway for different organizations to work together
+<ul>
+<li>The ultimate “why can’t we all get along”</li>
+</ul></li>
+<li>Step1: a hardware independent systems language “C”</li>
+<li>Step2: an operating system written in “C”</li>
+<li>Step3: design patterns to allow for interactions
+<ul>
+<li>Uniform file representation (everything is “ASCII test”, no special
+binary formats for each fie).</li>
+<li>Use pipes</li>
+</ul></li>
+</ul>
+<h2 id="programming-languages-and-abstraction">Programming Languages and
+Abstraction</h2>
+<h3 id="lisp-the-ultimate-abstraction">LISP: The Ultimate
+Abstraction</h3>
+<p>Consider a minimal programming language with just a few primitives,
+plus a macro language for assembling those primitives into more complex
+reasoning. - Build mappings from primitives down to hardware - Port
+those small number of mappings to many platform - Let programmers work
+up from the primitives.</p>
+<p>Enter LISP:</p>
+<p><img src="https://imgs.xkcd.com/comics/lisp_cycles.png"></p>
+<p><a href="https://www.youtube.com/watch?v=HM1Zb3xmvMc">LISP</a>, its
+the source</p>
+<ul>
+<li>1955: LISP: a minimal virtual machine. Code these (small set of
+primitives) on any hardware you like then, on top of all that, code
+written in LISP runs everywhere</li>
+</ul>
+<p>(Aside: Well, not really. - Turns out, code does more than
+“computes”. - It also “connects” (to GUIs, databases, networks) - It
+also “explores”; i.e. Cognitive support for humans<br />
+exploring the world with software. - But we’ll get back to that.)</p>
+<p><a href="http://www.paulgraham.com/rootsoflisp.html">Paul Graham</a>
+- “In 1960, John McCarthy published a remarkable paper in which he did
+for programming something like what Euclid did for geometry. He showed
+how, given a handful of simple operators and a notation for functions,
+you can build a whole programming language. He called this language
+Lisp, for”List Processing,” because one of his key ideas was to use a
+simple data structure called a list for both code and data.” - <a
+href="https://web.archive.org/web/20131004232653/http://www-formal.stanford.edu/jmc/recursive.pdf">Do
+not read</a> MacCarthy, 1960, “Recursive Functions of Symbolic
+Expressions and Their Computation by Machine, Part I” - Here’s a <a
+href="https://sep.yimg.com/ty/cdn/paulgraham/jmc.ps?t=1595850613&amp;">Better</a>
+read</p>
+<p>Here’s a LISP interpreter written in LISP:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">; The Lisp defined in McCarthy&#39;s 1960 paper, translated into CL.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">; Assumes only quote, atom, eq, cons, car, cdr, cond.</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">; Bug reports to lispcode@paulgraham.com.</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> null</span>. (x)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">eq</span> x &#39;()))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> and</span>. (x y)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span> (x (<span class="kw">cond</span> (y <span class="dt">&#39;t</span>) (<span class="dt">&#39;t</span> &#39;())))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        (<span class="dt">&#39;t</span> &#39;())))</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> not</span>. (x)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span> (x &#39;())</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        (<span class="dt">&#39;t</span> <span class="dt">&#39;t</span>)))</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> append</span>. (x y)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span> ((<span class="kw">null</span>. x) y)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        (<span class="dt">&#39;t</span> (<span class="kw">cons</span> (<span class="kw">car</span> x) (<span class="kw">append</span>. (<span class="kw">cdr</span> x) y)))))</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> list</span>. (x y)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cons</span> x (<span class="kw">cons</span> y &#39;())))</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> pair</span>. (x y)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span> ((<span class="kw">and</span>. (<span class="kw">null</span>. x) (<span class="kw">null</span>. y)) &#39;())</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>        ((<span class="kw">and</span>. (<span class="kw">not</span>. (<span class="kw">atom</span> x)) (<span class="kw">not</span>. (<span class="kw">atom</span> y)))</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>         (<span class="kw">cons</span> (<span class="kw">list</span>. (<span class="kw">car</span> x) (<span class="kw">car</span> y))</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>               (pair. (<span class="kw">cdr</span> x) (<span class="kw">cdr</span> y))))))</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> assoc</span>. (x y)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span> ((<span class="kw">eq</span> (<span class="kw">caar</span> y) x) (<span class="kw">cadar</span> y))</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>        (<span class="dt">&#39;t</span> (<span class="kw">assoc</span>. x (<span class="kw">cdr</span> y)))))</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> eval</span>. (e a)</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    ((<span class="kw">atom</span> e) (<span class="kw">assoc</span>. e a))</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    ((<span class="kw">atom</span> (<span class="kw">car</span> e))</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>     (<span class="kw">cond</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>       ((<span class="kw">eq</span> (<span class="kw">car</span> e) <span class="dt">&#39;quote</span>) (<span class="kw">cadr</span> e))</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>       ((<span class="kw">eq</span> (<span class="kw">car</span> e) <span class="dt">&#39;atom</span>)  (<span class="kw">atom</span>   (<span class="kw">eval</span>. (<span class="kw">cadr</span> e) a)))</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>       ((<span class="kw">eq</span> (<span class="kw">car</span> e) <span class="dt">&#39;eq</span>)    (<span class="kw">eq</span>     (<span class="kw">eval</span>. (<span class="kw">cadr</span> e) a)</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>                                    (<span class="kw">eval</span>. (<span class="kw">caddr</span> e) a)))</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>       ((<span class="kw">eq</span> (<span class="kw">car</span> e) <span class="dt">&#39;car</span>)   (<span class="kw">car</span>    (<span class="kw">eval</span>. (<span class="kw">cadr</span> e) a)))</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>       ((<span class="kw">eq</span> (<span class="kw">car</span> e) <span class="dt">&#39;cdr</span>)   (<span class="kw">cdr</span>    (<span class="kw">eval</span>. (<span class="kw">cadr</span> e) a)))</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>       ((<span class="kw">eq</span> (<span class="kw">car</span> e) <span class="dt">&#39;cons</span>)  (<span class="kw">cons</span>   (<span class="kw">eval</span>. (<span class="kw">cadr</span> e) a)</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>                                    (<span class="kw">eval</span>. (<span class="kw">caddr</span> e) a)))</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>       ((<span class="kw">eq</span> (<span class="kw">car</span> e) <span class="dt">&#39;cond</span>)  (evcon. (<span class="kw">cdr</span> e) a))</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>       (<span class="dt">&#39;t</span> (<span class="kw">eval</span>. (<span class="kw">cons</span> (<span class="kw">assoc</span>. (<span class="kw">car</span> e) a)</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>                        (<span class="kw">cdr</span> e))</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>                  a))))</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>    ((<span class="kw">eq</span> (<span class="kw">caar</span> e) <span class="dt">&#39;label</span>)</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>     (<span class="kw">eval</span>. (<span class="kw">cons</span> (<span class="kw">caddar</span> e) (<span class="kw">cdr</span> e))</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>            (<span class="kw">cons</span> (<span class="kw">list</span>. (<span class="kw">cadar</span> e) (<span class="kw">car</span> e)) a)))</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>    ((<span class="kw">eq</span> (<span class="kw">caar</span> e) <span class="dt">&#39;lambda</span>)</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>     (<span class="kw">eval</span>. (<span class="kw">caddar</span> e)</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>            (<span class="kw">append</span>. (pair. (<span class="kw">cadar</span> e) (evlis. (<span class="kw">cdr</span> e) a))</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>                     a)))))</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> evcon</span>. (c a)</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span> ((<span class="kw">eval</span>. (<span class="kw">caar</span> c) a)</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>         (<span class="kw">eval</span>. (<span class="kw">cadar</span> c) a))</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>        (<span class="dt">&#39;t</span> (evcon. (<span class="kw">cdr</span> c) a))))</span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> evlis</span>. (m a)</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span> ((<span class="kw">null</span>. m) &#39;())</span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>        (<span class="dt">&#39;t</span> (<span class="kw">cons</span> (<span class="kw">eval</span>.  (<span class="kw">car</span> m) a)</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>                  (evlis. (<span class="kw">cdr</span> m) a)))))</span></code></pre></div>
+<ul>
+<li>Here’s a <a href="https://norvig.com/lispy.html">much, much
+better</a>
+<ul>
+<li>Sooo much fun</li>
+</ul></li>
+<li>Lisp = computation = rewrite terms
+<ul>
+<li>there are atoms (symbols, numbers or nil or <code>t</code>, aka
+“true”)</li>
+<li>and there are lists (which contain atoms of lists)</li>
+<li>’a ==&gt; a</li>
+<li><code>(eq x y)</code> is the same or both nil
+<ul>
+<li><code>(car '(a b c))</code> ==&gt; <code>a</code> ; i.e. pull the
+head</li>
+<li><code>(cdr '(a b c))</code> ==&gt; <code>(b c)</code> ; i.e. pull
+the rest</li>
+</ul></li>
+<li><code>(cons 'x '(y z))</code> ==&gt; <code>(x y z)</code> ;
+i.e. assemble something</li>
+<li><code>(cond (if1 do1) (if2 do2) ..)</code> ; i.e. branch the
+reasoning</li>
+<li>“Functions” and <em>lambda bodies</em>
+<code>((lambda (p1 p2 p3..) e)  a1 a2 a3...)</code>
+<ul>
+<li>set <code>p1 p2 p3...</code> to the values of the arguments
+<code>a1 a2 a3...</code></li>
+<li>then evaluate <code>e</code>.</li>
+<li>Note that lambda bodies are just lists (so we can build them up and
+pull them down with <code>car</code> <code>cdr</code> <code>cons</code>
+just like anything ese</li>
+<li>When we “define a function”, we add a “lambda body” to the
+“environment”</li>
+</ul></li>
+<li>“Environments” and lists of pairs of symbol binding
+<ul>
+<li><code>'((a 1) (b 2) ...)</code></li>
+<li>When enter a lambda body, we add parameter arguments to the
+<em>left</em> hand side:
+<ul>
+<li><code>((p1 a1) (p2 a2) (p3 a3) (a 1) (b 2) ...)</code></li>
+<li>Look up local values left to right, local recursive vars shadow
+parent vars
+<ul>
+<li>So now we can recursion.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>is.py&gt; (define circle-area (<span class="kw">lambda</span> (r) (<span class="op">*</span> <span class="kw">pi</span> (<span class="op">*</span> r r))))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (circle-area <span class="dv">3</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fl">28.274333877</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (define fact (<span class="kw">lambda</span> (n) </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>              (<span class="kw">if</span> (<span class="op">&lt;=</span> n <span class="dv">1</span>) </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>      (<span class="op">*</span> n </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>         (fact (<span class="op">-</span> n <span class="dv">1</span>))))))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (fact <span class="dv">10</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="dv">3628800</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (fact <span class="dv">100</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="dv">9332621544394415268169923885626670049071596826438162146859296389521759999322991</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="dv">5608941463976156518286253697920827223758251185210916864000000000000000000000000</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (circle-area (fact <span class="dv">10</span>))</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fl">4.1369087198e+13</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (define <span class="kw">first</span> <span class="kw">car</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (define <span class="kw">rest</span> <span class="kw">cdr</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (define <span class="kw">count</span> (<span class="kw">lambda</span> (item L) </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>            (<span class="kw">if</span> L </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>                (<span class="op">+</span> (equal? item (<span class="kw">first</span> L)) </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                   (<span class="kw">count</span>  item (<span class="kw">rest</span> L))) </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                <span class="dv">0</span>)))</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (<span class="kw">count</span> <span class="dv">0</span> (<span class="kw">list</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span>))</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (<span class="kw">count</span> (<span class="kw">quote</span> <span class="kw">the</span>) (<span class="kw">quote</span> (<span class="kw">the</span> more <span class="kw">the</span> merrier <span class="kw">the</span> bigger <span class="kw">the</span> better)))</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (define twice (<span class="kw">lambda</span> (x) (<span class="op">*</span> <span class="dv">2</span> x)))</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (twice <span class="dv">5</span>)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (define repeat (<span class="kw">lambda</span> (f) </span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>                          (<span class="kw">lambda</span> (x) </span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>                              (f (f x)))))</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>lis.py&gt; ((repeat twice) <span class="dv">10</span>)</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="dv">40</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>lis.py&gt; ((repeat (repeat twice)) <span class="dv">10</span>)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="dv">160</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>lis.py&gt; ((repeat (repeat (repeat twice))) <span class="dv">10</span>)</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="dv">2560</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>lis.py&gt; ((repeat (repeat (repeat (repeat twice)))) <span class="dv">10</span>)</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="dv">655360</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (pow <span class="dv">2</span> <span class="dv">16</span>)</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="fl">65536.0</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (define fib (<span class="kw">lambda</span> (n) </span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>               (<span class="kw">if</span> (<span class="op">&lt;</span> n <span class="dv">2</span>)</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>                   <span class="dv">1</span> </span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>                  (<span class="op">+</span> (fib (<span class="op">-</span> n <span class="dv">1</span>)) </span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>                     (fib (<span class="op">-</span> n <span class="dv">2</span>))))))</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (define range (<span class="kw">lambda</span> (a b) </span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>                           (<span class="kw">if</span> (<span class="op">=</span> a b) </span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>                               (<span class="kw">quote</span> ()) </span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>                               (<span class="kw">cons</span> a </span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>                                     (range (<span class="op">+</span> a <span class="dv">1</span>) </span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>                                            b)))))</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (range <span class="dv">0</span> <span class="dv">10</span>)</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>(<span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span>)</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (<span class="kw">map</span> fib (range <span class="dv">0</span> <span class="dv">10</span>))</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">8</span> <span class="dv">13</span> <span class="dv">21</span> <span class="dv">34</span> <span class="dv">55</span>)</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>lis.py&gt; (<span class="kw">map</span> fib (range <span class="dv">0</span> <span class="dv">20</span>))</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">8</span> <span class="dv">13</span> <span class="dv">21</span> <span class="dv">34</span> <span class="dv">55</span> <span class="dv">89</span> <span class="dv">144</span> <span class="dv">233</span> <span class="dv">377</span> <span class="dv">610</span> <span class="dv">987</span> <span class="dv">1597</span> <span class="dv">2584</span> <span class="dv">4181</span> <span class="dv">6765</span>)</span></code></pre></div>
+<p>LISP was crazy popular and remains very influential</p>
+<ul>
+<li>And LISP ideas are constantly being added to other programming
+languages
+<ul>
+<li>Paul Graham: “It’s worth understanding what McCarthy discovered, not
+just as a landmark in the history of computers, but as a model for what
+programming is tending to become in our own time. It seems to me that
+there have been two really clean, consistent models of programming so
+far: the C model and the Lisp model. These two seem points of high
+ground, with swampy lowlands between them. As computers have grown more
+powerful, the new languages being developed have been moving steadily
+toward the Lisp model. A popular recipe for new programming languages in
+the past 20 years has been to take the C model of computing and add to
+it, piecemeal, parts taken from the Lisp model, like runtime typing and
+garbage collection.”</li>
+</ul></li>
+<li>Not until Julia, did I ever see a macro system as good as that in
+LISP.</li>
+<li>And what about multi-methods?</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">;;; numeric columns -----------------------------</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defmethod</span><span class="fu"> add1 </span>((self num) (x <span class="kw">string</span>)) </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Handling strings from text files </span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">   where &#39;x&#39; is not a number yet.&quot;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  (add1 self (<span class="kw">read-from-string</span> x)))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defmethod</span><span class="fu"> add1 </span>((self num) (x <span class="kw">number</span>))</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Knuth&#39;s algorithm for incrementally </span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="st">   updating lo, hi, mu, sd.&quot;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">with-slots</span> (n mu m2 hi lo sd) self</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">let</span> ((d (<span class="op">-</span> x mu)))</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">if</span> (<span class="op">&gt;</span> x hi) (<span class="kw">setf</span> hi x))</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">if</span> (<span class="op">&lt;</span> x lo) (<span class="kw">setf</span> lo x))</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">incf</span> mu (<span class="kw">float</span> (<span class="op">/</span> d n)))</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">incf</span> m2 (<span class="kw">float</span> (<span class="op">*</span> d (<span class="op">-</span> x mu))))</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">setf</span> sd </span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>            (<span class="kw">cond</span> ((<span class="op">&lt;</span> m2 <span class="dv">0</span>) <span class="dv">0</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                  ((<span class="op">&lt;</span> n <span class="dv">2</span>) <span class="dv">0</span>)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                  (<span class="kw">t</span> (<span class="kw">sqrt</span> (<span class="op">/</span> m2 (<span class="op">-</span> n <span class="dv">1</span>))))))))</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  x)</span></code></pre></div>
+<p>Vendor wars killed LISP</p>
+<ul>
+<li>When Peter Norvig went to Google, he had to recommend<br />
+Python, not LISP, since even decades after its invention there was still
+no platform independent GUI.</li>
+<li>Still, for a good time, install SBCL and have fun</li>
+</ul>
+<h3 id="javascript">JavaScript</h3>
+<ul>
+<li>ECMA
+<ul>
+<li>In September 1995, a Netscape programmer named Brandan Eich
+developed a new scripting language in just 10 days.
+<ul>
+<li>Clinet-side intra-interpreter language
+<ul>
+<li>a Virual machine in every borwser</li>
+</ul></li>
+<li>Why so fast? Cause its theoretical foundations were well defined… in
+LISP.</li>
+</ul></li>
+<li>It was originally named Mocha, but quickly became known as
+LiveScript and, later, JavaScript.</li>
+</ul></li>
+<li>ERLANG, ELIXR</li>
+</ul>
+<h3 id="transpilers">Transpilers</h3>
+<ul>
+<li>Transpilers
+<ul>
+<li>Why write a new language? Why not just convert your source code into
+some other language
+<ul>
+<li>e.g. CoffeeScript into JavaScript</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img width=800 src="https://raw.githubusercontent.com/txt/se20/master/etc/img/cs.png"></p>
+<p>But problem with transpliers: where are the line numbers?</p>
+<h3 id="smalltalk">Smalltalk</h3>
+<p><img  width=500
+ src="https://lh3.googleusercontent.com/-ezZ4lM0y5rE/WezC7wsnC2I/AAAAAAABFgc/3NuHmtD8q20B11eRKpL141huA2nC5JnpQCHMYBhgL/w606/smalltalk-desktop.jpg"></p>
+<ul>
+<li>1974 Smalltalk VM
+<ul>
+<li>Its the source man</li>
+<li>Invented bit-mapped graphics, multi-windows environment, pure OO
+prorgramming</li>
+<li>Significantly advanced the art of garbage collection, virtual
+machines</li>
+<li><a href="https://www.youtube.com/watch?v=AuXCc7WSczM">Smalltalk-80
+in a TV show</a></li>
+<li><a href="http://dreammachin.es/Kay_SciAm_77.pdf">Smalltalk article
+1980</a></li>
+<li>Later on, was used to design the Java VM
+<ul>
+<li>Q: Why does JAVA have single parent inheritance?</li>
+<li>A: Cause of Smalltalk</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Smalltalk class hierarchy (somewhere in the 1980s):</p>
+<p><img align=right width=400 src="https://i.pinimg.com/originals/e2/c1/4a/e2c14a7f83ea042e9dc8e0031e5e1a72.jpg"></p>
+<pre><code>Object
+|    Behavior
+|    |    ClassDescription
+|    |    |    Class
+|    |    |    Metaclass
+|    BlockClosure
+|    Boolean
+|    |    False
+|    |    True
+|    Browser
+|    Collection
+|    |    Bag
+|    |    MappedCollection
+|    |    SequenceableCollection
+|    |    |    ArrayedCollection
+|    |    |    |    Array
+|    |    |    |    ByteArray
+|    |    |    |    WordArray
+|    |    |    |    LargeArrayedCollection
+|    |    |    |    |    LargeArray
+|    |    |    |    |    LargeByteArray
+|    |    |    |    |    LargeWordArray
+|    |    |    |    CompiledCode
+|    |    |    |    |    CompiledMethod
+|    |    |    |    |    CompiledBlock
+|    |    |    |    Interval
+|    |    |    |    CharacterArray
+|    |    |    |    |    String
+|    |    |    |    |    |    Symbol
+|    |    |    LinkedList
+|    |    |    |    Semaphore
+|    |    |    OrderedCollection
+|    |    |    |    RunArray
+|    |    |    |    SortedCollection
+|    |    HashedCollection
+|    |    |    Dictionary
+|    |    |    |    IdentityDictionary
+|    |    |    |    |    MethodDictionary
+|    |    |    |    RootNamespace
+|    |    |    |    |    Namespace
+|    |    |    |    |    SystemDictionary
+|    |    |    Set
+|    |    |    |    IdentitySet
+|    ContextPart
+|    |    BlockContext
+|    |    MethodContext
+|    File
+|    |    Directory
+|    FileSegment
+|    Link
+|    |    Process
+|    |    SymLink
+|    Magnitude
+|    |    Association
+|    |    Character
+|    |    Date
+|    |    LargeArraySubpart
+|    |    Number
+|    |    |    Float
+|    |    |    Fraction
+|    |    |    Integer
+|    |    |    |    LargeInteger
+|    |    |    |    |    LargeNegativeInteger
+|    |    |    |    |    LargePositiveInteger
+|    |    |    |    |    |    LargeZeroInteger
+|    |    |    |    SmallInteger
+|    |    Time
+|    Memory
+|    Message
+|    |    DirectedMessage
+|    MethodInfo
+|    Point
+|    ProcessorScheduler
+|    Rectangle
+|    Signal
+|    |    Exception
+|    |    |    Error
+|    |    |    |    Halt
+|    |    |    |    |    ArithmeticError
+|    |    |    |    |    |    ZeroDivide
+|    |    |    |    |    MessageNotUnderstood
+|    |    |    |    UserBreak
+|    |    |    Notification
+|    |    |    |    Warning
+|    Stream
+|    |    ObjectDumper
+|    |    PositionableStream
+|    |    |    ReadStream
+|    |    |    WriteStream
+|    |    |    |    ReadWriteStream
+|    |    |    |    |    ByteStream
+|    |    |    |    |    |    FileStream
+|    |    Random
+|    |    TextCollector
+|    |    TokenStream
+|    UndefinedObject
+|    ValueAdaptor
+|    |    NullValueHolder
+|    |    PluggableAdaptor
+|    |    |    DelayedAdaptor
+|    |    ValueHolder</code></pre>
+
+
+
+
+</div>
+</body>
+</html>
