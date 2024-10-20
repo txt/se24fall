@@ -39,6 +39,7 @@ Five considerations influence the design  of this subject:
 |Oct10| [hw4](data.html)              |         | [git](git.html) |
 |Oct15| fall break       |no class | | 
 |Oct17| mid-term exam    |         | |
+|Oct22|                              |          |[abstraction](abstract.html)|
 |Oct24| [hw5](git.html)              |         | |
 |Oct31| [project2](project23.html)         |         | |
 |Nov27| [project3](project23.html)         |no class | |
