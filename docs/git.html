@@ -33,7 +33,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -92,9 +92,6 @@
   
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <div class=wrapper>
@@ -261,6 +258,11 @@ that need to be resolved.<br /> Open the files with conflicts in your
 text editor or IDE. Conflicts sections shows your current branch, named
 “<strong>HEAD</strong>”, and the branch you try to merge, named
 “branch-name”.<br /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">This</span> is a different line on main branch.</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">=======</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">This</span> is the modified line on current branch.</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> feature</span></code></pre></div>
 <p><strong>Step:</strong><br /></p>
 <ul>
 <li>Resolve the Conflict: Edit the file to resolve the conflict by
@@ -288,11 +290,11 @@ fact that a commit was reverted.<br />
 <code>sh     git revert &lt;commit-hash&gt;</code></p>
 <p>But if you have merged a branch into your main branch, but later
 realized that you need to undo this merge.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#find the commit hash of the merge that you want to reverse</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#use &quot;-m&quot; option to specify the parent of the merge you want to keep. The &quot;-m 1&quot; option typically specifies that you want to keep the changes from the first parent (usually the main branch before the merge).</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert <span class="at">-m</span> 1 <span class="op">&lt;</span>merge-commit-hash<span class="op">&gt;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#find the commit hash of the merge that you want to reverse</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#use &quot;-m&quot; option to specify the parent of the merge you want to keep. The &quot;-m 1&quot; option typically specifies that you want to keep the changes from the first parent (usually the main branch before the merge).</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert <span class="at">-m</span> 1 <span class="op">&lt;</span>merge-commit-hash<span class="op">&gt;</span></span></code></pre></div></li>
 <li><p><strong>Reset a Commit:</strong> Moves the <strong>HEAD</strong>
 pointer and potentially the branch pointer to a previous commit,
 effectively “erasing” commits from the history. This can be destructive
@@ -310,7 +312,7 @@ directory), but doesn’t touch the working directory.</li>
 specified commit and deletes all changes in the working directory and
 index.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset [--soft <span class="kw">|</span> <span class="ex">--mixed</span> <span class="kw">|</span> <span class="ex">--hard]</span> <span class="op">&lt;</span>commit-hash<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset [--soft <span class="kw">|</span> <span class="ex">--mixed</span> <span class="kw">|</span> <span class="ex">--hard]</span> <span class="op">&lt;</span>commit-hash<span class="op">&gt;</span></span></code></pre></div>
 <p><strong>Important</strong>: Using –hard will lose all changes after
 the specified commit, and they cannot be recovered easily.</p></li>
 <li><p><strong>Undo Changes in the Working Directory:</strong> Reverts
