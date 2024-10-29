@@ -41,7 +41,7 @@ Five considerations influence the design  of this subject:
 |Oct17| mid-term exam    |         | |
 |Oct22|                              |          |[abstraction](abstract.html)|
 |Oct24| [hw5](git.html)              |         | |
-|Oct31| [project2](project23.html)         |         |[availability][availability.html] |
+|Oct31| [project2](project23.html)         |         |[availability](availability.html) |
 |Nov26| [project3](project23.html)         |no class | |
 |Nov28| thanksgiving     |no class | |
 |Dec3| [essay due](essay.html)         |no class | |
